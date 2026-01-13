@@ -19,14 +19,7 @@ jobs:
         node-version: '18'
 
     - name: Install Linters
-      run: |
-        npm init -y
-        npm install --save-dev htmlhint stylelint stylelint-config-standard eslint
-
-    - name: Create configurations
-      run: |
-        echo '{ "extends": "stylelint-config-standard" }' > .stylelintrc.json
-        echo '{ "env": { "browser": true, "es2021": true }, "extends": "eslint:recommended", "parserOptions": { "ecmaVersion": 12 } }' > .eslintrc.json
+      run: npm install
 
     - name: Validate HTML
       run: npx htmlhint "**/*.html"
@@ -39,9 +32,8 @@ jobs:
       # But wait, tailwind uses @tailwind which standard stylelint might flag.
       # I'll create a specific config for stylelint to ignore tailwind rules if needed.
 
-    - name: Configure Stylelint for Tailwind
+    - name: Create Stylelint Config
       run: |
-        npm install --save-dev stylelint-config-recommended
         echo '{ "extends": "stylelint-config-recommended", "rules": { "at-rule-no-unknown": [ true, { "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"] } ] } }' > .stylelintrc.json
 
     - name: Validate CSS (Retry)
