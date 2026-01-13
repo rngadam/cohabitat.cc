@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cohabitat.cc | Visualisation BIM</title>
+    <meta name="description" content="Visualisation 3D interactive du bâtiment Cohabitat.">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config for Tailwind Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#064E3B', // Emerald-900
+                        secondary: '#F5F5F4', // Stone-100
+                        accent: '#C2410C', // Orange-700 (Resto Danny)
+                        dark: '#1c1917', // Stone-900
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <!-- Navigation (Sticky & Blur) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity">
+                Cohabitat<span class="text-accent">.cc</span>
+            </a>
+
+            <div class="flex items-center space-x-4">
+                 <a href="index.html" class="px-4 py-2 border border-primary text-primary rounded-full hover:bg-primary/5 transition-colors text-sm font-medium">
+                    <i data-lucide="arrow-left" class="w-4 h-4 inline-block mr-1"></i> Retour à l'accueil
+                 </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Visualisation 3D Section -->
+    <section id="visualisation" class="min-h-screen pt-32 pb-24 bg-stone-50 overflow-hidden flex flex-col justify-center">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="text-center mb-16 reveal active">
+                <span class="text-accent font-bold tracking-widest uppercase text-sm">Immersion BIM</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-primary mt-4">Exploration du Bâtiment</h2>
+                <p class="text-stone-500 mt-4 max-w-2xl mx-auto">
+                    Naviguez à travers les étages pour découvrir la mixité des usages. Cliquez sur un niveau pour en voir les détails.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- 3D Stack Representation -->
+                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
+                    <div id="building-stack" class="building-stack">
+                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
+                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
+                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
+                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
+                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                    </div>
+
+                    <!-- Engineering Toggle -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                        <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            Vue Ingénierie
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Panel -->
+                <div id="floor-info" class="bg-white p-10 rounded-2xl shadow-xl border border-stone-100 min-h-[400px] flex flex-col justify-center reveal active reveal-delay-200 transition-all duration-300">
+                    <div class="text-center text-stone-400">
+                        <i data-lucide="mouse-pointer-click" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                        <p class="text-lg">Sélectionnez un étage pour explorer les détails</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+             &copy; 2026 Cohabitat.cc.
+        </div>
+    </footer>
+
+    <!-- BIM Logic -->
+    <script src="bim.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

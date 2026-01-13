@@ -1,0 +1,51 @@
+name: Validate Code
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Linters
+      run: |
+        npm init -y
+        npm install --save-dev htmlhint stylelint stylelint-config-standard eslint
+
+    - name: Create configurations
+      run: |
+        echo '{ "extends": "stylelint-config-standard" }' > .stylelintrc.json
+        echo '{ "env": { "browser": true, "es2021": true }, "extends": "eslint:recommended", "parserOptions": { "ecmaVersion": 12 } }' > .eslintrc.json
+
+    - name: Validate HTML
+      run: npx htmlhint "**/*.html"
+
+    - name: Validate CSS
+      run: npx stylelint "**/*.css" || true
+      # "|| true" added because standard config might be too strict for this simple project (e.g. unknown tailwind directives if not configured),
+      # but ideally we should configure it properly. For now, we want to run it but not block.
+      # Actually, let's try to be cleaner. I'll just run it. If it fails, I'll see.
+      # But wait, tailwind uses @tailwind which standard stylelint might flag.
+      # I'll create a specific config for stylelint to ignore tailwind rules if needed.
+
+    - name: Configure Stylelint for Tailwind
+      run: |
+        npm install --save-dev stylelint-config-recommended
+        echo '{ "extends": "stylelint-config-recommended", "rules": { "at-rule-no-unknown": [ true, { "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"] } ] } }' > .stylelintrc.json
+
+    - name: Validate CSS (Retry)
+      run: npx stylelint "**/*.css"
+
+    - name: Validate JS
+      run: npx eslint "**/*.js"
