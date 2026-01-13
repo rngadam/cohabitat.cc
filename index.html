@@ -37,42 +37,8 @@
         }
     </script>
 
-    <style>
-        /* Custom Utilities */
-        body {
-            background-color: #F5F5F4;
-            color: #1c1917;
-        }
-        
-        /* Fade-in Animation Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Staggered delays for children */
-        .reveal-delay-100 { transition-delay: 100ms; }
-        .reveal-delay-200 { transition-delay: 200ms; }
-        .reveal-delay-300 { transition-delay: 300ms; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F5F5F4; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #064E3B; 
-            border-radius: 4px;
-        }
-    </style>
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-primary selection:text-white">
 
@@ -87,6 +53,7 @@
             <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide text-stone-600">
                 <a href="#philosophie" class="hover:text-primary transition-colors">Philosophie CC</a>
                 <a href="#concept" class="hover:text-primary transition-colors">Concept</a>
+                <a href="bim.html" class="hover:text-accent transition-colors font-bold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> BIM / 3D</a>
                 <a href="#resto" class="hover:text-accent transition-colors">Resto Danny</a>
                 <a href="#logistique" class="hover:text-primary transition-colors">Logistique</a>
                 <a href="mailto:joindre@cohabitat.cc" class="px-6 py-2 bg-primary text-secondary rounded-full hover:bg-emerald-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-300">
@@ -105,6 +72,7 @@
             <div class="flex flex-col p-6 space-y-4 font-serif text-lg text-primary">
                 <a href="#philosophie" class="block py-2" onclick="toggleMobileMenu()">Philosophie CC</a>
                 <a href="#concept" class="block py-2" onclick="toggleMobileMenu()">Concept</a>
+                <a href="bim.html" class="block py-2 text-accent" onclick="toggleMobileMenu()">BIM / 3D</a>
                 <a href="#resto" class="block py-2 text-accent" onclick="toggleMobileMenu()">Resto Danny</a>
                 <a href="#logistique" class="block py-2" onclick="toggleMobileMenu()">Logistique</a>
                 <a href="mailto:joindre@cohabitat.cc" class="block py-3 mt-4 text-center bg-primary text-secondary rounded-lg">Nous joindre</a>
@@ -138,8 +106,9 @@
                         <span>Découvrir le modèle</span>
                         <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
                     </a>
-                    <a href="#partenaires" class="px-8 py-4 border border-primary text-primary rounded-lg flex items-center justify-center hover:bg-primary/5 transition-colors">
-                        Partenaires
+                    <a href="bim.html" class="px-8 py-4 border border-primary text-primary rounded-lg flex items-center justify-center hover:bg-primary/5 transition-colors gap-2">
+                        <i data-lucide="box" class="w-4 h-4"></i>
+                        Voir en 3D
                     </a>
                 </div>
             </div>
@@ -405,10 +374,10 @@
                     
                     <ul class="space-y-6">
                         <li class="flex items-start gap-4">
-                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="wrench" class="w-5 h-5"></i></div>
+                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="hammer" class="w-5 h-5"></i></div>
                             <div>
-                                <h5 class="font-bold text-primary">L'Atelier Mécanique</h5>
-                                <p class="text-sm text-stone-500">Outils professionnels, pieds d'atelier et station de lavage.</p>
+                                <h5 class="font-bold text-primary">Fablab Complet</h5>
+                                <p class="text-sm text-stone-500">Mécanique vélo, menuiserie, électronique. Pour l'entretien, la production de meubles et la réparation.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
@@ -419,13 +388,69 @@
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="shower-head" class="w-5 h-5"></i></div>
+                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="door-open" class="w-5 h-5"></i></div>
                             <div>
-                                <h5 class="font-bold text-primary">Mudroom & Douches</h5>
-                                <p class="text-sm text-stone-500">Transition parfaite entre l'effort extérieur et le confort intérieur.</p>
+                                <h5 class="font-bold text-primary">Sas d'entrée "Japonais"</h5>
+                                <p class="text-sm text-stone-500">Vestiaire centralisé pour réduire l'entretien des espaces résidentiels, coworking, fablab et restaurant.</p>
                             </div>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Système Open Source -->
+    <section class="py-24 px-6 bg-white border-t border-stone-200">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+                <span>Open Source Building OS</span>
+            </div>
+            <h2 class="font-serif text-4xl text-primary mb-8">L'Intelligence Collective Numérique</h2>
+            <p class="text-lg text-stone-600 mb-12 leading-relaxed">
+                Le bâtiment est piloté par un système logiciel libre (Open Source) garantissant transparence, sécurité et autonomie. Une infrastructure numérique au service de l'humain.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-accent"></i>
+                        Sécurité & Accès
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Gestion des accès par serrures NFC. Clés numériques temporaires pour les invités et accès sécurisé aux espaces communs.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="users" class="w-5 h-5 text-accent"></i>
+                        Vie Communautaire
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Plateforme de gestion des résidents, calendrier des événements partagés et système de vote pour les décisions collectives.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 text-accent"></i>
+                        Entretien & Tâches
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Répartition équitable des tâches ménagères (corvées), signalement des bris et suivi automatisé de la maintenance du bâtiment.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="code-2" class="w-5 h-5 text-accent"></i>
+                        Liberté Logicielle
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Pas de boîtes noires. Le code est auditable, modifiable et appartient à la communauté, assurant la pérennité du système.
+                    </p>
                 </div>
             </div>
         </div>
