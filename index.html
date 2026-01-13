@@ -72,6 +72,77 @@
             background: #064E3B; 
             border-radius: 4px;
         }
+
+        /* 3D Visualization Styles */
+        .perspective-container {
+            perspective: 1200px;
+        }
+        .building-stack {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            transform: rotateX(60deg) rotateZ(-45deg);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            margin: 0 auto;
+        }
+        .floor-plate {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #064E3B;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #064E3B;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.2rem;
+            backface-visibility: hidden;
+        }
+        .floor-plate:hover, .floor-plate.active {
+            background: #064E3B;
+            color: #F5F5F4;
+            border-color: #34D399;
+            box-shadow: 20px 20px 50px rgba(6, 78, 59, 0.4);
+        }
+
+        /* Positioning Layers */
+        .layer-roof { transform: translateZ(280px) translateY(-80px); z-index: 60; }
+        .layer-residential { transform: translateZ(200px) translateY(-40px); z-index: 50; }
+        .layer-coworking { transform: translateZ(120px) translateY(0px); z-index: 40; }
+        .layer-rdc { transform: translateZ(40px) translateY(40px); z-index: 30; }
+        .layer-basement { transform: translateZ(-40px) translateY(80px); z-index: 20; background: #e7e5e4; }
+
+        /* Hover Effects */
+        .layer-roof:hover, .layer-roof.active { transform: translateZ(300px) translateY(-80px); }
+        .layer-residential:hover, .layer-residential.active { transform: translateZ(220px) translateY(-40px); }
+        .layer-coworking:hover, .layer-coworking.active { transform: translateZ(140px) translateY(0px); }
+        .layer-rdc:hover, .layer-rdc.active { transform: translateZ(60px) translateY(40px); }
+        .layer-basement:hover, .layer-basement.active { transform: translateZ(-20px) translateY(80px); }
+
+        /* Engineering Mode */
+        .building-stack.engineering .floor-plate {
+            background: rgba(6, 78, 59, 0.1);
+            border: 1px dashed #064E3B;
+            color: transparent;
+        }
+        .building-stack.engineering .floor-plate::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwNjRFM0IiIHN0cm9rZS13aWR0aD0iMSI+PHBhdGggZD0iTTAgMjBMMjAgME0xMCAyMEwyMCAxME0wIDEwTDEwIDAiLz48L3N2Zz4=');
+            opacity: 0.2;
+            border-radius: 14px;
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-primary selection:text-white">
@@ -269,6 +340,49 @@
         </div>
     </section>
 
+    <!-- Visualisation 3D Section -->
+    <section id="visualisation" class="py-32 bg-stone-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-accent font-bold tracking-widest uppercase text-sm">Immersion</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-primary mt-4">Exploration du Bâtiment</h2>
+                <p class="text-stone-500 mt-4 max-w-2xl mx-auto">
+                    Naviguez à travers les étages pour découvrir la mixité des usages. Cliquez sur un niveau pour en voir les détails.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- 3D Stack Representation -->
+                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal">
+                    <div id="building-stack" class="building-stack">
+                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
+                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
+                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
+                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
+                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                    </div>
+
+                    <!-- Engineering Toggle -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                        <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            Vue Ingénierie
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Panel -->
+                <div id="floor-info" class="bg-white p-10 rounded-2xl shadow-xl border border-stone-100 min-h-[400px] flex flex-col justify-center reveal reveal-delay-200 transition-all duration-300">
+                    <div class="text-center text-stone-400">
+                        <i data-lucide="mouse-pointer-click" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                        <p class="text-lg">Sélectionnez un étage pour explorer les détails</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Resto Danny Section -->
     <section id="resto" class="py-24 bg-stone-900 text-stone-100 relative overflow-hidden">
         <!-- Orange accent background blob -->
@@ -405,10 +519,10 @@
                     
                     <ul class="space-y-6">
                         <li class="flex items-start gap-4">
-                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="wrench" class="w-5 h-5"></i></div>
+                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="hammer" class="w-5 h-5"></i></div>
                             <div>
-                                <h5 class="font-bold text-primary">L'Atelier Mécanique</h5>
-                                <p class="text-sm text-stone-500">Outils professionnels, pieds d'atelier et station de lavage.</p>
+                                <h5 class="font-bold text-primary">Fablab Complet</h5>
+                                <p class="text-sm text-stone-500">Mécanique vélo, menuiserie, électronique. Pour l'entretien, la production de meubles et la réparation.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
@@ -419,13 +533,69 @@
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
-                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="shower-head" class="w-5 h-5"></i></div>
+                            <div class="p-2 bg-white rounded-lg shadow-sm text-primary"><i data-lucide="door-open" class="w-5 h-5"></i></div>
                             <div>
-                                <h5 class="font-bold text-primary">Mudroom & Douches</h5>
-                                <p class="text-sm text-stone-500">Transition parfaite entre l'effort extérieur et le confort intérieur.</p>
+                                <h5 class="font-bold text-primary">Sas d'entrée "Japonais"</h5>
+                                <p class="text-sm text-stone-500">Vestiaire centralisé pour réduire l'entretien des espaces résidentiels, coworking, fablab et restaurant.</p>
                             </div>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Système Open Source -->
+    <section class="py-24 px-6 bg-white border-t border-stone-200">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+                <i data-lucide="cpu" class="w-4 h-4"></i>
+                <span>Open Source Building OS</span>
+            </div>
+            <h2 class="font-serif text-4xl text-primary mb-8">L'Intelligence Collective Numérique</h2>
+            <p class="text-lg text-stone-600 mb-12 leading-relaxed">
+                Le bâtiment est piloté par un système logiciel libre (Open Source) garantissant transparence, sécurité et autonomie. Une infrastructure numérique au service de l'humain.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-accent"></i>
+                        Sécurité & Accès
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Gestion des accès par serrures NFC. Clés numériques temporaires pour les invités et accès sécurisé aux espaces communs.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="users" class="w-5 h-5 text-accent"></i>
+                        Vie Communautaire
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Plateforme de gestion des résidents, calendrier des événements partagés et système de vote pour les décisions collectives.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 text-accent"></i>
+                        Entretien & Tâches
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Répartition équitable des tâches ménagères (corvées), signalement des bris et suivi automatisé de la maintenance du bâtiment.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-100 hover:border-primary/30 transition-colors">
+                    <h4 class="font-serif text-xl text-primary mb-3 flex items-center gap-2">
+                        <i data-lucide="code-2" class="w-5 h-5 text-accent"></i>
+                        Liberté Logicielle
+                    </h4>
+                    <p class="text-sm text-stone-500">
+                        Pas de boîtes noires. Le code est auditable, modifiable et appartient à la communauté, assurant la pérennité du système.
+                    </p>
                 </div>
             </div>
         </div>
@@ -509,6 +679,109 @@
         document.querySelectorAll('.reveal').forEach(el => {
             observer.observe(el);
         });
+
+        // 3D Visualization Logic
+        const buildingData = {
+            roof: {
+                title: "Toit - Oasis Urbaine",
+                content: `<ul class="space-y-4">
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="sun" class="w-4 h-4"></i></div><span>Jardin communautaire productif</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="waves" class="w-4 h-4"></i></div><span>Jacuzzi et sauna nordique</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="droplets" class="w-4 h-4"></i></div><span>Système de collecte d'eau de pluie</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="mountain" class="w-4 h-4"></i></div><span>Vues panoramiques sur la ville</span></li>
+                        </ul>`,
+                icon: "sun"
+            },
+            residential: {
+                title: "Étages 2 à 5 - Résidentiel",
+                content: `<ul class="space-y-4">
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées (SDB, Walk-in, Balcon)</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="users" class="w-4 h-4"></i></div><span>Cuisine et salon partagé au cœur de chaque étage</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="shirt" class="w-4 h-4"></i></div><span>Buanderie annexée à l'escalier de secours</span></li>
+                        </ul>`,
+                icon: "home"
+            },
+            coworking: {
+                title: "1er Étage - Vie Active",
+                content: `<ul class="space-y-4">
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Espace de Coworking & Bureaux</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café-bar pour les résidents</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="film" class="w-4 h-4"></i></div><span>Cinéma-maison & Salle de réunion</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée résidentiel sécurisé</span></li>
+                        </ul>`,
+                icon: "briefcase"
+            },
+            rdc: {
+                title: "Rez-de-chaussée - Ancrage",
+                content: `<ul class="space-y-4">
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="utensils" class="w-4 h-4"></i></div><span>Restaurant Solidaire (Resto Danny)</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="map-pin" class="w-4 h-4"></i></div><span>Ouverture sur le quartier</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="heart-handshake" class="w-4 h-4"></i></div><span>Espace d'accueil et de mixité sociale</span></li>
+                        </ul>`,
+                icon: "utensils"
+            },
+            basement: {
+                title: "Sous-sol - Logistique",
+                content: `<ul class="space-y-4">
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique, Bois, Élec)</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bike" class="w-4 h-4"></i></div><span>Garage vélos sécurisé</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="package" class="w-4 h-4"></i></div><span>Espace de stockage (effets personnels)</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="recycle" class="w-4 h-4"></i></div><span>Système de bio-digesteur</span></li>
+                        </ul>`,
+                icon: "hammer"
+            },
+            engineering: {
+                title: "Vue Ingénierie",
+                content: `<ul class="space-y-4">
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="activity" class="w-4 h-4"></i></div><span>Poutres de support apparentes (Mass Timber)</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="pipette" class="w-4 h-4"></i></div><span>Colonnes de plomberie centralisées</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="zap" class="w-4 h-4"></i></div><span>Système électrique intelligent</span></li>
+                            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="arrow-up-down" class="w-4 h-4"></i></div><span>Ascenseur en verre (Puit de lumière)</span></li>
+                        </ul>`,
+                icon: "cpu"
+            }
+        };
+
+        function selectFloor(floorId) {
+            // Update Visuals
+            document.querySelectorAll('.floor-plate').forEach(el => el.classList.remove('active'));
+            if(floorId !== 'engineering') {
+                const activeEl = document.querySelector(`.layer-${floorId}`);
+                if(activeEl) activeEl.classList.add('active');
+            }
+
+            // Update Info Panel
+            const infoPanel = document.getElementById('floor-info');
+            const data = buildingData[floorId];
+
+            infoPanel.style.opacity = 0;
+            setTimeout(() => {
+                infoPanel.innerHTML = `
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-primary text-secondary rounded-xl shadow-lg">
+                            <i data-lucide="${data.icon}" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="font-serif text-3xl text-primary">${data.title}</h3>
+                    </div>
+                    <div class="text-stone-600 leading-relaxed text-lg">
+                        ${data.content}
+                    </div>
+                `;
+                lucide.createIcons();
+                infoPanel.style.opacity = 1;
+            }, 300);
+        }
+
+        function toggleEngineering() {
+            const stack = document.getElementById('building-stack');
+            stack.classList.toggle('engineering');
+
+            if (stack.classList.contains('engineering')) {
+                selectFloor('engineering');
+            } else {
+                selectFloor('roof'); // Reset to roof or clear
+            }
+        }
 
         // Navbar Blur Effect on Scroll
         window.addEventListener('scroll', () => {
