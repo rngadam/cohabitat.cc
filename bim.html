@@ -80,11 +80,17 @@
                         <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
                     </div>
 
-                    <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <!-- Controls -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2">
+                        <button onclick="zoom('in')" class="p-3 bg-white text-primary border border-primary rounded-full hover:bg-stone-50 transition-colors shadow-lg" title="Zoomer">
+                            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+                        </button>
                         <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Vue Ingénierie
+                        </button>
+                        <button onclick="zoom('out')" class="p-3 bg-white text-primary border border-primary rounded-full hover:bg-stone-50 transition-colors shadow-lg" title="Dézoomer">
+                            <i data-lucide="zoom-out" class="w-4 h-4"></i>
                         </button>
                     </div>
                 </div>
