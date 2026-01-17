@@ -83,11 +83,11 @@ body {
 .layer-basement { transform: translateZ(-40px) translateY(80px); z-index: 20; background: #e7e5e4; }
 
 /* Hover Effects */
-.layer-roof:hover, .layer-roof.active { transform: translateZ(300px) translateY(-80px); }
-.layer-residential:hover, .layer-residential.active { transform: translateZ(220px) translateY(-40px); }
-.layer-coworking:hover, .layer-coworking.active { transform: translateZ(140px) translateY(0px); }
-.layer-rdc:hover, .layer-rdc.active { transform: translateZ(60px) translateY(40px); }
-.layer-basement:hover, .layer-basement.active { transform: translateZ(-20px) translateY(80px); }
+.layer-roof:hover, .layer-roof.active { transform: translateZ(330px) translateY(-80px); }
+.layer-residential:hover, .layer-residential.active { transform: translateZ(250px) translateY(-40px); }
+.layer-coworking:hover, .layer-coworking.active { transform: translateZ(170px) translateY(0px); }
+.layer-rdc:hover, .layer-rdc.active { transform: translateZ(90px) translateY(40px); }
+.layer-basement:hover, .layer-basement.active { transform: translateZ(10px) translateY(80px); }
 
 /* Engineering Mode */
 .building-stack.engineering .floor-plate {
