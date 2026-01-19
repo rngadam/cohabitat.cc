@@ -55,6 +55,7 @@ const buildingData = {
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="pipette" class="w-4 h-4"></i></div><span>Colonnes de plomberie centralisées</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="zap" class="w-4 h-4"></i></div><span>Système électrique intelligent</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="arrow-up-down" class="w-4 h-4"></i></div><span>Ascenseur en verre (Puit de lumière)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="footprints" class="w-4 h-4"></i></div><span>Escalier de secours intégré</span></li>
                 </ul>`,
         icon: "cpu"
     }

@@ -53,7 +53,7 @@
             <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide text-stone-600">
                 <a href="#philosophie" class="hover:text-primary transition-colors">Philosophie CC</a>
                 <a href="#concept" class="hover:text-primary transition-colors">Concept</a>
-                <a href="bim.html" class="hover:text-accent transition-colors font-bold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> BIM / 3D</a>
+                <a href="#visualisation" class="hover:text-accent transition-colors font-bold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> BIM / 3D</a>
                 <a href="#resto" class="hover:text-accent transition-colors">Resto Danny</a>
                 <a href="#logistique" class="hover:text-primary transition-colors">Logistique</a>
                 <a href="mailto:joindre@cohabitat.cc" class="px-6 py-2 bg-primary text-secondary rounded-full hover:bg-emerald-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-300">
@@ -72,7 +72,7 @@
             <div class="flex flex-col p-6 space-y-4 font-serif text-lg text-primary">
                 <a href="#philosophie" class="block py-2" onclick="toggleMobileMenu()">Philosophie CC</a>
                 <a href="#concept" class="block py-2" onclick="toggleMobileMenu()">Concept</a>
-                <a href="bim.html" class="block py-2 text-accent" onclick="toggleMobileMenu()">BIM / 3D</a>
+                <a href="#visualisation" class="block py-2 text-accent" onclick="toggleMobileMenu()">BIM / 3D</a>
                 <a href="#resto" class="block py-2 text-accent" onclick="toggleMobileMenu()">Resto Danny</a>
                 <a href="#logistique" class="block py-2" onclick="toggleMobileMenu()">Logistique</a>
                 <a href="mailto:joindre@cohabitat.cc" class="block py-3 mt-4 text-center bg-primary text-secondary rounded-lg">Nous joindre</a>
@@ -106,7 +106,7 @@
                         <span>Découvrir le modèle</span>
                         <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
                     </a>
-                    <a href="bim.html" class="px-8 py-4 border border-primary text-primary rounded-lg flex items-center justify-center hover:bg-primary/5 transition-colors gap-2">
+                    <a href="#visualisation" class="px-8 py-4 border border-primary text-primary rounded-lg flex items-center justify-center hover:bg-primary/5 transition-colors gap-2">
                         <i data-lucide="box" class="w-4 h-4"></i>
                         Voir en 3D
                     </a>
@@ -456,6 +456,49 @@
         </div>
     </section>
 
+    <!-- Visualisation 3D Section -->
+    <section id="visualisation" class="py-24 bg-stone-50 overflow-hidden flex flex-col justify-center border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="text-center mb-16 reveal">
+                <span class="text-accent font-bold tracking-widest uppercase text-sm">Immersion BIM</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-primary mt-4">Exploration du Bâtiment</h2>
+                <p class="text-stone-500 mt-4 max-w-2xl mx-auto">
+                    Naviguez à travers les étages pour découvrir la mixité des usages. Cliquez sur un niveau pour en voir les détails.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- 3D Stack Representation -->
+                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal">
+                    <div id="building-stack" class="building-stack">
+                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
+                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
+                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
+                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
+                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                    </div>
+
+                    <!-- Engineering Toggle -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                        <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            Vue Ingénierie
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Panel -->
+                <div id="floor-info" class="bg-white p-10 rounded-2xl shadow-xl border border-stone-100 min-h-[400px] flex flex-col justify-center reveal reveal-delay-200 transition-all duration-300">
+                    <div class="text-center text-stone-400">
+                        <i data-lucide="mouse-pointer-click" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+                        <p class="text-lg">Sélectionnez un étage pour explorer les détails</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Partenaires / Co-Construction -->
     <section id="partenaires" class="py-32 bg-primary text-secondary text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
@@ -505,6 +548,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="bim.js"></script>
     <script>
         // Initialize Icons
         lucide.createIcons();
