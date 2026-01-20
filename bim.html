@@ -73,6 +73,15 @@
                 <!-- 3D Stack Representation -->
                 <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
                     <div id="building-stack" class="building-stack">
+                        <!-- Structural Elements -->
+                        <div class="elevator-shaft"></div>
+                        <div class="fire-escape"></div>
+
+                        <!-- Engineering Systems (Visible in Engineering View) -->
+                        <div class="eng-system plumbing-col"></div>
+                        <div class="eng-system elec-col"></div>
+
+                        <!-- Floors -->
                         <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
                         <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
                         <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>

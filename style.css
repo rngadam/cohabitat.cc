@@ -67,6 +67,7 @@ body {
     text-align: center;
     font-size: 1.2rem;
     backface-visibility: hidden;
+    transform-style: preserve-3d; /* Allow children (beams) to be 3d */
 }
 .floor-plate:hover, .floor-plate.active {
     background: #064E3B;
@@ -102,4 +103,107 @@ body {
     background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwNjRFM0IiIHN0cm9rZS13aWR0aD0iMSI+PHBhdGggZD0iTTAgMjBMMjAgME0xMCAyMEwyMCAxME0wIDEwTDEwIDAiLz48L3N2Zz4=');
     opacity: 0.2;
     border-radius: 14px;
+}
+
+/* =========================================
+   New Structural & Engineering Elements
+   ========================================= */
+
+/* Glass Elevator Shaft (Puit de lumière) */
+.elevator-shaft {
+    position: absolute;
+    width: 60px;
+    height: 360px; /* Spans from basement (-40) to roof (280+) */
+    top: 50%;
+    left: 50%;
+    background: rgba(147, 197, 253, 0.15); /* Blue-ish glass */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 20px rgba(147, 197, 253, 0.1);
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) rotateX(-90deg) translateY(120px);
+    /* RotateX(-90): Y becomes Z. translateY(120) moves center to Z=120 */
+    pointer-events: none;
+    z-index: 35;
+}
+
+/* Cross-section for 3D volume feel */
+.elevator-shaft::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    width: 100%; height: 100%;
+    background: inherit;
+    border: inherit;
+    transform: translateX(-50%) rotateY(90deg);
+}
+
+/* External Fire Escape (Escalier de secours) */
+.fire-escape {
+    position: absolute;
+    width: 40px;
+    height: 360px;
+    top: 50%;
+    right: -50px; /* Outside the stack */
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 10px,
+        #57534e 10px,
+        #57534e 12px
+    );
+    border-left: 2px solid #57534e;
+    border-right: 2px solid #57534e;
+    transform-style: preserve-3d;
+    transform: translate(0, -50%) rotateX(-90deg) translateY(120px);
+    z-index: 35;
+    opacity: 0.8;
+}
+
+/* Engineering Systems (Hidden by default) */
+.eng-system {
+    position: absolute;
+    height: 360px;
+    top: 50%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) rotateX(-90deg) translateY(120px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 36;
+}
+
+.building-stack.engineering .eng-system {
+    opacity: 1;
+}
+
+/* Plumbing Columns */
+.plumbing-col {
+    width: 12px;
+    left: 20%; /* Offset from center */
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+/* Electrical Conduits */
+.elec-col {
+    width: 8px;
+    left: 80%;
+    background: linear-gradient(90deg, #fbbf24, #b45309);
+    border-radius: 4px;
+}
+
+/* Mass Timber Beams (Visible on floor plates in engineering mode) */
+.building-stack.engineering .floor-plate::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    /* Grid pattern for beams */
+    background-image:
+        linear-gradient(rgba(120, 53, 15, 0.2) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(120, 53, 15, 0.2) 2px, transparent 2px);
+    background-size: 50px 50px;
+    z-index: 1;
+    pointer-events: none;
 }
