@@ -103,3 +103,52 @@ body {
     opacity: 0.2;
     border-radius: 14px;
 }
+
+/* Elevator Shaft - Glassy Vertical Core */
+.elevator-shaft {
+    position: absolute;
+    width: 60px;
+    height: 400px;
+    background: rgba(147, 197, 253, 0.2); /* blue-300/20 */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(90deg) translateZ(100px); /* Adjust Z to center vertically relative to stack */
+    transform-style: preserve-3d;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Cross-plane for 3D effect */
+.elevator-shaft::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(147, 197, 253, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: rotateY(90deg);
+}
+
+/* Fire Escape - Industrial side structure */
+.fire-escape {
+    position: absolute;
+    width: 40px;
+    height: 450px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(60, 60, 60, 0.1),
+        rgba(60, 60, 60, 0.1) 5px,
+        transparent 5px,
+        transparent 10px
+    );
+    border-left: 2px solid rgba(60, 60, 60, 0.4);
+    border-right: 2px solid rgba(60, 60, 60, 0.4);
+    top: 50%;
+    right: -50px;
+    transform: translate(0, -50%) rotateX(90deg) translateZ(100px);
+    pointer-events: none;
+    z-index: 5;
+}
