@@ -91,15 +91,92 @@ body {
 
 /* Engineering Mode */
 .building-stack.engineering .floor-plate {
-    background: rgba(6, 78, 59, 0.1);
-    border: 1px dashed #064E3B;
+    background: rgba(6, 78, 59, 0.05);
+    border: 1px dashed rgba(6, 78, 59, 0.3);
     color: transparent;
+    box-shadow: none;
 }
 .building-stack.engineering .floor-plate::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwNjRFM0IiIHN0cm9rZS13aWR0aD0iMSI+PHBhdGggZD0iTTAgMjBMMjAgME0xMCAyMEwyMCAxME0wIDEwTDEwIDAiLz48L3N2Zz4=');
-    opacity: 0.2;
+    /* Diagonal hatch pattern */
+    background-image: linear-gradient(45deg, rgba(6, 78, 59, 0.1) 25%, transparent 25%, transparent 50%, rgba(6, 78, 59, 0.1) 50%, rgba(6, 78, 59, 0.1) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    opacity: 0.3;
     border-radius: 14px;
+}
+
+/* New 3D Elements */
+.elevator-shaft, .fire-escape, .engineering-element {
+    position: absolute;
+    pointer-events: none;
+    transform-style: preserve-3d;
+}
+
+/* Elevator - Glass Shaft */
+.elevator-shaft {
+    width: 60px;
+    height: 380px; /* Spans height of building */
+    background: rgba(186, 230, 253, 0.15); /* Sky blue tint */
+    border: 1px solid rgba(186, 230, 253, 0.4);
+    top: 50%;
+    left: 85%; /* Offset position */
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(120px);
+    box-shadow: 0 0 15px rgba(186, 230, 253, 0.1);
+}
+.elevator-shaft::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: inherit;
+    border: inherit;
+    transform: rotateY(90deg);
+}
+
+/* Fire Escape - Industrial Stairwell */
+.fire-escape {
+    width: 50px;
+    height: 380px;
+    /* Grating look */
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 19px, #44403c 19px, #44403c 20px),
+        linear-gradient(90deg, #44403c 0%, #44403c 10%, transparent 10%, transparent 90%, #44403c 90%);
+    top: 50%;
+    left: -10px; /* Attached to left side */
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(120px);
+    opacity: 0.9;
+}
+
+/* Engineering Internals */
+.engineering-element {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.building-stack.engineering .engineering-element {
+    opacity: 1;
+}
+
+.pipe-column {
+    width: 12px;
+    height: 380px;
+    border-radius: 6px;
+    top: 50%;
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(120px);
+}
+.pipe-column.left {
+    left: 25%;
+    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626); /* Hot water/Fire */
+}
+.pipe-column.right {
+    left: 75%;
+    background: linear-gradient(90deg, #2563eb, #3b82f6, #2563eb); /* Cold water */
+}
+.beam-structure {
+    width: 20px;
+    height: 380px;
+    background: linear-gradient(90deg, #78350f, #92400e, #78350f); /* Timber */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(120px);
 }
