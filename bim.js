@@ -13,7 +13,7 @@ const buildingData = {
     residential: {
         title: "Étages 2 à 5 - Résidentiel",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées (SDB, Walk-in, Balcon)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées : Salle de bain, Walk-in, Chambre et Grand balcon.</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="users" class="w-4 h-4"></i></div><span>Cuisine et salon partagé au cœur de chaque étage</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="shirt" class="w-4 h-4"></i></div><span>Buanderie annexée à l'escalier de secours</span></li>
                 </ul>`,
@@ -25,7 +25,7 @@ const buildingData = {
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Espace de Coworking & Bureaux</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café-bar pour les résidents</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="film" class="w-4 h-4"></i></div><span>Cinéma-maison & Salle de réunion</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée résidentiel sécurisé</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée résidentiel "Japonais"</span></li>
                 </ul>`,
         icon: "briefcase"
     },
@@ -41,9 +41,8 @@ const buildingData = {
     basement: {
         title: "Sous-sol - Logistique",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique, Bois, Élec)</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bike" class="w-4 h-4"></i></div><span>Garage vélos sécurisé</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="package" class="w-4 h-4"></i></div><span>Espace de stockage (effets personnels)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique vélo, menuiserie, électronique)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bike" class="w-4 h-4"></i></div><span>Garage vélos et espace de stockage encombrants</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="recycle" class="w-4 h-4"></i></div><span>Système de bio-digesteur</span></li>
                 </ul>`,
         icon: "hammer"
@@ -99,4 +98,22 @@ function toggleEngineering() {
     } else {
         selectFloor('roof'); // Reset to roof or clear
     }
+}
+
+// Controls Logic
+const zoomSlider = document.getElementById('zoom-slider');
+const rotateSlider = document.getElementById('rotate-slider');
+const stack = document.getElementById('building-stack');
+
+function updateTransform() {
+    const zoom = zoomSlider.value;
+    const rotation = rotateSlider.value;
+
+    // Base rotation is rotateX(60deg). Rotation slider affects rotateZ.
+    stack.style.transform = `scale(${zoom}) rotateX(60deg) rotateZ(${rotation}deg)`;
+}
+
+if(zoomSlider && rotateSlider && stack) {
+    zoomSlider.addEventListener('input', updateTransform);
+    rotateSlider.addEventListener('input', updateTransform);
 }

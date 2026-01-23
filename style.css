@@ -103,3 +103,40 @@ body {
     opacity: 0.2;
     border-radius: 14px;
 }
+
+/* Structural Elements */
+.elevator-shaft {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 400px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+    border-left: 1px solid rgba(255,255,255,0.3);
+    border-right: 1px solid rgba(255,255,255,0.3);
+    transform: translate(-50%, -50%) translateZ(120px) rotateX(-90deg);
+    transform-origin: center center;
+    z-index: 35;
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.fire-stairs {
+    position: absolute;
+    top: 50%;
+    left: 85%; /* Side placement */
+    width: 40px;
+    height: 380px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(200, 50, 0, 0.05),
+        rgba(200, 50, 0, 0.05) 10px,
+        rgba(200, 50, 0, 0.15) 10px,
+        rgba(200, 50, 0, 0.15) 20px
+    );
+    border: 1px solid rgba(200, 50, 0, 0.2);
+    transform: translate(-50%, -50%) translateZ(120px) rotateX(-90deg);
+    transform-origin: center center;
+    z-index: 34;
+    pointer-events: none;
+}

@@ -71,8 +71,26 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
 
                 <!-- 3D Stack Representation -->
-                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
+                <div class="relative h-[600px] flex items-center justify-center perspective-container reveal active bg-stone-100/50 rounded-2xl border border-stone-200">
+
+                    <!-- Controls -->
+                    <div class="absolute top-4 left-4 z-50 bg-white/90 p-4 rounded-xl shadow-lg backdrop-blur-sm border border-stone-100">
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Zoom</label>
+                            <input type="range" id="zoom-slider" min="0.5" max="1.5" step="0.1" value="1" class="w-24 accent-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Rotation</label>
+                            <input type="range" id="rotate-slider" min="-180" max="180" step="5" value="-45" class="w-24 accent-primary">
+                        </div>
+                    </div>
+
                     <div id="building-stack" class="building-stack">
+                        <!-- Structural Elements -->
+                        <div class="elevator-shaft"></div>
+                        <div class="fire-stairs"></div>
+
+                        <!-- Floors -->
                         <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
                         <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
                         <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
@@ -81,7 +99,7 @@
                     </div>
 
                     <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50">
                         <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Vue Ingénierie

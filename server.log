@@ -1,0 +1,17 @@
+127.0.0.1 - - [23/Jan/2026 16:58:57] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:58:58] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:58:58] "GET /coliving.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:58:58] "GET /Communal_Kitchen.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:58:58] "GET /atelier-velo.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:59:30] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:59:30] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:59:30] "GET /coliving.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:59:30] "GET /Communal_Kitchen.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 16:59:30] "GET /atelier-velo.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:03] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:03] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:03] "GET /coliving.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:03] "GET /Communal_Kitchen.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:04] "GET /atelier-velo.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:04] "GET /bim.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Jan/2026 17:00:05] "GET /bim.js HTTP/1.1" 200 -
