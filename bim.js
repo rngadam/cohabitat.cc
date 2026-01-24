@@ -55,6 +55,7 @@ const buildingData = {
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="pipette" class="w-4 h-4"></i></div><span>Colonnes de plomberie centralisées</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="zap" class="w-4 h-4"></i></div><span>Système électrique intelligent</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="arrow-up-down" class="w-4 h-4"></i></div><span>Ascenseur en verre (Puit de lumière)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="footprints" class="w-4 h-4"></i></div><span>Escalier de secours externe</span></li>
                 </ul>`,
         icon: "cpu"
     }
@@ -100,3 +101,35 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+// Zoom Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('zoom-slider');
+    if (!slider) return;
+
+    const layers = [
+        { selector: '.layer-roof', baseZ: 280, baseY: -80 },
+        { selector: '.layer-residential', baseZ: 200, baseY: -40 },
+        { selector: '.layer-coworking', baseZ: 120, baseY: 0 },
+        { selector: '.layer-rdc', baseZ: 40, baseY: 40 },
+        { selector: '.layer-basement', baseZ: -40, baseY: 80 }
+    ];
+
+    // Cache elements
+    layers.forEach(l => l.el = document.querySelector(l.selector));
+
+    slider.addEventListener('input', (e) => {
+        const factor = parseFloat(e.target.value); // 0 to 1
+        const centerZ = 120; // Pivot point (Coworking floor)
+
+        layers.forEach(layer => {
+            if(layer.el) {
+                const dist = layer.baseZ - centerZ;
+                // Expand distance from center based on factor
+                // factor 1 => 2.5x spread
+                const newZ = centerZ + (dist * (1 + factor * 2.5));
+                layer.el.style.transform = `translateZ(${newZ}px) translateY(${layer.baseY}px)`;
+            }
+        });
+    });
+});
