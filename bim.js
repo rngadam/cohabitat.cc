@@ -1,4 +1,12 @@
 // 3D Visualization Logic
+
+// Residential Content (Shared across floors 2-5)
+const residentialContent = `<ul class="space-y-4">
+    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées (SDB, Walk-in, Balcon)</span></li>
+    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="users" class="w-4 h-4"></i></div><span>Cuisine et salon partagé au cœur de chaque étage</span></li>
+    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="shirt" class="w-4 h-4"></i></div><span>Buanderie annexée à l'escalier de secours</span></li>
+</ul>`;
+
 const buildingData = {
     roof: {
         title: "Toit - Oasis Urbaine",
@@ -10,22 +18,17 @@ const buildingData = {
                 </ul>`,
         icon: "sun"
     },
-    residential: {
-        title: "Étages 2 à 5 - Résidentiel",
-        content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées (SDB, Walk-in, Balcon)</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="users" class="w-4 h-4"></i></div><span>Cuisine et salon partagé au cœur de chaque étage</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="shirt" class="w-4 h-4"></i></div><span>Buanderie annexée à l'escalier de secours</span></li>
-                </ul>`,
-        icon: "home"
-    },
+    "floor-5": { title: "5ème Étage - Résidentiel", content: residentialContent, icon: "home" },
+    "floor-4": { title: "4ème Étage - Résidentiel", content: residentialContent, icon: "home" },
+    "floor-3": { title: "3ème Étage - Résidentiel", content: residentialContent, icon: "home" },
+    "floor-2": { title: "2ème Étage - Résidentiel", content: residentialContent, icon: "home" },
     coworking: {
         title: "1er Étage - Vie Active",
         content: `<ul class="space-y-4">
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Espace de Coworking & Bureaux</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café-bar pour les résidents</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="film" class="w-4 h-4"></i></div><span>Cinéma-maison & Salle de réunion</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée résidentiel sécurisé</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée "à la japonaise" (Vestiaire souliers/manteaux) pour réduire l'entretien</span></li>
                 </ul>`,
         icon: "briefcase"
     },
@@ -41,7 +44,7 @@ const buildingData = {
     basement: {
         title: "Sous-sol - Logistique",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique, Bois, Élec)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique, Bois, Élec). Sert à l'entretien, production de meubles et réparation.</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bike" class="w-4 h-4"></i></div><span>Garage vélos sécurisé</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="package" class="w-4 h-4"></i></div><span>Espace de stockage (effets personnels)</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="recycle" class="w-4 h-4"></i></div><span>Système de bio-digesteur</span></li>
@@ -72,6 +75,8 @@ function selectFloor(floorId) {
     const infoPanel = document.getElementById('floor-info');
     const data = buildingData[floorId];
 
+    if (!data) return;
+
     infoPanel.style.opacity = 0;
     setTimeout(() => {
         infoPanel.innerHTML = `
@@ -97,6 +102,27 @@ function toggleEngineering() {
     if (stack.classList.contains('engineering')) {
         selectFloor('engineering');
     } else {
-        selectFloor('roof'); // Reset to roof or clear
+        selectFloor('roof'); // Reset to roof or default
     }
 }
+
+// Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('zoom-slider');
+    const stack = document.getElementById('building-stack');
+
+    if (slider && stack) {
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            // Base gap is 30px, max is 120px
+            const minGap = 30;
+            const maxGap = 120;
+            const gap = minGap + (val / 100) * (maxGap - minGap);
+
+            stack.style.setProperty('--explode-gap', `${gap}px`);
+        });
+
+        // Initialize default view (collapsed)
+        stack.style.setProperty('--explode-gap', '30px');
+    }
+});
