@@ -25,7 +25,7 @@ const buildingData = {
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Espace de Coworking & Bureaux</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café-bar pour les résidents</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="film" class="w-4 h-4"></i></div><span>Cinéma-maison & Salle de réunion</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée résidentiel sécurisé</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><div><span class="font-bold">Sas d'entrée "Japonais"</span><br><span class="text-sm text-stone-500">Vestiaire pour réduire l'entretien des espaces résidentiels.</span></div></li>
                 </ul>`,
         icon: "briefcase"
     },
@@ -41,7 +41,7 @@ const buildingData = {
     basement: {
         title: "Sous-sol - Logistique",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique, Bois, Élec)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><div><span class="font-bold">Fablab Complet</span><br><span class="text-sm text-stone-500">Mécanique vélo, menuiserie, électronique. Production de meubles et maintenance.</span></div></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bike" class="w-4 h-4"></i></div><span>Garage vélos sécurisé</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="package" class="w-4 h-4"></i></div><span>Espace de stockage (effets personnels)</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="recycle" class="w-4 h-4"></i></div><span>Système de bio-digesteur</span></li>
@@ -100,3 +100,16 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+// Initialize Zoom Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('zoom-slider');
+    const stack = document.getElementById('building-stack');
+
+    if(slider && stack) {
+        slider.addEventListener('input', (e) => {
+            const gap = e.target.value;
+            stack.style.setProperty('--explode-gap', `${gap}px`);
+        });
+    }
+});

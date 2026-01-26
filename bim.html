@@ -71,13 +71,50 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
 
                 <!-- 3D Stack Representation -->
-                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
+                <div class="relative h-[600px] flex flex-col items-center justify-center perspective-container reveal active">
+
+                    <!-- Zoom Control -->
+                    <div class="mb-12 w-64 text-center z-10">
+                        <label for="zoom-slider" class="block text-xs font-bold tracking-widest uppercase text-stone-400 mb-2">Expansion des étages</label>
+                        <input type="range" id="zoom-slider" min="0" max="120" value="0" step="1" class="w-full h-1 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-primary">
+                    </div>
+
                     <div id="building-stack" class="building-stack">
-                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
-                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
-                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
-                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
-                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">
+                            <span class="relative z-20">Toit</span>
+                            <div class="elevator-shaft"></div>
+                            <div class="fire-escape"></div>
+                            <div class="engineering-system beams"></div>
+                            <div class="engineering-system pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">
+                            <span class="relative z-20">Étages 2-5</span>
+                            <div class="elevator-shaft"></div>
+                            <div class="fire-escape"></div>
+                            <div class="engineering-system beams"></div>
+                            <div class="engineering-system pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">
+                            <span class="relative z-20">1er Étage</span>
+                            <div class="elevator-shaft"></div>
+                            <div class="fire-escape"></div>
+                            <div class="engineering-system beams"></div>
+                            <div class="engineering-system pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">
+                            <span class="relative z-20">Rez-de-chaussée</span>
+                            <div class="elevator-shaft"></div>
+                            <div class="fire-escape"></div>
+                            <div class="engineering-system beams"></div>
+                            <div class="engineering-system pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">
+                            <span class="relative z-20">Sous-sol</span>
+                            <div class="elevator-shaft"></div>
+                            <div class="fire-escape"></div>
+                            <div class="engineering-system beams"></div>
+                            <div class="engineering-system pipes"></div>
+                        </div>
                     </div>
 
                     <!-- Engineering Toggle -->

@@ -37,6 +37,7 @@ body {
 .perspective-container {
     perspective: 1200px;
 }
+
 .building-stack {
     position: relative;
     width: 300px;
@@ -45,7 +46,11 @@ body {
     transform: rotateX(60deg) rotateZ(-45deg);
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     margin: 0 auto;
+
+    /* CSS Variable for Expansion controlled by slider */
+    --explode-gap: 0px;
 }
+
 .floor-plate {
     position: absolute;
     top: 0;
@@ -66,8 +71,10 @@ body {
     cursor: pointer;
     text-align: center;
     font-size: 1.2rem;
-    backface-visibility: hidden;
+    backface-visibility: visible; /* Changed to visible so we see bottoms if needed */
+    transform-style: preserve-3d;
 }
+
 .floor-plate:hover, .floor-plate.active {
     background: #064E3B;
     color: #F5F5F4;
@@ -75,31 +82,113 @@ body {
     box-shadow: 20px 20px 50px rgba(6, 78, 59, 0.4);
 }
 
-/* Positioning Layers */
-.layer-roof { transform: translateZ(280px) translateY(-80px); z-index: 60; }
-.layer-residential { transform: translateZ(200px) translateY(-40px); z-index: 50; }
-.layer-coworking { transform: translateZ(120px) translateY(0px); z-index: 40; }
-.layer-rdc { transform: translateZ(40px) translateY(40px); z-index: 30; }
-.layer-basement { transform: translateZ(-40px) translateY(80px); z-index: 20; background: #e7e5e4; }
+/* Internal Structures */
+.elevator-shaft {
+    position: absolute;
+    right: 15%;
+    top: 50%;
+    transform: translateY(-50%) translateZ(1px); /* Slight Z to avoid clipping */
+    width: 40px;
+    height: 80%;
+    background: rgba(200, 240, 255, 0.3);
+    border: 1px solid rgba(100, 200, 255, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+}
 
-/* Hover Effects */
-.layer-roof:hover, .layer-roof.active { transform: translateZ(300px) translateY(-80px); }
-.layer-residential:hover, .layer-residential.active { transform: translateZ(220px) translateY(-40px); }
-.layer-coworking:hover, .layer-coworking.active { transform: translateZ(140px) translateY(0px); }
-.layer-rdc:hover, .layer-rdc.active { transform: translateZ(60px) translateY(40px); }
-.layer-basement:hover, .layer-basement.active { transform: translateZ(-20px) translateY(80px); }
+.fire-escape {
+    position: absolute;
+    left: -20px;
+    top: 20%;
+    width: 20px;
+    height: 60%;
+    background: repeating-linear-gradient(
+        45deg,
+        #57534e,
+        #57534e 5px,
+        #44403c 5px,
+        #44403c 10px
+    );
+    border: 1px solid #44403c;
+    transform: rotateY(-90deg) translateX(10px); /* Position on side */
+    pointer-events: none;
+}
+
+/* Positioning Layers with Dynamic Gap */
+/* Base spacing + (Explode Gap * Index) */
+.layer-roof {
+    transform: translateZ(calc(280px + var(--explode-gap) * 4)) translateY(-80px);
+    z-index: 60;
+}
+.layer-residential {
+    transform: translateZ(calc(200px + var(--explode-gap) * 3)) translateY(-40px);
+    z-index: 50;
+}
+.layer-coworking {
+    transform: translateZ(calc(120px + var(--explode-gap) * 2)) translateY(0px);
+    z-index: 40;
+}
+.layer-rdc {
+    transform: translateZ(calc(40px + var(--explode-gap) * 1)) translateY(40px);
+    z-index: 30;
+}
+.layer-basement {
+    transform: translateZ(calc(-40px + var(--explode-gap) * 0)) translateY(80px);
+    z-index: 20;
+    background: #e7e5e4;
+}
+
+/* Hover Effects (Additive to current transform) */
+/* Simplified: Hover just adds a bit of lift, handled nicely by transition */
+.layer-roof:hover { transform: translateZ(calc(300px + var(--explode-gap) * 4)) translateY(-80px); }
+.layer-residential:hover { transform: translateZ(calc(220px + var(--explode-gap) * 3)) translateY(-40px); }
+.layer-coworking:hover { transform: translateZ(calc(140px + var(--explode-gap) * 2)) translateY(0px); }
+.layer-rdc:hover { transform: translateZ(calc(60px + var(--explode-gap) * 1)) translateY(40px); }
+.layer-basement:hover { transform: translateZ(calc(-20px + var(--explode-gap) * 0)) translateY(80px); }
+
 
 /* Engineering Mode */
-.building-stack.engineering .floor-plate {
-    background: rgba(6, 78, 59, 0.1);
-    border: 1px dashed #064E3B;
-    color: transparent;
-}
-.building-stack.engineering .floor-plate::before {
-    content: '';
+.engineering-system {
     position: absolute;
     inset: 0;
-    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwNjRFM0IiIHN0cm9rZS13aWR0aD0iMSI+PHBhdGggZD0iTTAgMjBMMjAgME0xMCAyMEwyMCAxME0wIDEwTDEwIDAiLz48L3N2Zz4=');
-    opacity: 0.2;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
     border-radius: 14px;
+}
+
+.beams {
+    background-image:
+        linear-gradient(rgba(120, 53, 15, 0.3) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(120, 53, 15, 0.3) 2px, transparent 2px);
+    background-size: 50px 50px;
+    z-index: 5;
+}
+
+.pipes {
+    background-image:
+        linear-gradient(90deg, transparent 45%, rgba(59, 130, 246, 0.5) 45%, rgba(59, 130, 246, 0.5) 48%, rgba(239, 68, 68, 0.5) 52%, rgba(239, 68, 68, 0.5) 55%, transparent 55%);
+    background-size: 100% 100%;
+    z-index: 6;
+}
+
+.building-stack.engineering .floor-plate {
+    background: rgba(255, 255, 255, 0.15); /* More transparent */
+    border: 1px dashed #064E3B;
+    color: transparent; /* Hide text */
+}
+
+.building-stack.engineering .floor-plate span {
+    opacity: 0; /* Ensure text span is hidden */
+}
+
+.building-stack.engineering .engineering-system {
+    opacity: 1;
+}
+
+/* Ensure elevator/fire escape stay visible in engineering but maybe ghostly? */
+.building-stack.engineering .elevator-shaft {
+    background: rgba(200, 240, 255, 0.1);
+    border-color: rgba(100, 200, 255, 0.3);
 }
