@@ -34,6 +34,10 @@ body {
 }
 
 /* 3D Visualization Styles */
+:root {
+    --explode-gap: 80px;
+}
+
 .perspective-container {
     perspective: 1200px;
 }
@@ -67,6 +71,7 @@ body {
     text-align: center;
     font-size: 1.2rem;
     backface-visibility: hidden;
+    transform-style: preserve-3d;
 }
 .floor-plate:hover, .floor-plate.active {
     background: #064E3B;
@@ -75,31 +80,125 @@ body {
     box-shadow: 20px 20px 50px rgba(6, 78, 59, 0.4);
 }
 
-/* Positioning Layers */
-.layer-roof { transform: translateZ(280px) translateY(-80px); z-index: 60; }
-.layer-residential { transform: translateZ(200px) translateY(-40px); z-index: 50; }
-.layer-coworking { transform: translateZ(120px) translateY(0px); z-index: 40; }
-.layer-rdc { transform: translateZ(40px) translateY(40px); z-index: 30; }
-.layer-basement { transform: translateZ(-40px) translateY(80px); z-index: 20; background: #e7e5e4; }
+/* Positioning Layers with Dynamic Gap */
+/* Base Z = 120px. Base Y logic: Shift Y opposite to Z to maintain visual stack center */
+.layer-roof {
+    transform: translateZ(calc(120px + (var(--explode-gap) * 2))) translateY(calc(var(--explode-gap) * -1));
+    z-index: 60;
+}
+.layer-residential {
+    transform: translateZ(calc(120px + (var(--explode-gap) * 1))) translateY(calc(var(--explode-gap) * -0.5));
+    z-index: 50;
+}
+.layer-coworking {
+    transform: translateZ(120px) translateY(0px);
+    z-index: 40;
+}
+.layer-rdc {
+    transform: translateZ(calc(120px + (var(--explode-gap) * -1))) translateY(calc(var(--explode-gap) * 0.5));
+    z-index: 30;
+}
+.layer-basement {
+    transform: translateZ(calc(120px + (var(--explode-gap) * -2))) translateY(calc(var(--explode-gap) * 1));
+    z-index: 20;
+    background: #e7e5e4;
+}
 
-/* Hover Effects */
-.layer-roof:hover, .layer-roof.active { transform: translateZ(300px) translateY(-80px); }
-.layer-residential:hover, .layer-residential.active { transform: translateZ(220px) translateY(-40px); }
+/* Hover Effects - Adjusted to use CSS variable or just slight offset */
+/* We'll simplify hover to just brightness/scale or slight additional Z */
+.layer-roof:hover, .layer-roof.active { transform: translateZ(calc(120px + (var(--explode-gap) * 2) + 20px)) translateY(calc(var(--explode-gap) * -1)); }
+.layer-residential:hover, .layer-residential.active { transform: translateZ(calc(120px + (var(--explode-gap) * 1) + 20px)) translateY(calc(var(--explode-gap) * -0.5)); }
 .layer-coworking:hover, .layer-coworking.active { transform: translateZ(140px) translateY(0px); }
-.layer-rdc:hover, .layer-rdc.active { transform: translateZ(60px) translateY(40px); }
-.layer-basement:hover, .layer-basement.active { transform: translateZ(-20px) translateY(80px); }
+.layer-rdc:hover, .layer-rdc.active { transform: translateZ(calc(120px + (var(--explode-gap) * -1) + 20px)) translateY(calc(var(--explode-gap) * 0.5)); }
+.layer-basement:hover, .layer-basement.active { transform: translateZ(calc(120px + (var(--explode-gap) * -2) + 20px)) translateY(calc(var(--explode-gap) * 1)); }
 
-/* Engineering Mode */
+
+/* Components */
+.elevator-segment {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(200, 230, 255, 0.4);
+    border: 1px solid rgba(100, 200, 255, 0.5);
+    transform: translateZ(2px);
+    pointer-events: none;
+}
+.elevator-segment::after {
+    content: 'Asc';
+    font-size: 0.6rem;
+    color: rgba(6, 78, 59, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.fire-escape-segment {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 15px;
+    height: 60px;
+    background: repeating-linear-gradient(90deg, #78716c, #78716c 2px, transparent 2px, transparent 4px);
+    border: 1px solid #57534e;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Engineering Internals */
+.beams, .pipes {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    border-radius: 14px;
+}
+
+.building-stack.engineering .beams {
+    opacity: 1;
+    background-image:
+        linear-gradient(90deg, transparent 45%, rgba(120, 53, 15, 0.2) 45%, rgba(120, 53, 15, 0.2) 55%, transparent 55%),
+        linear-gradient(0deg, transparent 45%, rgba(120, 53, 15, 0.2) 45%, rgba(120, 53, 15, 0.2) 55%, transparent 55%);
+    background-size: 100% 100%; /* Cross beams */
+}
+
+.building-stack.engineering .pipes {
+    opacity: 1;
+}
+/* Pipe representation: A blue vertical line for water, red for waste? */
+.pipes::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    width: 6px;
+    height: calc(100% - 20px);
+    background: rgba(59, 130, 246, 0.4);
+    border-radius: 3px;
+}
+.pipes::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    width: 6px;
+    height: calc(100% - 20px);
+    background: rgba(239, 68, 68, 0.4);
+    border-radius: 3px;
+}
+
+
+/* Engineering Mode Floors */
 .building-stack.engineering .floor-plate {
-    background: rgba(6, 78, 59, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     border: 1px dashed #064E3B;
     color: transparent;
 }
-.building-stack.engineering .floor-plate::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwNjRFM0IiIHN0cm9rZS13aWR0aD0iMSI+PHBhdGggZD0iTTAgMjBMMjAgME0xMCAyMEwyMCAxME0wIDEwTDEwIDAiLz48L3N2Zz4=');
-    opacity: 0.2;
-    border-radius: 14px;
+/* Keep the text transparent but maybe hide it fully? */
+.building-stack.engineering .floor-plate span {
+    opacity: 0;
 }
+/* Show beams/pipes instead */

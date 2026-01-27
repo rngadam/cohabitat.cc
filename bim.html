@@ -73,15 +73,52 @@
                 <!-- 3D Stack Representation -->
                 <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
                     <div id="building-stack" class="building-stack">
-                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
-                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
-                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
-                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
-                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">
+                            <span>Toit</span>
+                            <div class="elevator-segment"></div>
+                            <div class="fire-escape-segment"></div>
+                            <div class="beams"></div>
+                            <div class="pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">
+                            <span>Étages 2-5</span>
+                            <div class="elevator-segment"></div>
+                            <div class="fire-escape-segment"></div>
+                            <div class="beams"></div>
+                            <div class="pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">
+                            <span>1er Étage</span>
+                            <div class="elevator-segment"></div>
+                            <div class="fire-escape-segment"></div>
+                            <div class="beams"></div>
+                            <div class="pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">
+                            <span>Rez-de-chaussée</span>
+                            <div class="elevator-segment"></div>
+                            <div class="fire-escape-segment"></div>
+                            <div class="beams"></div>
+                            <div class="pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">
+                            <span>Sous-sol</span>
+                            <div class="elevator-segment"></div>
+                            <div class="fire-escape-segment"></div>
+                            <div class="beams"></div>
+                            <div class="pipes"></div>
+                        </div>
                     </div>
 
-                    <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <!-- Controls -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-4 w-full max-w-md px-4">
+                        <!-- Zoom Slider -->
+                        <div class="flex items-center gap-4 bg-white/90 backdrop-blur px-6 py-2 rounded-full shadow-lg border border-primary/10 w-full max-w-xs">
+                            <i data-lucide="zoom-in" class="w-4 h-4 text-primary"></i>
+                            <input type="range" id="explode-slider" min="20" max="200" value="80" class="w-full accent-primary h-1 bg-stone-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+
+                        <!-- Engineering Toggle -->
                         <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Vue Ingénierie
