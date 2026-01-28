@@ -25,7 +25,7 @@ const buildingData = {
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Espace de Coworking & Bureaux</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café-bar pour les résidents</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="film" class="w-4 h-4"></i></div><span>Cinéma-maison & Salle de réunion</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée résidentiel sécurisé</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="door-open" class="w-4 h-4"></i></div><span>Sas d'entrée "à la japonaise" (Vestiaire souliers/manteaux) pour réduire l'entretien</span></li>
                 </ul>`,
         icon: "briefcase"
     },
@@ -41,7 +41,7 @@ const buildingData = {
     basement: {
         title: "Sous-sol - Logistique",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Mécanique, Bois, Élec)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="hammer" class="w-4 h-4"></i></div><span>Fablab complet (Vélo, Bois, Élec). Entretien, meubles et réparation.</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bike" class="w-4 h-4"></i></div><span>Garage vélos sécurisé</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="package" class="w-4 h-4"></i></div><span>Espace de stockage (effets personnels)</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="recycle" class="w-4 h-4"></i></div><span>Système de bio-digesteur</span></li>
@@ -51,6 +51,7 @@ const buildingData = {
     engineering: {
         title: "Vue Ingénierie",
         content: `<ul class="space-y-4">
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="cpu" class="w-4 h-4"></i></div><span>OS Building Open Source (Sécurité NFC, Gestion résidents)</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="activity" class="w-4 h-4"></i></div><span>Poutres de support apparentes (Mass Timber)</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="pipette" class="w-4 h-4"></i></div><span>Colonnes de plomberie centralisées</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="zap" class="w-4 h-4"></i></div><span>Système électrique intelligent</span></li>
@@ -100,3 +101,15 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+// Initialize Slider Control
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('explodeSlider');
+    const stack = document.getElementById('building-stack');
+
+    if (slider && stack) {
+        slider.addEventListener('input', (e) => {
+            stack.style.setProperty('--explode-gap', e.target.value);
+        });
+    }
+});

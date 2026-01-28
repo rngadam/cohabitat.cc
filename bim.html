@@ -71,17 +71,53 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
 
                 <!-- 3D Stack Representation -->
-                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
+                <div class="relative h-[600px] flex items-center justify-center perspective-container reveal active">
                     <div id="building-stack" class="building-stack">
-                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
-                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
-                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
-                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
-                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                        <!-- Vertical Core Elements -->
+                        <div class="elevator-shaft"></div>
+                        <div class="fire-escape"></div>
+
+                        <!-- Floors with Engineering Details -->
+                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">
+                            <span class="label">Toit</span>
+                            <div class="eng-detail beams"></div>
+                            <div class="eng-detail pipes"></div>
+                        </div>
+                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">
+                            <span class="label">Étages 2-5</span>
+                            <div class="eng-detail beams"></div>
+                            <div class="eng-detail pipes"></div>
+                            <div class="eng-detail electric"></div>
+                        </div>
+                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">
+                            <span class="label">1er Étage</span>
+                            <div class="eng-detail beams"></div>
+                            <div class="eng-detail pipes"></div>
+                            <div class="eng-detail electric"></div>
+                        </div>
+                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">
+                            <span class="label">Rez-de-chaussée</span>
+                            <div class="eng-detail beams"></div>
+                            <div class="eng-detail pipes"></div>
+                            <div class="eng-detail electric"></div>
+                        </div>
+                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">
+                            <span class="label">Sous-sol</span>
+                            <div class="eng-detail beams"></div>
+                            <div class="eng-detail bio"></div>
+                        </div>
                     </div>
 
-                    <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <!-- Controls -->
+                    <div class="absolute bottom-0 left-0 w-full flex flex-col items-center gap-4 p-4">
+                        <!-- Zoom/Explode Slider -->
+                        <div class="bg-white/90 backdrop-blur px-6 py-3 rounded-full shadow-lg border border-stone-200 flex items-center gap-4">
+                            <i data-lucide="zoom-in" class="w-4 h-4 text-primary"></i>
+                            <input type="range" id="explodeSlider" min="0.5" max="2.5" step="0.1" value="1" class="w-32 accent-primary cursor-pointer">
+                            <span class="text-xs font-bold text-primary uppercase">Zoom Éclaté</span>
+                        </div>
+
+                        <!-- Engineering Toggle -->
                         <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Vue Ingénierie
