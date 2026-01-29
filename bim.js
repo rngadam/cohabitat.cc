@@ -72,6 +72,8 @@ function selectFloor(floorId) {
     const infoPanel = document.getElementById('floor-info');
     const data = buildingData[floorId];
 
+    if (!data) return;
+
     infoPanel.style.opacity = 0;
     setTimeout(() => {
         infoPanel.innerHTML = `
@@ -100,3 +102,15 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+// Initialize Slider
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('explode-slider');
+    const stack = document.getElementById('building-stack');
+
+    if(slider && stack) {
+        slider.addEventListener('input', (e) => {
+            stack.style.setProperty('--explode-factor', e.target.value);
+        });
+    }
+});

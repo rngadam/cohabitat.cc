@@ -73,6 +73,18 @@
                 <!-- 3D Stack Representation -->
                 <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
                     <div id="building-stack" class="building-stack">
+                        <!-- Vertical Elements -->
+                        <div class="elevator-shaft">
+                            <div class="e-wall e-1"></div>
+                            <div class="e-wall e-2"></div>
+                            <div class="e-wall e-3"></div>
+                            <div class="e-wall e-4"></div>
+                        </div>
+                        <div class="fire-escape">
+                            <div class="fe-wall fe-1"></div>
+                        </div>
+
+                        <!-- Floors -->
                         <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
                         <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
                         <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
@@ -80,8 +92,13 @@
                         <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
                     </div>
 
-                    <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                    <!-- Controls -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col gap-3 items-center w-full max-w-xs px-4">
+                        <div class="flex items-center gap-3 w-full bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-lg border border-primary/20">
+                            <i data-lucide="layers" class="w-4 h-4 text-primary"></i>
+                            <input type="range" id="explode-slider" min="0.5" max="3" step="0.1" value="1" class="w-full h-1 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-primary hover:accent-emerald-700">
+                            <i data-lucide="maximize" class="w-4 h-4 text-primary"></i>
+                        </div>
                         <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Vue Ingénierie
