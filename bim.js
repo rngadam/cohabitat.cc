@@ -57,14 +57,38 @@ const buildingData = {
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="arrow-up-down" class="w-4 h-4"></i></div><span>Ascenseur en verre (Puit de lumière)</span></li>
                 </ul>`,
         icon: "cpu"
+    },
+    elevator: {
+        title: "Ascenseur Panoramique",
+        content: `<ul class="space-y-4">
+            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="arrow-up-down" class="w-4 h-4"></i></div><span>Structure en verre</span></li>
+            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="sun" class="w-4 h-4"></i></div><span>Puit de lumière naturelle</span></li>
+        </ul>`,
+        icon: "arrow-up-down"
+    },
+    fire_escape: {
+        title: "Escalier de Secours",
+        content: `<ul class="space-y-4">
+            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="footprints" class="w-4 h-4"></i></div><span>Accès extérieur sécurisé</span></li>
+            <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="shirt" class="w-4 h-4"></i></div><span>Connexion directe à la buanderie</span></li>
+        </ul>`,
+        icon: "footprints"
     }
 };
 
 function selectFloor(floorId) {
     // Update Visuals
-    document.querySelectorAll('.floor-plate').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.floor-plate, .elevator-shaft, .fire-escape').forEach(el => el.classList.remove('active'));
+
+    // Also remove active from classes specific to elements
     if(floorId !== 'engineering') {
-        const activeEl = document.querySelector(`.layer-${floorId}`);
+        let activeEl = document.querySelector(`.layer-${floorId}`);
+        // If not a layer, try id selector or class selector matching logic
+        if(!activeEl && (floorId === 'elevator' || floorId === 'fire_escape')) {
+             if(floorId === 'elevator') activeEl = document.querySelector('.elevator-shaft');
+             if(floorId === 'fire_escape') activeEl = document.querySelector('.fire-escape');
+        }
+
         if(activeEl) activeEl.classList.add('active');
     }
 
@@ -72,22 +96,24 @@ function selectFloor(floorId) {
     const infoPanel = document.getElementById('floor-info');
     const data = buildingData[floorId];
 
-    infoPanel.style.opacity = 0;
-    setTimeout(() => {
-        infoPanel.innerHTML = `
-            <div class="flex items-center gap-4 mb-6">
-                <div class="p-3 bg-primary text-secondary rounded-xl shadow-lg">
-                    <i data-lucide="${data.icon}" class="w-8 h-8"></i>
+    if (data) {
+        infoPanel.style.opacity = 0;
+        setTimeout(() => {
+            infoPanel.innerHTML = `
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-3 bg-primary text-secondary rounded-xl shadow-lg">
+                        <i data-lucide="${data.icon}" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-serif text-3xl text-primary">${data.title}</h3>
                 </div>
-                <h3 class="font-serif text-3xl text-primary">${data.title}</h3>
-            </div>
-            <div class="text-stone-600 leading-relaxed text-lg">
-                ${data.content}
-            </div>
-        `;
-        lucide.createIcons();
-        infoPanel.style.opacity = 1;
-    }, 300);
+                <div class="text-stone-600 leading-relaxed text-lg">
+                    ${data.content}
+                </div>
+            `;
+            lucide.createIcons();
+            infoPanel.style.opacity = 1;
+        }, 300);
+    }
 }
 
 function toggleEngineering() {
@@ -100,3 +126,14 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('zoomSlider');
+    const stack = document.getElementById('building-stack');
+
+    if(slider && stack) {
+        slider.addEventListener('input', (e) => {
+            stack.style.setProperty('--explode-gap', e.target.value);
+        });
+    }
+});

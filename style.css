@@ -43,8 +43,9 @@ body {
     height: 300px;
     transform-style: preserve-3d;
     transform: rotateX(60deg) rotateZ(-45deg);
-    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.1s ease-out; /* Faster for slider */
     margin: 0 auto;
+    --explode-gap: 1;
 }
 .floor-plate {
     position: absolute;
@@ -75,25 +76,87 @@ body {
     box-shadow: 20px 20px 50px rgba(6, 78, 59, 0.4);
 }
 
-/* Positioning Layers */
-.layer-roof { transform: translateZ(280px) translateY(-80px); z-index: 60; }
-.layer-residential { transform: translateZ(200px) translateY(-40px); z-index: 50; }
-.layer-coworking { transform: translateZ(120px) translateY(0px); z-index: 40; }
-.layer-rdc { transform: translateZ(40px) translateY(40px); z-index: 30; }
-.layer-basement { transform: translateZ(-40px) translateY(80px); z-index: 20; background: #e7e5e4; }
+/* Structural Elements (Elevator & Fire Escape) */
+.elevator-shaft {
+    position: absolute;
+    width: 60px;
+    height: 500px; /* Spans the stack */
+    background: rgba(147, 197, 253, 0.3); /* Blueish glass */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    /* Stand it up vertically (Rotate X) and center it in Z space roughly */
+    transform: translate(-50%, -50%) rotateX(-90deg) translateZ(120px) rotateY(45deg);
+    z-index: 70; /* Ensure it is clickable above floors */
+    pointer-events: auto;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.elevator-shaft:hover, .elevator-shaft.active {
+    background: rgba(147, 197, 253, 0.6);
+    border-color: #3b82f6;
+}
 
-/* Hover Effects */
-.layer-roof:hover, .layer-roof.active { transform: translateZ(300px) translateY(-80px); }
-.layer-residential:hover, .layer-residential.active { transform: translateZ(220px) translateY(-40px); }
-.layer-coworking:hover, .layer-coworking.active { transform: translateZ(140px) translateY(0px); }
-.layer-rdc:hover, .layer-rdc.active { transform: translateZ(60px) translateY(40px); }
-.layer-basement:hover, .layer-basement.active { transform: translateZ(-20px) translateY(80px); }
+.fire-escape {
+    position: absolute;
+    width: 40px;
+    height: 500px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(6, 78, 59, 0.1),
+        rgba(6, 78, 59, 0.1) 10px,
+        rgba(6, 78, 59, 0.3) 10px,
+        rgba(6, 78, 59, 0.3) 20px
+    );
+    border-left: 4px solid #064E3B;
+    border-right: 4px solid #064E3B;
+    top: 50%;
+    right: -20px; /* Attach to side */
+    transform-origin: center center;
+    transform: translate(0, -50%) rotateX(-90deg) translateZ(120px);
+    z-index: 70; /* Ensure it is clickable above floors */
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.fire-escape:hover, .fire-escape.active {
+    border-color: #C2410C; /* Accent color */
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(194, 65, 12, 0.1),
+        rgba(194, 65, 12, 0.1) 10px,
+        rgba(194, 65, 12, 0.3) 10px,
+        rgba(194, 65, 12, 0.3) 20px
+    );
+}
+
+/* Positioning Layers with Zoom Factor */
+.layer-roof { transform: translateZ(calc(280px * var(--explode-gap))) translateY(calc(-80px * var(--explode-gap))); z-index: 60; }
+.layer-residential { transform: translateZ(calc(200px * var(--explode-gap))) translateY(calc(-40px * var(--explode-gap))); z-index: 50; }
+.layer-coworking { transform: translateZ(calc(120px * var(--explode-gap))) translateY(0px); z-index: 40; }
+.layer-rdc { transform: translateZ(calc(40px * var(--explode-gap))) translateY(calc(40px * var(--explode-gap))); z-index: 30; }
+.layer-basement { transform: translateZ(calc(-40px * var(--explode-gap))) translateY(calc(80px * var(--explode-gap))); z-index: 20; background: #e7e5e4; }
+
+/* Hover Effects (Added scale or offset on top of gap) */
+.layer-roof:hover, .layer-roof.active { transform: translateZ(calc(280px * var(--explode-gap) + 20px)) translateY(calc(-80px * var(--explode-gap))); }
+.layer-residential:hover, .layer-residential.active { transform: translateZ(calc(200px * var(--explode-gap) + 20px)) translateY(calc(-40px * var(--explode-gap))); }
+.layer-coworking:hover, .layer-coworking.active { transform: translateZ(calc(120px * var(--explode-gap) + 20px)) translateY(0px); }
+.layer-rdc:hover, .layer-rdc.active { transform: translateZ(calc(40px * var(--explode-gap) + 20px)) translateY(calc(40px * var(--explode-gap))); }
+.layer-basement:hover, .layer-basement.active { transform: translateZ(calc(-40px * var(--explode-gap) + 20px)) translateY(calc(80px * var(--explode-gap))); }
 
 /* Engineering Mode */
 .building-stack.engineering .floor-plate {
-    background: rgba(6, 78, 59, 0.1);
+    background: rgba(6, 78, 59, 0.05);
     border: 1px dashed #064E3B;
     color: transparent;
+    box-shadow: none;
+}
+.building-stack.engineering .elevator-shaft {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid #3b82f6;
+}
+.building-stack.engineering .fire-escape {
+    opacity: 0.8;
 }
 .building-stack.engineering .floor-plate::before {
     content: '';
