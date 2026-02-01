@@ -100,3 +100,16 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+// Zoom Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const zoomSlider = document.getElementById('zoom-slider');
+    const stack = document.getElementById('building-stack');
+
+    if (zoomSlider && stack) {
+        zoomSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            stack.style.setProperty('--explode-gap', val);
+        });
+    }
+});
