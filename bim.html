@@ -71,21 +71,52 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
 
                 <!-- 3D Stack Representation -->
-                <div class="relative h-[500px] flex items-center justify-center perspective-container reveal active">
-                    <div id="building-stack" class="building-stack">
-                        <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
-                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
-                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
-                        <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
-                        <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
+                <div class="flex flex-col items-center">
+                    <!-- Zoom Control -->
+                    <div class="w-full max-w-xs mb-8 reveal active">
+                        <label for="explode-slider" class="block text-sm font-medium text-stone-600 mb-2 flex items-center gap-2 justify-center">
+                            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+                            Explosion / Zoom
+                        </label>
+                        <input type="range" id="explode-slider" min="0" max="200" value="80" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-primary">
                     </div>
 
-                    <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                        <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
-                            <i data-lucide="wrench" class="w-4 h-4"></i>
-                            Vue Ingénierie
-                        </button>
+                    <div class="relative h-[500px] w-full flex items-center justify-center perspective-container reveal active">
+                        <div id="building-stack" class="building-stack">
+                            <div class="floor-plate layer-roof" onclick="selectFloor('roof')">
+                                Toit
+                                <div class="elevator-segment"></div>
+                                <div class="fire-escape-segment"></div>
+                            </div>
+                            <div class="floor-plate layer-residential" onclick="selectFloor('residential')">
+                                Étages 2-5
+                                <div class="elevator-segment"></div>
+                                <div class="fire-escape-segment"></div>
+                            </div>
+                            <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">
+                                1er Étage
+                                <div class="elevator-segment"></div>
+                                <div class="fire-escape-segment"></div>
+                            </div>
+                            <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">
+                                Rez-de-chaussée
+                                <div class="elevator-segment"></div>
+                                <div class="fire-escape-segment"></div>
+                            </div>
+                            <div class="floor-plate layer-basement" onclick="selectFloor('basement')">
+                                Sous-sol
+                                <div class="elevator-segment"></div>
+                                <div class="fire-escape-segment"></div>
+                            </div>
+                        </div>
+
+                        <!-- Engineering Toggle -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                            <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                Vue Ingénierie
+                            </button>
+                        </div>
                     </div>
                 </div>
 
