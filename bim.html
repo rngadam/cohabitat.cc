@@ -80,9 +80,17 @@
                         <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
                     </div>
 
-                    <!-- Engineering Toggle -->
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                        <button onclick="toggleEngineering()" class="flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-colors shadow-lg font-bold">
+                    <!-- Controls -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 w-full max-w-sm pointer-events-none">
+                        <!-- Slider (Pointer Events Auto) -->
+                        <div class="pointer-events-auto bg-white/90 backdrop-blur-sm px-6 py-2 rounded-full shadow-lg border border-stone-200 flex items-center gap-3 transition-transform hover:scale-105">
+                            <i data-lucide="layers" class="w-4 h-4 text-primary"></i>
+                            <input type="range" id="explode-slider" min="20" max="150" value="80" class="accent-primary h-1.5 w-32 md:w-48 bg-stone-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50">
+                            <span class="text-xs font-bold text-primary uppercase tracking-wider">Zoom</span>
+                        </div>
+
+                        <!-- Button (Pointer Events Auto) -->
+                        <button onclick="toggleEngineering()" class="pointer-events-auto flex items-center gap-2 px-6 py-3 bg-white text-primary border border-primary rounded-full text-sm hover:bg-stone-50 transition-all shadow-lg font-bold hover:shadow-xl hover:-translate-y-0.5">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Vue Ingénierie
                         </button>

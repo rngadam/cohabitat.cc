@@ -100,3 +100,14 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof or clear
     }
 }
+
+// Initialize Slider Logic
+const slider = document.getElementById('explode-slider');
+const stack = document.getElementById('building-stack');
+
+if (slider && stack) {
+    slider.addEventListener('input', (e) => {
+        const gap = e.target.value;
+        stack.style.setProperty('--explode-gap', `${gap}px`);
+    });
+}
