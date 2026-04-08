@@ -298,3 +298,15 @@ function toggleEngineering() {
         selectFloor('roof'); // Reset to roof
     }
 }
+
+// Initialize Slider
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('explode-slider');
+    const stack = document.getElementById('building-stack');
+
+    if(slider && stack) {
+        slider.addEventListener('input', (e) => {
+            stack.style.setProperty('--explode-factor', e.target.value);
+        });
+    }
+});

@@ -45,6 +45,7 @@ body {
     transform: rotateX(60deg) rotateZ(-45deg);
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     margin: 0 auto;
+    --explode-factor: 1;
 }
 .floor-plate {
     position: absolute;
@@ -62,7 +63,7 @@ body {
     font-weight: 600;
     color: #064E3B;
     box-shadow: 10px 10px 30px rgba(0,0,0,0.15);
-    transition: all 0.4s ease;
+    transition: all 0.4s ease, transform 0.1s linear; /* fast transform for slider */
     cursor: pointer;
     text-align: center;
     font-size: 1.2rem;
@@ -75,19 +76,45 @@ body {
     box-shadow: 20px 20px 50px rgba(6, 78, 59, 0.4);
 }
 
-/* Positioning Layers */
-.layer-roof { transform: translateZ(280px) translateY(-80px); z-index: 60; }
-.layer-residential { transform: translateZ(200px) translateY(-40px); z-index: 50; }
-.layer-coworking { transform: translateZ(120px) translateY(0px); z-index: 40; }
-.layer-rdc { transform: translateZ(40px) translateY(40px); z-index: 30; }
-.layer-basement { transform: translateZ(-40px) translateY(80px); z-index: 20; background: #e7e5e4; }
+/* Positioning Layers with Zoom Factor */
+.layer-roof {
+    transform: translateZ(calc(280px * var(--explode-factor))) translateY(calc(-80px * var(--explode-factor)));
+    z-index: 60;
+}
+.layer-residential {
+    transform: translateZ(calc(200px * var(--explode-factor))) translateY(calc(-40px * var(--explode-factor)));
+    z-index: 50;
+}
+.layer-coworking {
+    transform: translateZ(calc(120px * var(--explode-factor))) translateY(0px);
+    z-index: 40;
+}
+.layer-rdc {
+    transform: translateZ(calc(40px * var(--explode-factor))) translateY(calc(40px * var(--explode-factor)));
+    z-index: 30;
+}
+.layer-basement {
+    transform: translateZ(calc(-40px * var(--explode-factor))) translateY(calc(80px * var(--explode-factor)));
+    z-index: 20;
+    background: #e7e5e4;
+}
 
-/* Hover Effects */
-.layer-roof:hover, .layer-roof.active { transform: translateZ(300px) translateY(-80px); }
-.layer-residential:hover, .layer-residential.active { transform: translateZ(220px) translateY(-40px); }
-.layer-coworking:hover, .layer-coworking.active { transform: translateZ(140px) translateY(0px); }
-.layer-rdc:hover, .layer-rdc.active { transform: translateZ(60px) translateY(40px); }
-.layer-basement:hover, .layer-basement.active { transform: translateZ(-20px) translateY(80px); }
+/* Hover Effects (Additive to the calculated position) */
+.layer-roof:hover, .layer-roof.active {
+    transform: translateZ(calc(300px * var(--explode-factor))) translateY(calc(-80px * var(--explode-factor)));
+}
+.layer-residential:hover, .layer-residential.active {
+    transform: translateZ(calc(220px * var(--explode-factor))) translateY(calc(-40px * var(--explode-factor)));
+}
+.layer-coworking:hover, .layer-coworking.active {
+    transform: translateZ(calc(140px * var(--explode-factor))) translateY(0px);
+}
+.layer-rdc:hover, .layer-rdc.active {
+    transform: translateZ(calc(60px * var(--explode-factor))) translateY(calc(40px * var(--explode-factor)));
+}
+.layer-basement:hover, .layer-basement.active {
+    transform: translateZ(calc(-20px * var(--explode-factor))) translateY(calc(80px * var(--explode-factor)));
+}
 
 /* Engineering Mode */
 .building-stack.engineering .floor-plate {
@@ -104,129 +131,62 @@ body {
     border-radius: 14px;
 }
 
-/* --- New Styles for Interactive Floor Plan --- */
-
-.floor-plan-wrapper {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    perspective: 1000px;
-    overflow: hidden;
-    border: 1px solid #e7e5e4;
-    border-radius: 12px;
-    background: #fafaf9;
-}
-
-.floor-plan-scene {
+/* Vertical Elements (Elevator & Fire Escape) */
+.elevator-shaft {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 70%;
-    height: 70%;
-    transform: translate(-50%, -50%) rotateX(30deg);
+    width: 0;
+    height: 0;
     transform-style: preserve-3d;
-    background: rgba(255, 255, 255, 0.8);
-    border: 2px solid #064E3B;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.floor-plan-wrapper:hover .floor-plan-scene {
-    transform: translate(-50%, -50%) rotateX(0deg) scale(1.1);
-}
-
-.fp-wall {
-    position: absolute;
-    background: #44403c;
-    z-index: 10;
-}
-
-.fp-door {
-    position: absolute;
-    background: #C2410C;
-    z-index: 11;
-}
-
-.fp-area {
-    position: absolute;
-    background: rgba(6, 78, 59, 0.05);
-    border: 1px dashed rgba(6, 78, 59, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: help;
-    transition: all 0.3s ease;
-    z-index: 5;
-}
-
-.fp-area:hover {
-    background: rgba(6, 78, 59, 0.15);
-    border-color: #064E3B;
-    box-shadow: 0 0 15px rgba(6, 78, 59, 0.1);
-    z-index: 20;
-}
-
-.fp-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #064E3B;
-    background: rgba(255,255,255,0.8);
-    padding: 2px 6px;
-    border-radius: 4px;
-    text-align: center;
-    white-space: nowrap;
+    transform: translateZ(120px); /* Center of the vertical stack */
     pointer-events: none;
+    z-index: 25;
 }
 
-.fp-size {
-    font-size: 0.6rem;
-    color: #C2410C;
-    margin-top: 2px;
-    font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.2s;
-    background: rgba(255,255,255,0.9);
-    padding: 1px 4px;
-    border-radius: 2px;
-}
-
-.fp-area:hover .fp-size {
-    opacity: 1;
-}
-
-.fp-furniture {
+.e-wall {
     position: absolute;
-    color: #78716c;
-    z-index: 8;
+    width: 50px;
+    height: 450px; /* Runs through the whole building */
+    background: rgba(186, 230, 253, 0.3); /* Light Blue Glass */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    left: -25px;
+    top: -225px;
+    box-shadow: 0 0 10px rgba(186, 230, 253, 0.2);
+}
+
+.e-1 { transform: rotateX(90deg) translateZ(25px); }
+.e-2 { transform: rotateX(90deg) rotateY(90deg) translateZ(25px); }
+.e-3 { transform: rotateX(90deg) rotateY(180deg) translateZ(25px); }
+.e-4 { transform: rotateX(90deg) rotateY(-90deg) translateZ(25px); }
+
+.fire-escape {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    transform: translateZ(120px) translateX(20px);
     pointer-events: none;
+    z-index: 25;
 }
 
-.unit-toggle-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: white;
-    border: 1px solid #d6d3d1;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #44403c;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-left: auto;
+.fe-wall {
+    position: absolute;
+    width: 30px;
+    height: 450px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(6, 78, 59, 0.1),
+        rgba(6, 78, 59, 0.1) 10px,
+        rgba(6, 78, 59, 0.3) 10px,
+        rgba(6, 78, 59, 0.3) 12px
+    );
+    border-left: 2px solid #064E3B;
+    border-right: 2px solid #064E3B;
+    left: -15px;
+    top: -225px;
 }
 
-.unit-toggle-btn:hover {
-    border-color: #064E3B;
-    color: #064E3B;
-}
-
-.unit-toggle-btn.active {
-    background: #064E3B;
-    color: white;
-    border-color: #064E3B;
-}
+.fe-1 { transform: rotateX(90deg) rotateY(90deg) translateZ(0); } /* Side Panel */
