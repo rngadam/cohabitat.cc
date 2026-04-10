@@ -19,7 +19,7 @@ const buildingData = {
         title: "Toit - Oasis Urbaine",
         content: `<ul class="space-y-4">
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="sun" class="w-4 h-4"></i></div><span>Jardin communautaire productif</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="waves" class="w-4 h-4"></i></div><span>Jacuzzi et sauna nordique</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="waves" class="w-4 h-4"></i></div><span>Bain tourbillon + cabine sauna</span></li>
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="droplets" class="w-4 h-4"></i></div><span>Système de collecte d'eau de pluie</span></li>
                 </ul>`,
         icon: "sun",
