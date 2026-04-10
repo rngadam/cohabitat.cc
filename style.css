@@ -78,42 +78,63 @@ body {
 
 /* Positioning Layers with Zoom Factor */
 .layer-roof {
-    transform: translateZ(calc(280px * var(--explode-factor))) translateY(calc(-80px * var(--explode-factor)));
+    transform: translateZ(calc(440px * var(--explode-factor))) translateY(calc(-120px * var(--explode-factor)));
+    z-index: 90;
+}
+.layer-floor-5 {
+    transform: translateZ(calc(360px * var(--explode-factor))) translateY(calc(-80px * var(--explode-factor)));
+    z-index: 80;
+}
+.layer-floor-4 {
+    transform: translateZ(calc(280px * var(--explode-factor))) translateY(calc(-40px * var(--explode-factor)));
+    z-index: 70;
+}
+.layer-floor-3 {
+    transform: translateZ(calc(200px * var(--explode-factor))) translateY(0px);
     z-index: 60;
 }
-.layer-residential {
-    transform: translateZ(calc(200px * var(--explode-factor))) translateY(calc(-40px * var(--explode-factor)));
+.layer-floor-2 {
+    transform: translateZ(calc(120px * var(--explode-factor))) translateY(calc(40px * var(--explode-factor)));
     z-index: 50;
 }
-.layer-coworking {
-    transform: translateZ(calc(120px * var(--explode-factor))) translateY(0px);
+.layer-floor-1 {
+    transform: translateZ(calc(40px * var(--explode-factor))) translateY(calc(80px * var(--explode-factor)));
     z-index: 40;
 }
 .layer-rdc {
-    transform: translateZ(calc(40px * var(--explode-factor))) translateY(calc(40px * var(--explode-factor)));
+    transform: translateZ(calc(-40px * var(--explode-factor))) translateY(calc(120px * var(--explode-factor)));
     z-index: 30;
 }
 .layer-basement {
-    transform: translateZ(calc(-40px * var(--explode-factor))) translateY(calc(80px * var(--explode-factor)));
+    transform: translateZ(calc(-120px * var(--explode-factor))) translateY(calc(160px * var(--explode-factor)));
     z-index: 20;
     background: #e7e5e4;
 }
 
 /* Hover Effects (Additive to the calculated position) */
 .layer-roof:hover, .layer-roof.active {
-    transform: translateZ(calc(300px * var(--explode-factor))) translateY(calc(-80px * var(--explode-factor)));
+    transform: translateZ(calc(460px * var(--explode-factor))) translateY(calc(-120px * var(--explode-factor)));
 }
-.layer-residential:hover, .layer-residential.active {
-    transform: translateZ(calc(220px * var(--explode-factor))) translateY(calc(-40px * var(--explode-factor)));
+.layer-floor-5:hover, .layer-floor-5.active {
+    transform: translateZ(calc(380px * var(--explode-factor))) translateY(calc(-80px * var(--explode-factor)));
 }
-.layer-coworking:hover, .layer-coworking.active {
-    transform: translateZ(calc(140px * var(--explode-factor))) translateY(0px);
+.layer-floor-4:hover, .layer-floor-4.active {
+    transform: translateZ(calc(300px * var(--explode-factor))) translateY(calc(-40px * var(--explode-factor)));
+}
+.layer-floor-3:hover, .layer-floor-3.active {
+    transform: translateZ(calc(220px * var(--explode-factor))) translateY(0px);
+}
+.layer-floor-2:hover, .layer-floor-2.active {
+    transform: translateZ(calc(140px * var(--explode-factor))) translateY(calc(40px * var(--explode-factor)));
+}
+.layer-floor-1:hover, .layer-floor-1.active {
+    transform: translateZ(calc(60px * var(--explode-factor))) translateY(calc(80px * var(--explode-factor)));
 }
 .layer-rdc:hover, .layer-rdc.active {
-    transform: translateZ(calc(60px * var(--explode-factor))) translateY(calc(40px * var(--explode-factor)));
+    transform: translateZ(calc(-20px * var(--explode-factor))) translateY(calc(120px * var(--explode-factor)));
 }
 .layer-basement:hover, .layer-basement.active {
-    transform: translateZ(calc(-20px * var(--explode-factor))) translateY(calc(80px * var(--explode-factor)));
+    transform: translateZ(calc(-100px * var(--explode-factor))) translateY(calc(160px * var(--explode-factor)));
 }
 
 /* Engineering Mode */

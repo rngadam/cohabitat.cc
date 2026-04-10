@@ -52,7 +52,8 @@
     <!-- Navigation (Sticky & Blur) -->
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity">
+            <a href="#" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
+                <img src="assets/images/logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
                 Cohabitat<span class="text-accent">.cc</span>
             </a>
             
@@ -63,6 +64,9 @@
                 <a href="bim.html" class="hover:text-accent transition-colors font-bold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> BIM / 3D</a>
                 <a href="#resto" class="hover:text-accent transition-colors">Resto Danny</a>
                 <a href="#logistique" class="hover:text-primary transition-colors">Logistique</a>
+                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
                 <a href="mailto:joindre@cohabitat.cc" class="px-6 py-2 bg-primary text-secondary rounded-full hover:bg-emerald-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-300">
                     Nous joindre
                 </a>
@@ -82,13 +86,32 @@
                 <a href="bim.html" class="block py-2 text-accent" onclick="toggleMobileMenu()">BIM / 3D</a>
                 <a href="#resto" class="block py-2 text-accent" onclick="toggleMobileMenu()">Resto Danny</a>
                 <a href="#logistique" class="block py-2" onclick="toggleMobileMenu()">Logistique</a>
+                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="block py-2 flex items-center gap-2" onclick="toggleMobileMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    Facebook
+                </a>
                 <a href="mailto:joindre@cohabitat.cc" class="block py-3 mt-4 text-center bg-primary text-secondary rounded-lg">Nous joindre</a>
             </div>
         </div>
     </nav>
 
+    <!-- Event Banner -->
+    <div class="bg-accent text-white py-3 px-6 mt-16 md:mt-20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left text-sm md:text-base">
+            <span class="font-bold flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                Prochain événement :
+            </span>
+            <span>Lundi 4 mai, 18:00 - 20:30, Espace des Possibles, Montréal. <em>cohabitat.cc v2: le luxe de la sobriété</em></span>
+            <a href="https://luma.com/kd6mwesm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-white text-accent px-4 py-1.5 rounded-full font-bold hover:bg-stone-100 transition-colors">
+                Détails & Inscription
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <header class="relative min-h-[calc(100vh-4rem)] flex items-center justify-center pt-10 overflow-hidden">
         <!-- Abstract Background Shape -->
         <div class="absolute top-0 right-0 w-2/3 h-full bg-stone-200/50 rounded-l-full transform translate-x-1/3 -z-10 blur-3xl opacity-60"></div>
 
@@ -484,7 +507,7 @@
             <div class="mt-16 pt-16 border-t border-emerald-800/50">
                 <h3 class="font-serif text-2xl mb-8 text-emerald-100">Notre Partenaire</h3>
                 <a href="https://lykka.org" target="_blank" rel="noopener noreferrer" class="inline-block hover:scale-105 transition-transform duration-300">
-                    <img src="assets/images/lykkacohabitation.svg" alt="Lykka Cohabitation" class="h-16 md:h-20 mx-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="assets/images/lykkacohabitation.svg" alt="Lykka Cohabitation" class="h-16 md:h-20 mx-auto ">
                 </a>
             </div>
         </div>
@@ -505,7 +528,9 @@
                 <p class="text-sm mt-2">Montréal, Québec.</p>
             </div>
             <div class="flex gap-6">
-                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
             </div>
 
             <div class="text-sm">
