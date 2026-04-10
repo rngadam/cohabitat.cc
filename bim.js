@@ -45,81 +45,179 @@ const buildingData = {
             ]
         }
     },
-    residential: {
-        title: "Étages 2 à 5 - Résidentiel",
+    floor5: {
+        title: "Étage 5 - Couche-tôt / Couvre-feu",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées (SDB, Walk-in, Balcon)</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="users" class="w-4 h-4"></i></div><span>Cuisine et salon partagé au cœur</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="moon" class="w-4 h-4"></i></div><span>Zone de quiétude et couvre-feu strict</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées avec insonorisation renforcée</span></li>
                 </ul>`,
-        icon: "home",
+        icon: "moon",
         floorPlan: {
             width: 20, depth: 15,
             walls: [
                 { x: 0, y: 0, w: 100, h: 2 }, { x: 0, y: 98, w: 100, h: 2 },
                 { x: 0, y: 0, w: 2, h: 100 }, { x: 98, y: 0, w: 2, h: 100 },
-                // Central corridor walls
                 { x: 35, y: 0, w: 2, h: 100 }, { x: 65, y: 0, w: 2, h: 100 },
-                // Room dividers
-                { x: 0, y: 33, w: 35, h: 2 }, { x: 0, y: 66, w: 35, h: 2 },
-                { x: 65, y: 50, w: 35, h: 2 },
+                { x: 0, y: 50, w: 35, h: 2 }, { x: 65, y: 50, w: 35, h: 2 },
             ],
             areas: [
-                { label: "Suite 101", x: 5, y: 5, w: 28, h: 25, sqm: 22 },
-                { label: "Suite 102", x: 5, y: 38, w: 28, h: 25, sqm: 22 },
-                { label: "Suite 103", x: 5, y: 71, w: 28, h: 25, sqm: 22 },
-                { label: "Cuisine / Salon", x: 40, y: 5, w: 22, h: 90, sqm: 60 },
-                { label: "Suite 104", x: 70, y: 5, w: 25, h: 42, sqm: 30 },
-                { label: "Suite 105", x: 70, y: 55, w: 25, h: 40, sqm: 30 },
+                { label: "Suite 501", x: 5, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 502", x: 5, y: 55, w: 28, h: 40, sqm: 28 },
+                { label: "Salon Calme", x: 38, y: 5, w: 25, h: 90, sqm: 45 },
+                { label: "Suite 503", x: 68, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 504", x: 68, y: 55, w: 28, h: 40, sqm: 28 },
             ],
             furniture: [
-                { type: "bed-double", x: 10, y: 10 }, { type: "bed-double", x: 10, y: 45 }, { type: "bed-double", x: 10, y: 80 },
-                { type: "sofa", x: 48, y: 45 }, { type: "utensils", x: 48, y: 20 },
-                { type: "bed-double", x: 80, y: 15 }, { type: "bed-double", x: 80, y: 65 }
+                { type: "bed-double", x: 15, y: 25 }, { type: "bed-double", x: 15, y: 75 },
+                { type: "bed-double", x: 80, y: 25 }, { type: "bed-double", x: 80, y: 75 },
+                { type: "book", x: 50, y: 50 }
             ],
             doors: [
-                { x: 35, y: 15, w: 2, h: 4, vertical: true }, { x: 35, y: 48, w: 2, h: 4, vertical: true }, { x: 35, y: 81, w: 2, h: 4, vertical: true },
-                { x: 65, y: 20, w: 2, h: 4, vertical: true }, { x: 65, y: 70, w: 2, h: 4, vertical: true }
+                { x: 35, y: 25, w: 2, h: 4, vertical: true }, { x: 35, y: 75, w: 2, h: 4, vertical: true },
+                { x: 65, y: 25, w: 2, h: 4, vertical: true }, { x: 65, y: 75, w: 2, h: 4, vertical: true }
             ]
         }
     },
-    coworking: {
-        title: "1er Étage - Vie Active",
+    floor4: {
+        title: "Étage 4 - Sans Animaux",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Espace de Coworking & Bureaux</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café-bar</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="shield-check" class="w-4 h-4"></i></div><span>Zone garantie sans allergènes animaux</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées et espaces partagés</span></li>
                 </ul>`,
-        icon: "briefcase",
+        icon: "shield-check",
         floorPlan: {
             width: 20, depth: 15,
             walls: [
                 { x: 0, y: 0, w: 100, h: 2 }, { x: 0, y: 98, w: 100, h: 2 },
                 { x: 0, y: 0, w: 2, h: 100 }, { x: 98, y: 0, w: 2, h: 100 },
-                { x: 0, y: 40, w: 100, h: 2 }, // Split Top/Bottom
-                { x: 60, y: 40, w: 2, h: 60 }, // Split Bottom Right
+                { x: 35, y: 0, w: 2, h: 100 }, { x: 65, y: 0, w: 2, h: 100 },
+                { x: 0, y: 50, w: 35, h: 2 }, { x: 65, y: 50, w: 35, h: 2 },
             ],
             areas: [
-                { label: "Open Space", x: 5, y: 5, w: 90, h: 32, sqm: 120 },
-                { label: "Café", x: 5, y: 45, w: 50, h: 50, sqm: 80 },
-                { label: "Salle Réunion", x: 65, y: 45, w: 30, h: 50, sqm: 45 },
+                { label: "Suite 401", x: 5, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 402", x: 5, y: 55, w: 28, h: 40, sqm: 28 },
+                { label: "Espace Commun", x: 38, y: 5, w: 25, h: 90, sqm: 45 },
+                { label: "Suite 403", x: 68, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 404", x: 68, y: 55, w: 28, h: 40, sqm: 28 },
             ],
             furniture: [
-                { type: "monitor", x: 10, y: 10 }, { type: "monitor", x: 30, y: 10 }, { type: "monitor", x: 50, y: 10 },
-                { type: "coffee", x: 20, y: 70 },
-                { type: "presentation", x: 80, y: 70 }
+                { type: "bed-double", x: 15, y: 25 }, { type: "bed-double", x: 15, y: 75 },
+                { type: "bed-double", x: 80, y: 25 }, { type: "bed-double", x: 80, y: 75 },
+                { type: "sofa", x: 50, y: 50 }
             ],
             doors: [
-                { x: 40, y: 40, w: 6, h: 2, vertical: false },
-                { x: 60, y: 70, w: 2, h: 4, vertical: true }
+                { x: 35, y: 25, w: 2, h: 4, vertical: true }, { x: 35, y: 75, w: 2, h: 4, vertical: true },
+                { x: 65, y: 25, w: 2, h: 4, vertical: true }, { x: 65, y: 75, w: 2, h: 4, vertical: true }
+            ]
+        }
+    },
+    floor3: {
+        title: "Étage 3 - Animaux Acceptés",
+        content: `<ul class="space-y-4">
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="cat" class="w-4 h-4"></i></div><span>Chats et petits animaux de compagnie bienvenus</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites privées et espaces partagés aménagés pour animaux</span></li>
+                </ul>`,
+        icon: "cat",
+        floorPlan: {
+            width: 20, depth: 15,
+            walls: [
+                { x: 0, y: 0, w: 100, h: 2 }, { x: 0, y: 98, w: 100, h: 2 },
+                { x: 0, y: 0, w: 2, h: 100 }, { x: 98, y: 0, w: 2, h: 100 },
+                { x: 35, y: 0, w: 2, h: 100 }, { x: 65, y: 0, w: 2, h: 100 },
+                { x: 0, y: 50, w: 35, h: 2 }, { x: 65, y: 50, w: 35, h: 2 },
+            ],
+            areas: [
+                { label: "Suite 301", x: 5, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 302", x: 5, y: 55, w: 28, h: 40, sqm: 28 },
+                { label: "Espace Commun", x: 38, y: 5, w: 25, h: 90, sqm: 45 },
+                { label: "Suite 303", x: 68, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 304", x: 68, y: 55, w: 28, h: 40, sqm: 28 },
+            ],
+            furniture: [
+                { type: "bed-double", x: 15, y: 25 }, { type: "bed-double", x: 15, y: 75 },
+                { type: "bed-double", x: 80, y: 25 }, { type: "bed-double", x: 80, y: 75 },
+                { type: "paw-print", x: 50, y: 50 }
+            ],
+            doors: [
+                { x: 35, y: 25, w: 2, h: 4, vertical: true }, { x: 35, y: 75, w: 2, h: 4, vertical: true },
+                { x: 65, y: 25, w: 2, h: 4, vertical: true }, { x: 65, y: 75, w: 2, h: 4, vertical: true }
+            ]
+        }
+    },
+    floor2: {
+        title: "Étage 2 - Personnes Âgées",
+        content: `<ul class="space-y-4">
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="heart" class="w-4 h-4"></i></div><span>Aménagements universels et accessibilité maximale</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="bed-double" class="w-4 h-4"></i></div><span>Suites adaptées et espaces de socialisation</span></li>
+                </ul>`,
+        icon: "heart",
+        floorPlan: {
+            width: 20, depth: 15,
+            walls: [
+                { x: 0, y: 0, w: 100, h: 2 }, { x: 0, y: 98, w: 100, h: 2 },
+                { x: 0, y: 0, w: 2, h: 100 }, { x: 98, y: 0, w: 2, h: 100 },
+                { x: 35, y: 0, w: 2, h: 100 }, { x: 65, y: 0, w: 2, h: 100 },
+                { x: 0, y: 50, w: 35, h: 2 }, { x: 65, y: 50, w: 35, h: 2 },
+            ],
+            areas: [
+                { label: "Suite 201", x: 5, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 202", x: 5, y: 55, w: 28, h: 40, sqm: 28 },
+                { label: "Espace Commun", x: 38, y: 5, w: 25, h: 90, sqm: 45 },
+                { label: "Suite 203", x: 68, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Suite 204", x: 68, y: 55, w: 28, h: 40, sqm: 28 },
+            ],
+            furniture: [
+                { type: "bed-double", x: 15, y: 25 }, { type: "bed-double", x: 15, y: 75 },
+                { type: "bed-double", x: 80, y: 25 }, { type: "bed-double", x: 80, y: 75 },
+                { type: "armchair", x: 50, y: 50 }
+            ],
+            doors: [
+                { x: 35, y: 25, w: 2, h: 4, vertical: true }, { x: 35, y: 75, w: 2, h: 4, vertical: true },
+                { x: 65, y: 25, w: 2, h: 4, vertical: true }, { x: 65, y: 75, w: 2, h: 4, vertical: true }
+            ]
+        }
+    },
+    floor1: {
+        title: "Étage 1 - Familles",
+        content: `<ul class="space-y-4">
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="baby" class="w-4 h-4"></i></div><span>Espaces de jeux partagés et chambres communicantes</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="users" class="w-4 h-4"></i></div><span>Garde partagée et entraide familiale</span></li>
+                </ul>`,
+        icon: "baby",
+        floorPlan: {
+            width: 20, depth: 15,
+            walls: [
+                { x: 0, y: 0, w: 100, h: 2 }, { x: 0, y: 98, w: 100, h: 2 },
+                { x: 0, y: 0, w: 2, h: 100 }, { x: 98, y: 0, w: 2, h: 100 },
+                { x: 35, y: 0, w: 2, h: 100 }, { x: 65, y: 0, w: 2, h: 100 },
+                { x: 0, y: 50, w: 35, h: 2 }, { x: 65, y: 50, w: 35, h: 2 },
+            ],
+            areas: [
+                { label: "Suite Familiale", x: 5, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Chambre Enfants", x: 5, y: 55, w: 28, h: 40, sqm: 28 },
+                { label: "Salle de Jeux", x: 38, y: 5, w: 25, h: 90, sqm: 45 },
+                { label: "Suite Familiale", x: 68, y: 5, w: 28, h: 42, sqm: 30 },
+                { label: "Chambre Enfants", x: 68, y: 55, w: 28, h: 40, sqm: 28 },
+            ],
+            furniture: [
+                { type: "bed-double", x: 15, y: 25 }, { type: "bed", x: 15, y: 75 },
+                { type: "bed-double", x: 80, y: 25 }, { type: "bed", x: 80, y: 75 },
+                { type: "gamepad-2", x: 50, y: 50 }
+            ],
+            doors: [
+                { x: 35, y: 25, w: 2, h: 4, vertical: true }, { x: 35, y: 75, w: 2, h: 4, vertical: true },
+                { x: 65, y: 25, w: 2, h: 4, vertical: true }, { x: 65, y: 75, w: 2, h: 4, vertical: true },
+                { x: 15, y: 50, w: 4, h: 2, vertical: false }, { x: 80, y: 50, w: 4, h: 2, vertical: false } // Communicating doors
             ]
         }
     },
     rdc: {
-        title: "Rez-de-chaussée - Ancrage",
+        title: "Rez-de-chaussée - Mixité Active",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="utensils" class="w-4 h-4"></i></div><span>Restaurant Solidaire</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="heart-handshake" class="w-4 h-4"></i></div><span>Accueil</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="utensils" class="w-4 h-4"></i></div><span>Restaurant Solidaire & Accueil (RDC)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Café-bar (RDC)</span></li>
                 </ul>`,
-        icon: "utensils",
+        icon: "building",
         floorPlan: {
             width: 20, depth: 15,
             walls: [

@@ -52,11 +52,15 @@
     <!-- Navigation (Sticky & Blur) -->
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity">
+            <a href="index.html" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
+                <img src="assets/images/logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
                 Cohabitat<span class="text-accent">.cc</span>
             </a>
 
             <div class="flex items-center space-x-4">
+                 <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors flex items-center gap-1 hidden md:flex">
+                    <i data-lucide="facebook" class="w-4 h-4"></i>
+                 </a>
                  <a href="index.html" class="px-4 py-2 border border-primary text-primary rounded-full hover:bg-primary/5 transition-colors text-sm font-medium">
                     <i data-lucide="arrow-left" class="w-4 h-4 inline-block mr-1"></i> Retour à l'accueil
                  </a>
@@ -93,8 +97,11 @@
 
                         <!-- Floors -->
                         <div class="floor-plate layer-roof" onclick="selectFloor('roof')">Toit</div>
-                        <div class="floor-plate layer-residential" onclick="selectFloor('residential')">Étages 2-5</div>
-                        <div class="floor-plate layer-coworking" onclick="selectFloor('coworking')">1er Étage</div>
+                        <div class="floor-plate layer-floor-5" onclick="selectFloor('floor5')">Étage 5</div>
+                        <div class="floor-plate layer-floor-4" onclick="selectFloor('floor4')">Étage 4</div>
+                        <div class="floor-plate layer-floor-3" onclick="selectFloor('floor3')">Étage 3</div>
+                        <div class="floor-plate layer-floor-2" onclick="selectFloor('floor2')">Étage 2</div>
+                        <div class="floor-plate layer-floor-1" onclick="selectFloor('floor1')">Étage 1</div>
                         <div class="floor-plate layer-rdc" onclick="selectFloor('rdc')">Rez-de-chaussée</div>
                         <div class="floor-plate layer-basement" onclick="selectFloor('basement')">Sous-sol</div>
                     </div>
