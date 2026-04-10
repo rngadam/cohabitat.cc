@@ -212,10 +212,10 @@ const buildingData = {
         }
     },
     rdc: {
-        title: "RDC / 1er Étage - Mixité Active",
+        title: "Rez-de-chaussée - Mixité Active",
         content: `<ul class="space-y-4">
                     <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="utensils" class="w-4 h-4"></i></div><span>Restaurant Solidaire & Accueil (RDC)</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Coworking, Bureaux & Café-bar (1er Étage intégré)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Café-bar (RDC)</span></li>
                 </ul>`,
         icon: "building",
         floorPlan: {
