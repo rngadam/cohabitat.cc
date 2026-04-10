@@ -6,6 +6,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
+        ...globals.node,
         lucide: "readonly" // Define lucide as a global variable
       }
     }
