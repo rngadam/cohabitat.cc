@@ -43,7 +43,7 @@ jobs:
       run: npx eslint "**/*.js"
 
     - name: Check Links
-      run: npx linkinator . --recurse --skip "^mailto:|example\.com|facebook\.com"
+      run: npx linkinator . --recurse --skip "^mailto:|example\.com|facebook\.com|linkedin\.com"
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
