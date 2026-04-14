@@ -7,11 +7,11 @@
     <meta name="description" content="Visualisation 3D interactive du bâtiment Cohabitat.">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-    <link rel="manifest" href="assets/images/site.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
 
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,13 +53,16 @@
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
-                <img src="assets/images/logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
+                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
                 Cohabitat<span class="text-accent">.cc</span>
             </a>
 
             <div class="flex items-center space-x-4">
-                 <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors flex items-center gap-1 hidden md:flex">
-                    <i data-lucide="facebook" class="w-4 h-4"></i>
+                 <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-primary transition-colors flex items-center gap-1 hidden md:flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                 </a>
+                 <a href="https://linkedin.com/company/cohabitat-cc/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-primary transition-colors flex items-center gap-1 hidden md:flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" role="img" aria-label="LinkedIn Icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                  </a>
                  <a href="index.html" class="px-4 py-2 border border-primary text-primary rounded-full hover:bg-primary/5 transition-colors text-sm font-medium">
                     <i data-lucide="arrow-left" class="w-4 h-4 inline-block mr-1"></i> Retour à l'accueil

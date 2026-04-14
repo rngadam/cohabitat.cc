@@ -8,7 +8,7 @@ const { chromium } = require('playwright');
     await page.goto("http://localhost:8080/index.html");
 
     // Wait for the images and text to load
-    await page.waitForSelector('img[alt="Lykka Cohabitation"]');
+    await page.waitForSelector('h1');
 
     // Take a full page screenshot to verify changes
     await page.screenshot({ path: "screenshots/index_changes.png", fullPage: true });
