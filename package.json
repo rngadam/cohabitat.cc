@@ -4,7 +4,6 @@
   "description": "Cohabitat Club Cyclistes",
   "main": "bim.js",
   "scripts": {
-    "validate:allocations": "node validate-allocations.js allocations.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "http-server . -p 8080"
   },
