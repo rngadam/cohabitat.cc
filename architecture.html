@@ -52,7 +52,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <a href="index.html" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
-            <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">Cohabitat<span class="text-accent">.cc</span>
+            <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
+            Cohabitat<span class="text-accent">.cc</span>
         </a>
 
         <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide text-stone-600">
@@ -169,7 +170,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
         <div>
             <a href="index.html" class="font-serif text-2xl text-white tracking-tight inline-flex items-center gap-2 mb-4">
-                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">Cohabitat<span class="text-accent">.cc</span>
+                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
+                Cohabitat<span class="text-accent">.cc</span>
             </a>
             <p class="text-sm leading-relaxed text-stone-400">Plan, mobilité et communauté au cœur d'un projet urbain durable.</p>
         </div>
@@ -274,20 +276,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return itemTotal === floor.total;
     }
 
-    function getLabelsList(item) {
-        if (Array.isArray(item.labels)) {
-            return item.labels;
+    function getTypeList(item) {
+        if (Array.isArray(item.type)) {
+            return item.type;
         }
-        if (typeof item.labels === 'string') {
-            return [item.labels];
+        if (typeof item.type === 'string') {
+            return [item.type];
         }
         return ['privé'];
     }
 
     function accumulateTypeTotals(items, totals) {
         items.forEach(item => {
-            getLabelsList(item).forEach(label => {
-                totals[label] = (totals[label] || 0) + item.area;
+            getTypeList(item).forEach(type => {
+                totals[type] = (totals[type] || 0) + item.area;
             });
             if (item.subitems) {
                 accumulateTypeTotals(item.subitems, totals);

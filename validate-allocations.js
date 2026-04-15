@@ -1,6 +1,6 @@
-/* global define */
+
 (function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
+  if (typeof define !== "undefined" && typeof define === 'function' && define.amd) {
     define([], factory);
   } else if (typeof module === 'object' && module.exports) {
     module.exports = factory();
@@ -20,12 +20,12 @@
     return items.reduce((sum, item) => sum + item.area, 0);
   }
 
-  function getLabelsList(item) {
-    if (Array.isArray(item.labels)) {
-      return item.labels;
+  function getTypeList(item) {
+    if (Array.isArray(item.type)) {
+      return item.type;
     }
-    if (typeof item.labels === 'string') {
-      return [item.labels];
+    if (typeof item.type === 'string') {
+      return [item.type];
     }
     return [];
   }
@@ -93,9 +93,6 @@
       'grillagée'
     ];
 
-    if (name.includes('ascenseur') || name.includes('escalier')) {
-      return 'partagé';
-    }
     if (name.includes('partagé') || name.includes('partage')) {
       return 'partagé';
     }
@@ -138,12 +135,12 @@
   function validateItem(item, path, issues) {
     const itemPath = [...path, item.name].join(' > ');
     const expectedType = getExpectedType(item, path);
-    const labelsList = getLabelsList(item);
+    const typeList = getTypeList(item);
 
-    if (!item.labels) {
-      issues.push(`${itemPath}: labels manquant${expectedType ? ` (attendu: ${expectedType})` : ''}`);
-    } else if (expectedType && !labelsList.includes(expectedType)) {
-      issues.push(`${itemPath}: labels incorrects (${Array.isArray(item.labels) ? item.labels.join(' / ') : item.labels}) — attendu: ${expectedType}`);
+    if (!item.type) {
+      issues.push(`${itemPath}: type manquant${expectedType ? ` (attendu: ${expectedType})` : ''}`);
+    } else if (expectedType && !typeList.includes(expectedType)) {
+      issues.push(`${itemPath}: type incorrect (${Array.isArray(item.type) ? item.type.join(' / ') : item.type}) — attendu: ${expectedType}`);
     }
 
     if (item.subitems) {

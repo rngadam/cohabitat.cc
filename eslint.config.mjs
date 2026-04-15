@@ -7,15 +7,20 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        lucide: "readonly", // Define lucide as a global variable
-        define: "readonly"
+        lucide: "readonly"
       }
     }
   },
   pluginJs.configs.recommended,
   {
     rules: {
-      "no-unused-vars": ["error", { "varsIgnorePattern": "toggleEngineering|selectFloor|toggleUnit" }] // Ignore unused vars for these functions as they are called from HTML
+      "no-unused-vars": ["error", { "varsIgnorePattern": "toggleEngineering|selectFloor|toggleUnit" }]
     }
+  },
+  {
+      files: ["validate-allocations.js"],
+      rules: {
+          "no-undef": "off"
+      }
   }
 ];

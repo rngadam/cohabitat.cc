@@ -63,33 +63,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
-                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">Cohabitat<span class="text-accent">.cc</span>
+                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">
+                Cohabitat<span class="text-accent">.cc</span>
             </a>
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide text-stone-600">
-
-                <!-- Desktop Dropdown Menu -->
-                <div class="relative group">
-                    <button class="flex items-center gap-2 hover:text-primary transition-colors focus:outline-none">
-                        <i data-lucide="menu" class="w-5 h-5"></i>
-                        <span>Menu</span>
-                    </button>
-                    <!-- Dropdown Content -->
-                    <div class="absolute left-0 mt-2 w-56 bg-white border border-stone-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                        <div class="flex flex-col py-2">
-                            <a href="#philosophie" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Philosophie CC</a>
-                            <a href="#concept" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Concept</a>
-                            <a href="architecture.html" class="px-4 py-2 hover:bg-stone-50 text-accent font-bold flex items-center gap-2 transition-colors"><i data-lucide="box" class="w-4 h-4"></i> Plan</a>
-                            <a href="#resto" class="px-4 py-2 hover:bg-stone-50 text-accent transition-colors">Resto Solidaire</a>
-                            <a href="#membres" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Membres</a>
-                            <a href="organisation.html" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Organisation</a>
-                            <a href="#ateliers" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Ateliers</a>
-                            <a href="#os" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Système OS</a>
-                        </div>
-                    </div>
-                </div>
-
+                <a href="#philosophie" class="hover:text-primary transition-colors">Philosophie CC</a>
+                <a href="#concept" class="hover:text-primary transition-colors">Concept</a>
+                <a href="architecture.html" class="hover:text-accent transition-colors font-bold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> Plan</a>
+                <a href="#resto" class="hover:text-accent transition-colors">Resto Solidaire</a>
                 <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-primary transition-colors flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
@@ -114,10 +97,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="#concept" class="block py-2" onclick="toggleMobileMenu()">Concept</a>
                 <a href="architecture.html" class="block py-2 text-accent" onclick="toggleMobileMenu()">Plan</a>
                 <a href="#resto" class="block py-2 text-accent" onclick="toggleMobileMenu()">Resto Solidaire</a>
-                <a href="#membres" class="block py-2" onclick="toggleMobileMenu()">Membres</a>
-                <a href="organisation.html" class="block py-2" onclick="toggleMobileMenu()">Organisation</a>
-                <a href="#ateliers" class="block py-2" onclick="toggleMobileMenu()">Ateliers</a>
-                <a href="#os" class="block py-2" onclick="toggleMobileMenu()">Système OS</a>
                 <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="block py-2 flex items-center gap-2" onclick="toggleMobileMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                     Facebook
@@ -445,7 +424,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- Membres Section -->
-    <section id="membres" class="py-24 px-6 bg-secondary">
+    <section class="py-24 px-6 bg-secondary">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal">
                 <h2 class="font-serif text-4xl text-primary">Qui sont les membres ?</h2>
@@ -488,39 +467,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         Engagé dans la transition. Cherche un milieu de vie cohérent avec ses valeurs profondes : zéro déchet, mobilité active, entraide.
                     </p>
                 </div>
-
-                <!-- Profile 4 -->
-                <div class="bg-white p-8 rounded-xl border-t-4 border-accent shadow-sm hover:shadow-md transition-shadow reveal mt-8 md:mt-0">
-                    <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mb-6 text-accent">
-                        <i data-lucide="users" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-primary mb-2">Le Parent</h3>
-                    <p class="text-stone-600 text-sm leading-relaxed">
-                        Mono-parental qui a la garde de son enfant une semaine sur deux.
-                    </p>
-                </div>
-
-                <!-- Profile 5 -->
-                <div class="bg-white p-8 rounded-xl border-t-4 border-primary shadow-sm hover:shadow-md transition-shadow reveal reveal-delay-100 mt-8 md:mt-0">
-                    <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mb-6 text-primary">
-                        <i data-lucide="graduation-cap" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-primary mb-2">L'Étudiant</h3>
-                    <p class="text-stone-600 text-sm leading-relaxed">
-                        Qui vient des régions pour étudier en ville.
-                    </p>
-                </div>
-
-                <!-- Profile 6 -->
-                <div class="bg-white p-8 rounded-xl border-t-4 border-accent shadow-sm hover:shadow-md transition-shadow reveal reveal-delay-200 mt-8 md:mt-0">
-                    <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mb-6 text-accent">
-                        <i data-lucide="globe" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-primary mb-2">L'Immigrant</h3>
-                    <p class="text-stone-600 text-sm leading-relaxed">
-                        Qui veut une intégration accélérée à la culture québécoise.
-                    </p>
-                </div>
             </div>
         </div>
     </section>
@@ -541,7 +487,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <div class="p-8 bg-stone-50 rounded-3xl border border-stone-200 shadow-sm reveal reveal-delay-100">
                     <h3 class="font-serif text-2xl text-primary mb-4">Gouvernance démocratique</h3>
-                    <p class="text-stone-600">Une gestion humaine par sociocratie, propulsée par un Système d'Exploitation Communautaire pour l'attribution des tâches. La technologie réduit la charge mentale de la cohabitation.</p>
+                    <p class="text-stone-600">Une gestion humaine par sociocratie, propulsée par un Community OS pour l'attribution des tâches. La technologie réduit la charge mentale de la cohabitation.</p>
                 </div>
 
                 <div class="p-8 bg-stone-50 rounded-3xl border border-stone-200 shadow-sm reveal reveal-delay-200">
@@ -560,7 +506,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- Cohabitation Entrepreneuriale -->
-    <section id="ateliers" class="py-24 bg-white px-6">
+    <section class="py-24 bg-white px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal">
                 <span class="text-accent font-bold tracking-widest uppercase text-sm">Cohabitation Entrepreneuriale</span>
@@ -584,8 +530,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
+    <!-- Publics Cibles et Segmentation -->
+    <section class="py-24 px-6 bg-stone-50 border-t border-stone-200">
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl text-primary mb-6">Un Projet, Trois Piliers d'Engagement</h2>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
+                    Notre modèle repose sur un équilibre unique entre financement éthique, co-création et accessibilité.
+                </p>
+            </div>
+
+            <div class="overflow-x-auto shadow-sm rounded-xl border border-stone-200">
+                <table class="w-full text-left bg-white">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="py-4 px-6 font-serif text-lg">Groupe Cible</th>
+                            <th class="py-4 px-6 font-serif text-lg">Notre Proposition de Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100">
+                        <tr class="hover:bg-stone-50 transition-colors">
+                            <td class="py-5 px-6 font-bold text-primary w-1/3">Investisseurs à impact</td>
+                            <td class="py-5 px-6 text-stone-600">Accent sur le levier de capital communautaire (<strong class="text-emerald-700">1M$ via des obligations communautaires</strong>) et la pérennité sociale assurée par la fiducie (legs des fondateurs) pour un retour sociétal durable.</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition-colors bg-stone-50/50">
+                            <td class="py-5 px-6 font-bold text-primary w-1/3">Investisseurs-résidents</td>
+                            <td class="py-5 px-6 text-stone-600">Accent sur la qualité de vie et la valeur de l'actif immobilier (parts dans 50% d'espaces communs), tout en contribuant à une mission sociale claire.</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition-colors">
+                            <td class="py-5 px-6 font-bold text-primary w-1/3">Résidents locataires</td>
+                            <td class="py-5 px-6 text-stone-600">Accent sur l'abordabilité garantie (30 % du revenu) et les avantages directs des services mutualisés (coworking, Lufa, buanderie sur chaque étage).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Sociale: Itinérance -->
+    <section class="py-24 px-6 bg-white border-t border-stone-200">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/30 bg-orange-50 text-orange-700 text-xs font-bold tracking-widest uppercase mb-6">
+                <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                <span>Mission Humanitaire</span>
+            </div>
+            <h2 class="font-serif text-4xl text-primary mb-8">Réduction de l'Itinérance et Intégration</h2>
+            <p class="text-lg text-stone-600 mb-8 leading-relaxed">
+                Le Cohabitat intègre une mission active de réduction de l'itinérance en dédiant des ressources à l'accueil d'un itinérant ou d'un migrant récent.
+            </p>
+            <p class="text-lg text-stone-600 mb-12 leading-relaxed">
+                Ce processus d'intégration est rigoureusement encadré par notre <strong>« Charte d'intégration et de sélection communautaire »</strong> afin de garantir un accompagnement bienveillant tout en assurant la sécurité et l'harmonie pour l'ensemble des résidents.
+            </p>
+        </div>
+    </section>
+
     <!-- Système Open Source -->
-    <section id="os" class="py-24 px-6 bg-white border-t border-stone-200">
+    <section class="py-24 px-6 bg-stone-50 border-t border-stone-200">
         <div class="max-w-4xl mx-auto text-center reveal">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold tracking-widest uppercase mb-6">
                 <i data-lucide="cpu" class="w-4 h-4"></i>
