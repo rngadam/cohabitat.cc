@@ -295,8 +295,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="p-8">
                         <h3 class="font-serif text-2xl text-primary mb-4">Mobilité active de pointe</h3>
                         <p class="text-stone-600 mb-6">
-                            Optimisé pour les transports en commun, services voitures partagées, covoiturage et livraisons, stationnement adapté aux besoins variés (1 à 3+ vélos par cycliste), et vélos partagés (Bixi).</p>
-                        </div>
+                            Infrastructure pensée pour une vie 100% sans voiture, centrée sur le REV (Réseau Express Vélo) et la multi-modalité urbaine.
+                        </p>
+                        <ul class="space-y-2 text-sm text-stone-500">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Stationnement vélo haute densité (1 à 3+ vélos)</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Accès direct au REV Bellechasse</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Bornes de recharge et auto-partage intégré</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Card 5 -->
@@ -307,8 +313,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="p-8">
                         <h3 class="font-serif text-2xl text-primary mb-4">Services Internes</h3>
                         <p class="text-stone-600 mb-6">
-                            Micro-économie interne (prototype à venir) avec Café cohabitat.cc, services à la carte, et point de chute Lufa.</p>
-                        </div>
+                            Une micro-économie de proximité pour simplifier le quotidien et réduire l'empreinte environnementale collective.
+                        </p>
+                        <ul class="space-y-2 text-sm text-stone-500">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Café cohabitat.cc et espaces de rencontre</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Point de chute Lufa et circuits courts</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Services à la carte mutualisés</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Card 6 -->
@@ -426,8 +438,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i data-lucide="users" class="w-8 h-8"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-primary mb-2">Le Parent</h3>
+                    <p class="text-sm text-stone-500 mb-4 uppercase tracking-wider">30-45 ans • Mono-parentalité</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Mono-parental qui a la garde de son enfant une semaine sur deux.
+                        Concilier vie pro et temps de garde. Cherche un environnement sécuritaire et une communauté d'entraide pour ses enfants une semaine sur deux.
                     </p>
                 </div>
 
@@ -437,8 +450,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i data-lucide="graduation-cap" class="w-8 h-8"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-primary mb-2">L'Étudiant</h3>
+                    <p class="text-sm text-stone-500 mb-4 uppercase tracking-wider">18-25 ans • Études / Recherche</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Qui vient des régions pour étudier en ville.
+                        Quitte sa région pour Montréal. Cherche une alternative aux résidences impersonnelles et un réseau de mentors inspirants pour ses projets.
                     </p>
                 </div>
 
@@ -448,8 +462,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <i data-lucide="globe" class="w-8 h-8"></i>
                     </div>
                     <h3 class="font-serif text-xl font-bold text-primary mb-2">L'Immigrant</h3>
+                    <p class="text-sm text-stone-500 mb-4 uppercase tracking-wider">Tout âge • Talent international</p>
                     <p class="text-stone-600 text-sm leading-relaxed">
-                        Qui veut une intégration accélérée à la culture québécoise.
+                        Cherche une intégration accélérée à la culture québécoise via un milieu de vie solidaire qui valorise son bagage international.
                     </p>
                 </div>
             </div>
@@ -597,34 +612,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
+    <script src="common.js"></script>
     <script>
-        // Load header and footer
-        async function loadComponent(url, placeholderId) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(placeholderId).innerHTML = html;
-                return true;
-            } catch (error) {
-                console.error('Error loading component:', error);
-                return false;
-            }
-        }
-
         // Load components
         Promise.all([
             loadComponent('header.html', 'header-placeholder'),
             loadComponent('footer.html', 'footer-placeholder')
         ]).then(() => {
+            // Set active link for logo or home if present
+            const homeLinks = document.querySelectorAll('a[href="index.html"]');
+            homeLinks.forEach(link => {
+                // Not adding accent to logo usually, but we could if there was a text link
+            });
             // Initialize icons after loading
             lucide.createIcons();
         });
 
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
+        // Mobile Menu Toggle - kept local if needed by inline onclick, 
+        // but now it's in common.js which is included above.
+        // We can safely remove it from here.
 
         // Intersection Observer for Fade-In Animations
         const observerOptions = {
@@ -644,18 +650,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         document.querySelectorAll('.reveal').forEach(el => {
             observer.observe(el);
-        });
-
-        // Navbar Blur Effect on Scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-                nav.classList.replace('bg-secondary/80', 'bg-secondary/95');
-            } else {
-                nav.classList.remove('shadow-md');
-                nav.classList.replace('bg-secondary/95', 'bg-secondary/80');
-            }
         });
     </script>
 </body>

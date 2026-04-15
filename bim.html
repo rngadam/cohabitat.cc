@@ -119,23 +119,21 @@
     <div id="footer-placeholder"></div>
 
     <!-- BIM Logic -->
+    <script src="common.js"></script>
     <script>
-        // Load header and footer
-        async function loadComponent(url, placeholderId) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(placeholderId).innerHTML = html;
-            } catch (error) {
-                console.error('Error loading component:', error);
-            }
-        }
-
         // Load components
-        loadComponent('header.html', 'header-placeholder');
-        loadComponent('footer.html', 'footer-placeholder');
-
-        lucide.createIcons();
+        Promise.all([
+            loadComponent('header.html', 'header-placeholder'),
+            loadComponent('footer.html', 'footer-placeholder')
+        ]).then(() => {
+            // Set active link
+            const bimLinks = document.querySelectorAll('a[href="bim.html"]');
+            bimLinks.forEach(link => {
+                link.classList.add('text-accent', 'font-bold');
+            });
+            // Initialize icons after loading
+            lucide.createIcons();
+        });
     </script>
     <script src="bim.js"></script>
 </body>

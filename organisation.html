@@ -178,28 +178,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
+    <script src="common.js"></script>
     <script>
-        // Load header and footer
-        async function loadComponent(url, placeholderId) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(placeholderId).innerHTML = html;
-            } catch (error) {
-                console.error('Error loading component:', error);
-            }
-        }
-
         // Load components
         Promise.all([
             loadComponent('header.html', 'header-placeholder'),
             loadComponent('footer.html', 'footer-placeholder')
         ]).then(() => {
             // Set active link
-            const orgLink = document.querySelector('a[href="organisation.html"]');
-            if (orgLink) {
-                orgLink.classList.add('text-accent', 'font-bold');
-            }
+            const orgLinks = document.querySelectorAll('a[href="organisation.html"]');
+            orgLinks.forEach(link => {
+                link.classList.add('text-accent', 'font-bold');
+            });
             // Initialize icons after loading
             lucide.createIcons();
         });

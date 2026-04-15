@@ -40,10 +40,22 @@
             </a>
         </div>
 
-        <!-- Mobile Menu Button -->
-        <button class="md:hidden text-primary" onclick="toggleMobileMenu()">
-            <i data-lucide="menu" class="w-6 h-6"></i>
-        </button>
+        <!-- Mobile Navigation Items -->
+        <div class="flex md:hidden items-center gap-4">
+            <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-primary hover:text-accent transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="https://linkedin.com/company/cohabitat-cc/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-primary hover:text-accent transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="LinkedIn Icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="mailto:joindre@cohabitat.cc" aria-label="Contact" class="text-primary hover:text-accent transition-colors">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+            </a>
+            <!-- Mobile Menu Button -->
+            <button class="text-primary" onclick="toggleMobileMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Mobile Menu Overlay -->

@@ -138,29 +138,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div id="footer-placeholder"></div>
 
+<script src="common.js"></script>
 <script src="validate-allocations.js"></script>
 <script>
-    // Load header and footer
-    async function loadComponent(url, placeholderId) {
-        try {
-            const response = await fetch(url);
-            const html = await response.text();
-            document.getElementById(placeholderId).innerHTML = html;
-        } catch (error) {
-            console.error('Error loading component:', error);
-        }
-    }
-
     // Load components
         Promise.all([
             loadComponent('header.html', 'header-placeholder'),
             loadComponent('footer.html', 'footer-placeholder')
         ]).then(() => {
             // Set active link
-            const planLink = document.querySelector('a[href="architecture.html"]');
-            if (planLink) {
-                planLink.classList.add('text-accent', 'font-bold');
-            }
+            const planLinks = document.querySelectorAll('a[href="architecture.html"]');
+            planLinks.forEach(link => {
+                link.classList.add('text-accent', 'font-bold');
+            });
             // Initialize icons after loading
             lucide.createIcons();
         });

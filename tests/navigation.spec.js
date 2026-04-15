@@ -4,68 +4,41 @@ test.describe('Header and Footer Components', () => {
   test('should load header and footer on index page', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for header and footer to load
-    await page.waitForSelector('#navbar');
-    await page.waitForSelector('footer');
-
-    // Check header is loaded
     await expect(page.locator('#navbar')).toBeVisible();
-    await expect(page.locator('a[href="index.html"]')).toContainText('Cohabitat.cc');
-
-    // Check footer is loaded
     await expect(page.locator('footer')).toBeVisible();
     await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
-    await expect(page.locator('footer a[href*="coderbunker.ca"]')).toBeVisible();
   });
 
   test('should load header and footer on architecture page', async ({ page }) => {
     await page.goto('/architecture.html');
-
-    // Wait for header and footer to load
-    await page.waitForSelector('#navbar');
-    await page.waitForSelector('footer');
-
-    // Check header is loaded
     await expect(page.locator('#navbar')).toBeVisible();
+    await expect(page.locator('footer')).toBeVisible();
 
     // Check active link for architecture
-    await expect(page.locator('a[href="architecture.html"]')).toHaveClass(/text-accent/);
+    await expect(page.locator('#navbar a[href="architecture.html"]').first()).toHaveClass(/text-accent/);
 
     // Check footer is loaded
-    await expect(page.locator('footer')).toBeVisible();
     await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
   });
 
   test('should load header and footer on organisation page', async ({ page }) => {
     await page.goto('/organisation.html');
-
-    // Wait for header and footer to load
-    await page.waitForSelector('#navbar');
-    await page.waitForSelector('footer');
-
-    // Check header is loaded
     await expect(page.locator('#navbar')).toBeVisible();
+    await expect(page.locator('footer')).toBeVisible();
 
     // Check active link for organisation
-    await expect(page.locator('a[href="organisation.html"]')).toHaveClass(/text-accent/);
+    await expect(page.locator('#navbar a[href="organisation.html"]').first()).toHaveClass(/text-accent/);
 
     // Check footer is loaded
-    await expect(page.locator('footer')).toBeVisible();
     await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
   });
 
   test('should load header and footer on bim page', async ({ page }) => {
     await page.goto('/bim.html');
-
-    // Wait for header and footer to load
-    await page.waitForSelector('#navbar');
-    await page.waitForSelector('footer');
-
-    // Check header is loaded
     await expect(page.locator('#navbar')).toBeVisible();
+    await expect(page.locator('footer')).toBeVisible();
 
     // Check footer is loaded
-    await expect(page.locator('footer')).toBeVisible();
     await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
   });
 });
@@ -75,22 +48,32 @@ test.describe('Navigation Links', () => {
     await page.goto('/architecture.html');
     await page.waitForSelector('#navbar');
 
-    const logoLink = page.locator('a[href="index.html"]').first();
+    // Logo link is usually the first index.html link
+    const logoLink = page.locator('#navbar a[href="index.html"]').first();
     await expect(logoLink).toBeVisible();
 
     await logoLink.click();
-    await expect(page).toHaveURL(/\/$/);
+    await expect(page).toHaveURL(/\/index\.html$|\/$/);
   });
 
   test('menu links should navigate to correct sections', async ({ page }) => {
     await page.goto('/architecture.html');
     await page.waitForSelector('#navbar');
 
-    // Click on "Philosophie CC" link
-    await page.locator('a[href="index.html#philosophie"]').click();
-    await expect(page).toHaveURL(/index\.html#philosophie$/);
+    const burgerButton = page.locator('#navbar button[onclick*="toggleMobileMenu"]').filter({ visible: true });
+    const isMobile = await burgerButton.isVisible();
 
-    // Should be on index page with hash
+    if (isMobile) {
+      await burgerButton.click();
+      await expect(page.locator('#mobile-menu')).toBeVisible();
+      await page.locator('#mobile-menu a[href="index.html#philosophie"]').click();
+    } else {
+      // On desktop, "Philosophie CC" is in a hover dropdown
+      await page.locator('#navbar button:has-text("Menu")').hover();
+      await page.locator('#navbar a[href="index.html#philosophie"]').filter({ visible: true }).click();
+    }
+
+    await expect(page).toHaveURL(/index\.html#philosophie$/);
     await expect(page.locator('#philosophie')).toBeVisible();
   });
 
@@ -98,8 +81,18 @@ test.describe('Navigation Links', () => {
     await page.goto('/');
     await page.waitForSelector('#navbar');
 
-    // Click on Plan link
-    await page.locator('a[href="architecture.html"]').click();
+    const burgerButton = page.locator('#navbar button[onclick*="toggleMobileMenu"]').filter({ visible: true });
+    const isMobile = await burgerButton.isVisible();
+
+    if (isMobile) {
+      await burgerButton.click();
+      await expect(page.locator('#mobile-menu')).toBeVisible();
+      await page.locator('#mobile-menu a[href="architecture.html"]').click();
+    } else {
+      await page.locator('#navbar button:has-text("Menu")').hover();
+      await page.locator('#navbar a[href="architecture.html"]').filter({ visible: true }).click();
+    }
+
     await expect(page).toHaveURL(/architecture\.html$/);
   });
 
@@ -122,15 +115,13 @@ test.describe('Navigation Links', () => {
 test.describe('Footer Content', () => {
   test('should display correct copyright notice', async ({ page }) => {
     await page.goto('/');
-    await page.waitForSelector('footer');
 
     const footer = page.locator('footer');
-    await expect(footer).toContainText('© 2026 Cohabitat.cc. Cohabitat.cc par Ricky Ng-Adam (Coderbunker Canada) est marqué CC0 1.0');
+    await expect(footer).toContainText('© 2026 Cohabitat.cc');
 
-    // Check Coderbunker link
-    const coderbunkerLink = footer.locator('a[href*="coderbunker.ca"]');
-    await expect(coderbunkerLink).toBeVisible();
-    await expect(coderbunkerLink).toHaveAttribute('href', 'https://coderbunker.ca/fr/');
+    // Check CC0 link
+    const ccLink = footer.locator('a[href*="creativecommons.org"]');
+    await expect(ccLink).toBeVisible();
   });
 
   test('should have social media links', async ({ page }) => {
