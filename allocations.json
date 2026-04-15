@@ -271,11 +271,11 @@
       "items": [
         {
           "name": "Resto solidaire",
-          "area": 65.03,
+          "area": 60.39,
           "subitems": [
             {
               "name": "Salle à manger communautaire",
-              "area": 27.87,
+              "area": 23.23,
               "labels": [
                 "partagé"
               ]
@@ -310,7 +310,7 @@
         },
         {
           "name": "Café & zone d'échange",
-          "area": 27.87,
+          "area": 18.58,
           "labels": [
             "partagé",
             "location"
@@ -349,7 +349,7 @@
         },
         {
           "name": "Ateliers culinaires",
-          "area": 13.94,
+          "area": 23.23,
           "labels": [
             "partagé",
             "location"
@@ -357,7 +357,7 @@
         },
         {
           "name": "Salle polyvalente",
-          "area": 18.58,
+          "area": 13.93,
           "labels": [
             "partagé",
             "location"
@@ -365,7 +365,7 @@
         },
         {
           "name": "Espace formation",
-          "area": 13.94,
+          "area": 23.23,
           "labels": [
             "partagé",
             "location"
@@ -1998,7 +1998,8 @@
           "name": "Circulation piétonne",
           "area": 18.58,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
