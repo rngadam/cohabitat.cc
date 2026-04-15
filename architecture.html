@@ -309,14 +309,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="flex justify-between"><span>Assurances & Fonds de réserve</span> <span>${formatCurrency((globalCosts.recurring.insurance + globalCosts.recurring.reserveFund)/12)}</span></div>
                                 <div class="flex justify-between font-bold text-amber-400"><span>Opérations (OPEX)</span> <span>${formatCurrency(globalCosts.recurring.monthlyServices + globalCosts.recurring.monthlyEnergy + globalCosts.recurring.monthlyAmortization)}</span></div>
                                 <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus locatifs commerciaux</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome)}</span></div>
-                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-xl"><span>Coût Net à couvrir</span> <span>${formatCurrency(globalCosts.totalMonthlyNet)}</span></div>
+                                <div class="flex justify-between text-emerald-400 font-bold"><span>Revenus chambres flottantes</span> <span>+ ${formatCurrency(perSuite.floatingRoomRevenue)}</span></div>
+                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-xl"><span>Coût Net à couvrir</span> <span>${formatCurrency(globalCosts.totalMonthlyNet - perSuite.floatingRoomRevenue)}*</span></div>
+                                <p class="text-[9px] opacity-60 mt-1 italic text-right">*Après déduction de tous les revenus tiers</p>
                             </div>
                         </div>
                         <div class="rounded-3xl bg-accent text-white p-6 shadow-lg border-4 border-white/20">
-                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Coût Résidentiel (Par suite pour ${params.population.total_suites} suites)</p>
+                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Coût Résidentiel (${params.population.total_suites} suites + ${params.floating_rooms.count} chambres flottantes)</p>
                             <div class="mb-6">
                                 <p class="text-4xl font-serif mb-1">${formatCurrency(perSuite.totalMonthlyNet)} <span class="text-sm font-sans opacity-80">/mois</span></p>
-                                <p class="text-[10px] opacity-70">Loyer de base incluant tous les services et amortissements</p>
+                                <p class="text-[10px] opacity-70">Loyer résident permanent (Chambre flottante : ${formatCurrency(perSuite.floatingRoomPrice)})</p>
                             </div>
                             <div class="space-y-4 text-sm opacity-90 border-t border-white/10 pt-4">
                                 <div class="bg-white/10 p-4 rounded-2xl">

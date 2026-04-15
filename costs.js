@@ -136,18 +136,27 @@ class CostCalculator {
         const numSuites = this.params.population.total_suites;
         const numHolders = this.params.community_bonds.holders_count;
 
-        const baseMonthlyNet = global.totalMonthlyNet / numSuites;
+        // Floating rooms revenue logic
+        // They pay 50% price with 80% occupancy. 
+        // Effective suite equivalents: 31 + (10 * 0.5 * 0.8) = 35
+        const floatingConfig = this.params.floating_rooms;
+        const suiteEquivalents = numSuites + (floatingConfig.count * (floatingConfig.price_pct / 100) * (floatingConfig.occupancy_rate_pct / 100));
+        
+        const baseMonthlyNet = global.totalMonthlyNet / suiteEquivalents;
+        const floatingRoomRevenue = baseMonthlyNet * (suiteEquivalents - numSuites);
 
         return {
             totalMonthlyNet: baseMonthlyNet,
-            constructionCost: global.mortgage.totalCost / numSuites,
+            constructionCost: global.mortgage.totalCost / numSuites, // Construction cost still shared by permanent residences
             downpaymentPerFounder: global.mortgage.downpayment / numHolders,
             monthlyMortgage: global.mortgage.monthlyPayment / numSuites,
             monthlyRecurring: global.recurring.totalMonthly / numSuites,
             monthlyRentalOffset: global.rental.monthlyIncome / numSuites,
             monthlyBondDebtService: global.bonds.monthlyPayment / numSuites,
             monthlyBondRepaymentToFounder: global.bonds.paymentPerHolder,
-            totalMonthlyNetFounder: baseMonthlyNet - global.bonds.paymentPerHolder
+            totalMonthlyNetFounder: baseMonthlyNet - global.bonds.paymentPerHolder,
+            floatingRoomRevenue,
+            floatingRoomPrice: baseMonthlyNet * (floatingConfig.price_pct / 100)
         };
     }
 }

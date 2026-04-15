@@ -602,7 +602,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -610,7 +610,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -633,7 +633,7 @@
         },
         {
           "name": "Studio 2",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -641,7 +641,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -664,7 +664,7 @@
         },
         {
           "name": "Studio 3",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -672,7 +672,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -695,7 +695,7 @@
         },
         {
           "name": "Studio 4",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -703,7 +703,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -726,7 +726,7 @@
         },
         {
           "name": "Studio 5",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -734,7 +734,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -757,7 +757,7 @@
         },
         {
           "name": "Studio 6",
-          "area": 24.15,
+          "area": 25.03,
           "labels": [
             "privé",
             "résidentiel"
@@ -765,7 +765,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.14,
               "labels": [
                 "privé"
               ]
@@ -787,38 +787,23 @@
           ]
         },
         {
-          "name": "Studio 7",
-          "area": 24.18,
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
-            "privé",
+            "partagé",
             "résidentiel"
-          ],
-          "subitems": [
-            {
-              "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Kitchenette optimisée",
-              "area": 3.25,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Salle d'eau (Douche/WC)",
-              "area": 4.64,
-              "labels": [
-                "privé"
-              ]
-            }
+          ]
+        },
+        {
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
+          "labels": [
+            "partagé",
+            "résidentiel"
           ]
         }
       ],
-      "description": "7 studios individuels optimisés (comptoir/kitchenette) avec grande cuisine et salon communautaires sur le palier.",
+      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
       "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage."
     },
     {
@@ -869,7 +854,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -877,7 +862,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -900,7 +885,7 @@
         },
         {
           "name": "Studio 2",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -908,7 +893,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -931,7 +916,7 @@
         },
         {
           "name": "Studio 3",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -939,7 +924,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -962,7 +947,7 @@
         },
         {
           "name": "Studio 4",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -970,7 +955,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -993,7 +978,7 @@
         },
         {
           "name": "Studio 5",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1001,7 +986,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1024,7 +1009,7 @@
         },
         {
           "name": "Studio 6",
-          "area": 24.15,
+          "area": 25.03,
           "labels": [
             "privé",
             "résidentiel"
@@ -1032,7 +1017,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.14,
               "labels": [
                 "privé"
               ]
@@ -1054,38 +1039,23 @@
           ]
         },
         {
-          "name": "Studio 7",
-          "area": 24.18,
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
-            "privé",
+            "partagé",
             "résidentiel"
-          ],
-          "subitems": [
-            {
-              "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Kitchenette optimisée",
-              "area": 3.25,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Salle d'eau (Douche/WC)",
-              "area": 4.64,
-              "labels": [
-                "privé"
-              ]
-            }
+          ]
+        },
+        {
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
+          "labels": [
+            "partagé",
+            "résidentiel"
           ]
         }
       ],
-      "description": "7 studios individuels optimisés (comptoir/kitchenette) avec grande cuisine et salon communautaires sur le palier.",
+      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
       "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage."
     },
     {
@@ -1136,7 +1106,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1144,7 +1114,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1167,7 +1137,7 @@
         },
         {
           "name": "Studio 2",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1175,7 +1145,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1198,7 +1168,7 @@
         },
         {
           "name": "Studio 3",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1206,7 +1176,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1229,7 +1199,7 @@
         },
         {
           "name": "Studio 4",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1237,7 +1207,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1260,7 +1230,7 @@
         },
         {
           "name": "Studio 5",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1268,7 +1238,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1291,7 +1261,7 @@
         },
         {
           "name": "Studio 6",
-          "area": 24.15,
+          "area": 25.03,
           "labels": [
             "privé",
             "résidentiel"
@@ -1299,7 +1269,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.14,
               "labels": [
                 "privé"
               ]
@@ -1321,38 +1291,23 @@
           ]
         },
         {
-          "name": "Studio 7",
-          "area": 24.18,
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
-            "privé",
+            "partagé",
             "résidentiel"
-          ],
-          "subitems": [
-            {
-              "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Kitchenette optimisée",
-              "area": 3.25,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Salle d'eau (Douche/WC)",
-              "area": 4.64,
-              "labels": [
-                "privé"
-              ]
-            }
+          ]
+        },
+        {
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
+          "labels": [
+            "partagé",
+            "résidentiel"
           ]
         }
       ],
-      "description": "7 studios individuels optimisés (comptoir/kitchenette) avec grande cuisine et salon communautaires sur le palier.",
+      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
       "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage."
     },
     {
@@ -1403,7 +1358,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1411,7 +1366,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1434,7 +1389,7 @@
         },
         {
           "name": "Studio 2",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1442,7 +1397,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1465,7 +1420,7 @@
         },
         {
           "name": "Studio 3",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1473,7 +1428,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1496,7 +1451,7 @@
         },
         {
           "name": "Studio 4",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1504,7 +1459,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1527,7 +1482,7 @@
         },
         {
           "name": "Studio 5",
-          "area": 24.15,
+          "area": 25.01,
           "labels": [
             "privé",
             "résidentiel"
@@ -1535,7 +1490,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.12,
               "labels": [
                 "privé"
               ]
@@ -1558,7 +1513,7 @@
         },
         {
           "name": "Studio 6",
-          "area": 24.15,
+          "area": 25.03,
           "labels": [
             "privé",
             "résidentiel"
@@ -1566,7 +1521,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
+              "area": 17.14,
               "labels": [
                 "privé"
               ]
@@ -1588,38 +1543,23 @@
           ]
         },
         {
-          "name": "Studio 7",
-          "area": 24.18,
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
-            "privé",
+            "partagé",
             "résidentiel"
-          ],
-          "subitems": [
-            {
-              "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 16.26,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Kitchenette optimisée",
-              "area": 3.25,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Salle d'eau (Douche/WC)",
-              "area": 4.64,
-              "labels": [
-                "privé"
-              ]
-            }
+          ]
+        },
+        {
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
+          "labels": [
+            "partagé",
+            "résidentiel"
           ]
         }
       ],
-      "description": "7 studios individuels optimisés (comptoir/kitchenette) avec grande cuisine et salon communautaires sur le palier.",
+      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
       "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage."
     },
     {
@@ -1670,7 +1610,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 21.18,
+          "area": 21.62,
           "labels": [
             "privé",
             "résidentiel"
@@ -1678,7 +1618,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.29,
+              "area": 13.73,
               "labels": [
                 "privé"
               ]
@@ -1701,7 +1641,7 @@
         },
         {
           "name": "Studio 2",
-          "area": 21.18,
+          "area": 21.62,
           "labels": [
             "privé",
             "résidentiel"
@@ -1709,7 +1649,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.29,
+              "area": 13.73,
               "labels": [
                 "privé"
               ]
@@ -1732,7 +1672,7 @@
         },
         {
           "name": "Studio 3",
-          "area": 21.18,
+          "area": 21.62,
           "labels": [
             "privé",
             "résidentiel"
@@ -1740,7 +1680,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.29,
+              "area": 13.73,
               "labels": [
                 "privé"
               ]
@@ -1763,7 +1703,7 @@
         },
         {
           "name": "Studio 4",
-          "area": 21.18,
+          "area": 21.62,
           "labels": [
             "privé",
             "résidentiel"
@@ -1771,7 +1711,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.29,
+              "area": 13.73,
               "labels": [
                 "privé"
               ]
@@ -1794,7 +1734,7 @@
         },
         {
           "name": "Studio 5",
-          "area": 21.09,
+          "area": 21.53,
           "labels": [
             "privé",
             "résidentiel"
@@ -1802,7 +1742,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.19,
+              "area": 13.63,
               "labels": [
                 "privé"
               ]
@@ -1825,7 +1765,7 @@
         },
         {
           "name": "Studio 6",
-          "area": 21.09,
+          "area": 21.53,
           "labels": [
             "privé",
             "résidentiel"
@@ -1833,7 +1773,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.19,
+              "area": 13.63,
               "labels": [
                 "privé"
               ]
@@ -1856,7 +1796,7 @@
         },
         {
           "name": "Studio 7",
-          "area": 21.09,
+          "area": 21.54,
           "labels": [
             "privé",
             "résidentiel"
@@ -1864,7 +1804,7 @@
           "subitems": [
             {
               "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.19,
+              "area": 13.64,
               "labels": [
                 "privé"
               ]
@@ -1886,38 +1826,23 @@
           ]
         },
         {
-          "name": "Studio 8",
-          "area": 21.09,
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9,
           "labels": [
-            "privé",
+            "partagé",
             "résidentiel"
-          ],
-          "subitems": [
-            {
-              "name": "Espace principal (Lit/Bureau/Comptoir)",
-              "area": 13.19,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Kitchenette optimisée",
-              "area": 3.25,
-              "labels": [
-                "privé"
-              ]
-            },
-            {
-              "name": "Salle d'eau (Douche/WC)",
-              "area": 4.65,
-              "labels": [
-                "privé"
-              ]
-            }
+          ]
+        },
+        {
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9,
+          "labels": [
+            "partagé",
+            "résidentiel"
           ]
         }
       ],
-      "description": "8 studios individuels optimisés (comptoir/kitchenette) avec grande cuisine et salon communautaires sur le palier.",
+      "description": "7 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
       "design_notes": "Dernier niveau résidentiel maximisant la capacité d'accueil tout en préservant le partage."
     },
     {

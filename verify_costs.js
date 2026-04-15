@@ -17,9 +17,14 @@ const output = {
     "Coût Construction Global": globalCosts.mortgage.totalCost.toFixed(2) + " $",
     "Coût Mensuel Net Bâtiment": globalCosts.totalMonthlyNet.toFixed(2) + " $",
     "OPEX Mensuel (Services + Énergie + Amort.)": (globalCosts.recurring.monthlyServices + globalCosts.recurring.monthlyEnergy + globalCosts.recurring.monthlyAmortization).toFixed(2) + " $",
-    [`Pour Standard (36 suites)`]: {
+    "Revenus Chambres Flottantes": perSuite.floatingRoomRevenue.toFixed(2) + " $",
+    [`Pour Résident Permanent (31 suites)`]: {
         "Coût Net / mois": perSuite.totalMonthlyNet.toFixed(2) + " $",
         "Part OPEX / mois": (perSuite.monthlyRecurring).toFixed(2) + " $"
+    },
+    [`Pour Chambre Flottante (10 unités)`]: {
+        "Prix / nuit (est.)": (perSuite.floatingRoomPrice / 30).toFixed(2) + " $",
+        "Loyer mensuel": perSuite.floatingRoomPrice.toFixed(2) + " $"
     },
     [`Pour Co-fondateur (12 co-fondateurs)`]: {
         "Mise de fonds initial": perSuite.downpaymentPerFounder.toFixed(2) + " $",

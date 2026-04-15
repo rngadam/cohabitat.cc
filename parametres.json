@@ -18,9 +18,14 @@
     "comm_rent_sqft_year": 30.00
   },
   "population": {
-    "owners": 18,
-    "tenants": 18,
-    "total_suites": 36
+    "owners": 12,
+    "tenants": 19,
+    "total_suites": 31
+  },
+  "floating_rooms": {
+    "count": 10,
+    "price_pct": 50,
+    "occupancy_rate_pct": 80
   },
   "community_bonds": {
     "holders_count": 12,
