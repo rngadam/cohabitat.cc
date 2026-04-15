@@ -1,8 +1,0 @@
-127.0.0.1 - - [29/Jan/2026 16:55:49] "GET /index.html HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:49] "GET /style.css HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:49] "GET /coliving.jpg HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:50] "GET /Communal_Kitchen.jpg HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:50] "GET /atelier-velo.jpg HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:53] "GET /bim.html HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:53] "GET /style.css HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 16:55:53] "GET /bim.js HTTP/1.1" 200 -

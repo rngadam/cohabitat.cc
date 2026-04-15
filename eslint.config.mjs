@@ -7,7 +7,8 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        lucide: "readonly" // Define lucide as a global variable
+        lucide: "readonly", // Define lucide as a global variable
+        define: "readonly"
       }
     }
   },
