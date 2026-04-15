@@ -60,18 +60,12 @@ test.describe('Navigation Links', () => {
     await page.goto('/architecture.html');
     await page.waitForSelector('#navbar');
 
-    const burgerButton = page.locator('#navbar button[onclick*="toggleMobileMenu"]').filter({ visible: true });
-    const isMobile = await burgerButton.isVisible();
+    // Click the menu button (now unified)
+    const menuButton = page.locator('#navbar button[onclick*="toggleMobileMenu"]').filter({ visible: true });
+    await menuButton.click();
+    await expect(page.locator('#mobile-menu')).toBeVisible();
 
-    if (isMobile) {
-      await burgerButton.click();
-      await expect(page.locator('#mobile-menu')).toBeVisible();
-      await page.locator('#mobile-menu a[href="index.html#philosophie"]').click();
-    } else {
-      // On desktop, "Philosophie CC" is in a hover dropdown
-      await page.locator('#navbar button:has-text("Menu")').hover();
-      await page.locator('#navbar a[href="index.html#philosophie"]').filter({ visible: true }).click();
-    }
+    await page.locator('#mobile-menu a[href="index.html#philosophie"]').click();
 
     await expect(page).toHaveURL(/index\.html#philosophie$/);
     await expect(page.locator('#philosophie')).toBeVisible();
@@ -81,17 +75,11 @@ test.describe('Navigation Links', () => {
     await page.goto('/');
     await page.waitForSelector('#navbar');
 
-    const burgerButton = page.locator('#navbar button[onclick*="toggleMobileMenu"]').filter({ visible: true });
-    const isMobile = await burgerButton.isVisible();
+    const menuButton = page.locator('#navbar button[onclick*="toggleMobileMenu"]').filter({ visible: true });
+    await menuButton.click();
+    await expect(page.locator('#mobile-menu')).toBeVisible();
 
-    if (isMobile) {
-      await burgerButton.click();
-      await expect(page.locator('#mobile-menu')).toBeVisible();
-      await page.locator('#mobile-menu a[href="architecture.html"]').click();
-    } else {
-      await page.locator('#navbar button:has-text("Menu")').hover();
-      await page.locator('#navbar a[href="architecture.html"]').filter({ visible: true }).click();
-    }
+    await page.locator('#mobile-menu a[href="architecture.html"]').click();
 
     await expect(page).toHaveURL(/architecture\.html$/);
   });
@@ -122,6 +110,10 @@ test.describe('Footer Content', () => {
     // Check CC0 link
     const ccLink = footer.locator('a[href*="creativecommons.org"]');
     await expect(ccLink).toBeVisible();
+
+    // Check Coderbunker link
+    const coderbunkerLink = footer.locator('a[href*="coderbunker.ca"]');
+    await expect(coderbunkerLink).toBeVisible();
   });
 
   test('should have social media links', async ({ page }) => {
