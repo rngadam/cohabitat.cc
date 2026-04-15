@@ -1,18 +1,18 @@
 class CostCalculator {
-    constructor(params, allocations) {
+    constructor(params, allocations, opex) {
         this.params = params;
         this.allocations = allocations;
+        this.opex = opex;
+        this.M2_TO_SQFT = 10.7639104; // Used for display only
     }
 
-    calculateTotalArea() {
-        // We use the same logic as in architecture.html
+    calculateTotalAreaM2() {
         return this.allocations.floors.reduce((sum, floor) => sum + floor.total, 0);
     }
 
     calculateTotalConstructionCost() {
-        const totalAreaSqFt = this.calculateTotalArea();
-        const totalAreaM2 = totalAreaSqFt * this.params.constants.sqft_to_m2;
-        return totalAreaM2 * this.params.construction.max_cost_m2_2023;
+        const totalAreaM2 = this.calculateTotalAreaM2();
+        return totalAreaM2 * this.params.construction.max_cost_m2;
     }
 
     calculateMortgageDetails() {
@@ -38,36 +38,57 @@ class CostCalculator {
 
     calculateRecurringCosts() {
         const totalCost = this.calculateTotalConstructionCost();
+        const totalAreaM2 = this.calculateTotalAreaM2();
+        
+        // Taxes and Insurance
         const municipalTax = totalCost * (this.params.taxes_and_fees.municipal_tax_rate_pct / 100);
         const schoolTax = totalCost * (this.params.taxes_and_fees.school_tax_rate_pct / 100);
         const insurance = totalCost * (this.params.taxes_and_fees.insurance_rate_pct / 100);
         const reserveFund = totalCost * (this.params.taxes_and_fees.reserve_fund_rate_pct / 100);
 
-        const totalAnnual = municipalTax + schoolTax + insurance + reserveFund;
+        // Operational Expenses (OPEX) from opex.json
+        const monthlyServices = Object.values(this.opex.monthly_services).reduce((a, b) => a + b, 0);
+        const monthlyEnergy = (this.opex.energy_costs.electricity_heat_per_m2_year * totalAreaM2) / 12;
+        
+        // Amortization
+        let annualAmortization = 0;
+        this.opex.equipment_amortization.forEach(equip => {
+            annualAmortization += equip.capital_value / equip.lifespan_years;
+        });
+        const monthlyAmortization = annualAmortization / 12;
+
+        const totalMonthlyFixed = (municipalTax + schoolTax + insurance + reserveFund) / 12;
+        const totalMonthlyOpex = monthlyServices + monthlyEnergy + monthlyAmortization;
 
         return {
             municipalTax,
             schoolTax,
             insurance,
             reserveFund,
-            totalAnnual,
-            totalMonthly: totalAnnual / 12
+            monthlyServices,
+            monthlyEnergy,
+            monthlyAmortization,
+            totalMonthly: totalMonthlyFixed + totalMonthlyOpex
         };
     }
 
     calculateRentalIncome() {
-        let totalRentalAreaSqFt = 0;
+        let totalRentalAreaM2 = 0;
         this.allocations.floors.forEach(floor => {
             floor.items.forEach(item => {
                 const labels = Array.isArray(item.labels) ? item.labels : (typeof item.labels === 'string' ? [item.labels] : []);
                 if (labels.includes('location')) {
-                    totalRentalAreaSqFt += item.area;
+                    totalRentalAreaM2 += item.area;
                 }
             });
         });
 
+        // Current rent constant is $/sqft/year. Let's convert area to sqft for the calculation
+        const totalRentalAreaSqFt = totalRentalAreaM2 * this.M2_TO_SQFT;
         const annualIncome = totalRentalAreaSqFt * this.params.constants.comm_rent_sqft_year;
+        
         return {
+            totalRentalAreaM2,
             totalRentalAreaSqFt,
             annualIncome,
             monthlyIncome: annualIncome / 12
@@ -99,20 +120,13 @@ class CostCalculator {
         const rental = this.calculateRentalIncome();
         const bonds = this.calculateCommunityBondsDetails();
         
-        const totalAnnualGross = mortgage.annualPayment + recurring.totalAnnual + bonds.annualPayment;
-        const totalAnnualNet = totalAnnualGross - rental.annualIncome;
-        
-        const totalMonthlyGross = totalAnnualGross / 12;
-        const totalMonthlyNet = totalAnnualNet / 12;
+        const totalMonthlyNet = mortgage.monthlyPayment + recurring.totalMonthly + bonds.monthlyPayment - rental.monthlyIncome;
 
         return {
             mortgage,
             recurring,
             rental,
             bonds,
-            totalAnnualGross,
-            totalAnnualNet,
-            totalMonthlyGross,
             totalMonthlyNet
         };
     }
@@ -125,10 +139,8 @@ class CostCalculator {
         const baseMonthlyNet = global.totalMonthlyNet / numSuites;
 
         return {
-            totalMonthlyGross: global.totalMonthlyGross / numSuites,
             totalMonthlyNet: baseMonthlyNet,
             constructionCost: global.mortgage.totalCost / numSuites,
-            downpaymentPerSuite: global.mortgage.downpayment / numSuites,
             downpaymentPerFounder: global.mortgage.downpayment / numHolders,
             monthlyMortgage: global.mortgage.monthlyPayment / numSuites,
             monthlyRecurring: global.recurring.totalMonthly / numSuites,

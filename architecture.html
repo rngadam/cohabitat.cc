@@ -64,15 +64,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     Cette page décrit le plan fonctionnel du bâtiment : sous-sol partagé, rez-de-chaussée mixte, étage mezzanine de services, et cinq étages résidentiels optimisés pour 36 studios, cour urbaine et toit technique.
                     Chaque niveau est calibré pour 3000 pi² (≈279 m²) et clarifie les choix de design pour le confort individuel et le partage collectif.
                 </p>
-                <div class="grid gap-4 sm:grid-cols-2">
-                    <div class="rounded-3xl bg-white/90 p-6 border border-stone-200 shadow-sm">
-                        <h2 class="font-serif text-xl text-primary mb-2">Objectif</h2>
-                        <p class="text-stone-500 text-sm leading-relaxed">Un plan simple et robuste : atteindre une densité de 36 studios tout en préservant 30%+ d'espaces partagés, avec cuisine et salons collectifs à chaque étage.</p>
-                    </div>
-                    <div class="rounded-3xl bg-white/90 p-6 border border-stone-200 shadow-sm">
-                        <h2 class="font-serif text-xl text-primary mb-2">Configuration</h2>
-                        <p class="text-stone-500 text-sm leading-relaxed">Sous-sol + RDC + Mezzanine = Partagés ; 5 étages de 7 à 8 studios ; cour extérieure et toit technique avec énergie renouvelable.</p>
-                    </div>
+                <div id="project-constraints" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                    <!-- Constraints will be dynamically injected here -->
                 </div>
             </div>
             <div class="rounded-[2rem] overflow-hidden shadow-2xl reveal reveal-delay-200">
@@ -90,7 +83,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="text-stone-600 max-w-3xl mx-auto mt-4">Chaque niveau correspond à un ensemble d'usages clarifiés par des principes de design, pour créer un habitat durable, collectif et convivial. Cliquez sur un étage pour voir la ventilation détaillée des allocations d'espace.</p>
             <div class="mt-6">
                 <button id="unit-toggle" class="px-6 py-2 bg-primary text-secondary rounded-lg hover:bg-emerald-800 transition-colors">
-                    Basculer vers pieds carrés
+                    Basculer vers mètres carrés
                 </button>
             </div>
         </div>
@@ -177,21 +170,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     let allocationsData = null;
-    let useMetric = true; // true = m², false = pi²
+    let constraintsData = null;
+    let useMetric = false; // Par défaut en pi² pour l'affichage informel (Québec)
 
-    let costCalculator = null;
-
-    // Load allocations and parameters data
+    // Load all data
     Promise.all([
         fetch('allocations.json').then(response => response.json()),
-        fetch('parametres.json').then(response => response.json())
-    ]).then(([allocations, params]) => {
+        fetch('parametres.json').then(response => response.json()),
+        fetch('opex.json').then(response => response.json()),
+        fetch('constraints.json').then(response => response.json())
+    ]).then(([allocations, params, opex, constraints]) => {
         allocationsData = allocations;
-        // Initialize CostCalculator (defined in costs.js)
-        costCalculator = new CostCalculator(params, allocations);
+        constraintsData = constraints;
+        // Initialize CostCalculator with all 3 data sources
+        costCalculator = new CostCalculator(params, allocations, opex);
         
         const issues = AllocationsValidator.validateAllocationsData(allocationsData);
         renderValidationReport(issues);
+        renderConstraints();
         renderDesignCards();
         renderTable();
     })
@@ -205,22 +201,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (allocationsData) renderTable();
     });
 
-    function formatArea(areaSqFt) {
+    function formatArea(areaSqM) {
         if (useMetric) {
-            const areaSqM = Math.round(areaSqFt * 0.092903);
-            return `${areaSqM} m²`;
+            return `${areaSqM.toFixed(2)} m²`;
         } else {
-            return `${areaSqFt} pi²`;
+            const areaSqFt = Math.round(areaSqM * 10.7639104);
+            return `${areaSqFt.toLocaleString()} pi²`;
         }
     }
 
     function calculateSubtotal(items) {
-        return items.reduce((sum, item) => sum + item.area, 0);
+        const sum = items.reduce((sum, item) => sum + item.area, 0);
+        return Math.round(sum * 100) / 100;
     }
 
     function validateSums(floor) {
         const itemTotal = calculateSubtotal(floor.items);
-        return itemTotal === floor.total;
+        const EPSILON = 0.05;
+        return Math.abs(itemTotal - floor.total) < EPSILON;
     }
 
     function renderValidationReport(issues) {
@@ -237,11 +235,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 ${issues.map(issue => `<li>${issue}</li>`).join('')}
             </ul>
         `;
-    }
-
-    function validateSums(floor) {
-        const itemTotal = calculateSubtotal(floor.items);
-        return itemTotal === floor.total;
     }
 
     function getLabelsList(item) {
@@ -301,39 +294,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (costCalculator) {
             const globalCosts = costCalculator.calculateGlobalCosts();
             const perSuite = costCalculator.calculatePerSuiteCosts();
+            const params = costCalculator.params;
             
             costsHtml = `
                 <div class="mt-8 pt-8 border-t border-stone-200">
-                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-6">Modèle Financier (Obligations & Location)</h3>
+                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-6">Financement & Opérations</h3>
                     <div class="grid gap-6 lg:grid-cols-2">
                         <div class="rounded-3xl bg-stone-900 text-white p-6 shadow-lg">
-                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Structure de financement (Bâtiment)</p>
-                            <p class="text-3xl font-serif mb-4">${formatCurrency(globalCosts.mortgage.totalCost)}</p>
-                            <div class="space-y-2 text-sm opacity-90 border-t border-white/10 pt-4">
-                                <div class="flex justify-between"><span>Hypothèque (${globalCosts.mortgage.principal.toLocaleString()} $)</span> <span>${formatCurrency(globalCosts.mortgage.monthlyPayment)}/mois</span></div>
-                                <div class="flex justify-between"><span>Obligations (Mise de fonds)</span> <span>${formatCurrency(globalCosts.bonds.monthlyPayment)}/mois</span></div>
-                                <div class="flex justify-between"><span>Taxes & Assurances</span> <span>${formatCurrency(globalCosts.recurring.totalMonthly)}/mois</span></div>
-                                <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus locatifs</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome)}/mois</span></div>
-                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-lg"><span>Coût Net Projet</span> <span>${formatCurrency(globalCosts.totalMonthlyNet)}/mois</span></div>
+                            <p class="text-xs uppercase tracking-widest opacity-80 mb-4">Structure Mensuelle (Projet Global)</p>
+                            <div class="space-y-3 text-sm opacity-90">
+                                <div class="flex justify-between"><span>Hypothèque (${formatCurrency(globalCosts.mortgage.principal)})</span> <span>${formatCurrency(globalCosts.mortgage.monthlyPayment)}</span></div>
+                                <div class="flex justify-between"><span>Obligations (${params.community_bonds.interest_rate_pct}%)</span> <span>${formatCurrency(globalCosts.bonds.monthlyPayment)}</span></div>
+                                <div class="flex justify-between border-t border-white/10 pt-2"><span>Taxes (Municipales & Scolaires)</span> <span>${formatCurrency((globalCosts.recurring.municipalTax + globalCosts.recurring.schoolTax)/12)}</span></div>
+                                <div class="flex justify-between"><span>Assurances & Fonds de réserve</span> <span>${formatCurrency((globalCosts.recurring.insurance + globalCosts.recurring.reserveFund)/12)}</span></div>
+                                <div class="flex justify-between font-bold text-amber-400"><span>Opérations (OPEX)</span> <span>${formatCurrency(globalCosts.recurring.monthlyServices + globalCosts.recurring.monthlyEnergy + globalCosts.recurring.monthlyAmortization)}</span></div>
+                                <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus locatifs commerciaux</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome)}</span></div>
+                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-xl"><span>Coût Net à couvrir</span> <span>${formatCurrency(globalCosts.totalMonthlyNet)}</span></div>
                             </div>
                         </div>
                         <div class="rounded-3xl bg-accent text-white p-6 shadow-lg border-4 border-white/20">
-                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Coût Résidentiel /mois (36 suites)</p>
+                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Coût Résidentiel (Par suite pour ${params.population.total_suites} suites)</p>
                             <div class="mb-6">
                                 <p class="text-4xl font-serif mb-1">${formatCurrency(perSuite.totalMonthlyNet)} <span class="text-sm font-sans opacity-80">/mois</span></p>
-                                <p class="text-[10px] opacity-70">Loyer de base partagé équitablement</p>
+                                <p class="text-[10px] opacity-70">Loyer de base incluant tous les services et amortissements</p>
                             </div>
                             <div class="space-y-4 text-sm opacity-90 border-t border-white/10 pt-4">
                                 <div class="bg-white/10 p-4 rounded-2xl">
-                                    <p class="font-bold mb-2">Pour les 12 co-fondateurs :</p>
-                                    <div class="flex justify-between opacity-80 mb-1"><span>Mise de fonds initiale</span> <span>${formatCurrency(perSuite.downpaymentPerFounder)}</span></div>
-                                    <div class="flex justify-between text-white font-bold"><span>Loyer effectif net*</span> <span>${formatCurrency(perSuite.totalMonthlyNetFounder)}/mois</span></div>
-                                    <p class="text-[9px] mt-2 italic">*Après remboursement de leur obligation à 5%</p>
+                                    <p class="font-bold mb-2">Pour les ${params.community_bonds.holders_count} co-fondateurs :</p>
+                                    <div class="flex justify-between opacity-80 mb-1"><span>Mise de fonds (Obligation)</span> <span>${formatCurrency(perSuite.downpaymentPerFounder)}</span></div>
+                                    <div class="flex justify-between text-white font-bold text-lg"><span>Loyer effectif net*</span> <span>${formatCurrency(perSuite.totalMonthlyNetFounder)}</span></div>
+                                    <p class="text-[9px] mt-2 italic">*Après remboursement de leur obligation communautaire</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p class="text-[10px] text-stone-400 mt-4 italic">Note : Les obligations (mise de fonds de ${formatCurrency(globalCosts.bonds.principal)}) sont remboursées par le projet sur ${costCalculator.params.community_bonds.amortization_years} ans à 5% d'intérêt.</p>
                 </div>
             `;
         }
@@ -383,7 +377,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         if (item.subitems && item.subitems.length > 0) {
             const subTotal = calculateSubtotal(item.subitems);
-            const isValid = subTotal === item.area;
+            const EPSILON = 0.05;
+            const isValid = Math.abs(subTotal - item.area) < EPSILON;
 
             html += `<ul class="mt-2 space-y-1 ${!isValid ? 'border-l-2 border-red-300 pl-4' : ''}">`;
             item.subitems.forEach(subitem => {
@@ -400,6 +395,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         html += '</li>';
         return html;
+    }
+
+    function renderConstraints() {
+        const container = document.getElementById('project-constraints');
+        if (!constraintsData || !container) return;
+
+        let html = '';
+        constraintsData.constraints.forEach(constraint => {
+            html += `
+                <div class="rounded-3xl bg-white/90 p-5 border border-stone-200 shadow-sm hover:border-accent/30 transition-colors">
+                    <p class="text-[10px] uppercase tracking-widest text-accent mb-2 font-bold">${constraint.label}</p>
+                    <p class="text-2xl font-serif text-primary mb-2">${constraint.value}</p>
+                    <p class="text-stone-500 text-[11px] leading-relaxed">${constraint.description}</p>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
     }
 
     function renderDesignCards() {

@@ -7,16 +7,14 @@
     root.AllocationsValidator = factory();
   }
 }(typeof self !== 'undefined' ? self : this, function () {
-  function formatArea(areaSqFt, useMetric = true) {
-    if (useMetric) {
-      const areaSqM = Math.round(areaSqFt * 0.092903);
-      return `${areaSqM} m²`;
-    }
-    return `${areaSqFt} pi²`;
+  function formatArea(areaSqM) {
+    return `${areaSqM.toFixed(2)} m²`;
   }
 
   function calculateSubtotal(items) {
-    return items.reduce((sum, item) => sum + item.area, 0);
+    // Round to 2 decimals to avoid floating point issues (e.g. 0.1 + 0.2)
+    const sum = items.reduce((sum, item) => sum + item.area, 0);
+    return Math.round(sum * 100) / 100;
   }
 
   function getLabelsList(item) {
@@ -147,7 +145,8 @@
 
     if (item.subitems) {
       const subTotal = calculateSubtotal(item.subitems);
-      if (subTotal !== item.area) {
+      const EPSILON = 0.05; // Tolerance for cumulative rounding offsets
+      if (Math.abs(subTotal - item.area) > EPSILON) {
         issues.push(`${itemPath}: somme des sous-éléments (${formatArea(subTotal)}) ≠ total (${formatArea(item.area)})`);
       }
       item.subitems.forEach(subitem => validateItem(subitem, [...path, item.name], issues));
@@ -158,7 +157,8 @@
     const issues = [];
     data.floors.forEach(floor => {
       const floorSum = calculateSubtotal(floor.items);
-      if (floorSum !== floor.total) {
+      const EPSILON = 0.05;
+      if (Math.abs(floorSum - floor.total) > EPSILON) {
         issues.push(`${floor.name}: somme des éléments (${formatArea(floorSum)}) ≠ total (${formatArea(floor.total)})`);
       }
       floor.items.forEach(item => validateItem(item, [floor.name], issues, floor.name));
