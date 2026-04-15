@@ -1,3 +1,7 @@
 node_modules/
 server_playwright.log
 screenshots/index_changes.png
+
+# Test artifacts
+playwright-report/
+test-results/

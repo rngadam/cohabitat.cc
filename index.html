@@ -60,76 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <!-- Navigation (Sticky & Blur) -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
-                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">Cohabitat<span class="text-accent">.cc</span>
-            </a>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide text-stone-600">
-
-                <!-- Desktop Dropdown Menu -->
-                <div class="relative group">
-                    <button class="flex items-center gap-2 hover:text-primary transition-colors focus:outline-none">
-                        <i data-lucide="menu" class="w-5 h-5"></i>
-                        <span>Menu</span>
-                    </button>
-                    <!-- Dropdown Content -->
-                    <div class="absolute left-0 mt-2 w-56 bg-white border border-stone-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                        <div class="flex flex-col py-2">
-                            <a href="#philosophie" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Philosophie CC</a>
-                            <a href="#concept" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Concept</a>
-                            <a href="architecture.html" class="px-4 py-2 hover:bg-stone-50 text-accent font-bold flex items-center gap-2 transition-colors"><i data-lucide="box" class="w-4 h-4"></i> Plan</a>
-                            <a href="#resto" class="px-4 py-2 hover:bg-stone-50 text-accent transition-colors">Resto Solidaire</a>
-                            <a href="#membres" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Membres</a>
-                            <a href="organisation.html" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Organisation</a>
-                            <a href="#ateliers" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Ateliers</a>
-                            <a href="#os" class="px-4 py-2 hover:bg-stone-50 hover:text-primary transition-colors">Système OS</a>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-primary transition-colors flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                </a>
-                <a href="https://linkedin.com/company/cohabitat-cc/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-primary transition-colors flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" role="img" aria-label="LinkedIn Icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-                <a href="mailto:joindre@cohabitat.cc" class="px-6 py-2 bg-primary text-secondary rounded-full hover:bg-emerald-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-300">
-                    Nous joindre
-                </a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-primary" onclick="toggleMobileMenu()">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-secondary border-b border-stone-200 shadow-xl md:hidden">
-            <div class="flex flex-col p-6 space-y-4 font-serif text-lg text-primary">
-                <a href="#philosophie" class="block py-2" onclick="toggleMobileMenu()">Philosophie CC</a>
-                <a href="#concept" class="block py-2" onclick="toggleMobileMenu()">Concept</a>
-                <a href="architecture.html" class="block py-2 text-accent" onclick="toggleMobileMenu()">Plan</a>
-                <a href="#resto" class="block py-2 text-accent" onclick="toggleMobileMenu()">Resto Solidaire</a>
-                <a href="#membres" class="block py-2" onclick="toggleMobileMenu()">Membres</a>
-                <a href="organisation.html" class="block py-2" onclick="toggleMobileMenu()">Organisation</a>
-                <a href="#ateliers" class="block py-2" onclick="toggleMobileMenu()">Ateliers</a>
-                <a href="#os" class="block py-2" onclick="toggleMobileMenu()">Système OS</a>
-                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" class="block py-2 flex items-center gap-2" onclick="toggleMobileMenu()">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                    Facebook
-                </a>
-                <a href="https://linkedin.com/company/cohabitat-cc/" target="_blank" rel="noopener noreferrer" class="block py-2 flex items-center gap-2" onclick="toggleMobileMenu()">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="LinkedIn Icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    LinkedIn
-                </a>
-                <a href="mailto:joindre@cohabitat.cc" class="block py-3 mt-4 text-center bg-primary text-secondary rounded-lg">Nous joindre</a>
-            </div>
-        </div>
-    </nav>
+    <div id="header-placeholder"></div>
 
     <!-- Event Banner -->
     <div class="bg-accent text-white py-3 px-6 mt-16 md:mt-20">
@@ -663,33 +594,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
     <!-- Footer -->
-    <footer class="bg-stone-900 text-stone-400 py-12 border-t border-stone-800">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <h4 class="font-serif text-2xl text-stone-200">Cohabitat<span class="text-accent">.cc</span></h4>
-                <p class="text-sm mt-2">Montréal, Québec.</p>
-            </div>
-            <div class="flex gap-6">
-                <a href="https://www.facebook.com/profile.php?id=61573297292271" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="hover:text-white transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="Facebook Icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                </a>
-                <a href="https://linkedin.com/company/cohabitat-cc/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-white transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5" role="img" aria-label="LinkedIn Icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-            </div>
-
-            <div class="text-sm">
-                &copy; 2026 Cohabitat.cc. <a href="https://cohabitat.cc">Cohabitat.cc</a> par <a href="https://example.com">Ricky Ng-Adam</a> est marqué <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/zero.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
-                <br>
-                <span class="mt-2 block">designed and generated by <a href="https://coderbunker.ca" target="_blank" class="hover:text-stone-200 transition-colors">Coderbunker Canada (Coderbunker.ca)</a></span>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
     <script>
-        // Initialize Icons
-        lucide.createIcons();
+        // Load header and footer
+        async function loadComponent(url, placeholderId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(placeholderId).innerHTML = html;
+                return true;
+            } catch (error) {
+                console.error('Error loading component:', error);
+                return false;
+            }
+        }
+
+        // Load components
+        Promise.all([
+            loadComponent('header.html', 'header-placeholder'),
+            loadComponent('footer.html', 'footer-placeholder')
+        ]).then(() => {
+            // Initialize icons after loading
+            lucide.createIcons();
+        });
 
         // Mobile Menu Toggle
         function toggleMobileMenu() {

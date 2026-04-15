@@ -49,36 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9H5BQPF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-secondary/80 border-b border-stone-200/50" id="navbar">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="font-serif text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
-            <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">Cohabitat<span class="text-accent">.cc</span>
-        </a>
-
-        <div class="hidden md:flex space-x-8 items-center text-sm font-medium tracking-wide text-stone-600">
-            <a href="index.html#philosophie" class="hover:text-primary transition-colors">Philosophie CC</a>
-            <a href="index.html#concept" class="hover:text-primary transition-colors">Concept</a>
-            <a href="architecture.html" class="hover:text-accent transition-colors font-bold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> Plan</a>
-            <a href="index.html#resto" class="hover:text-accent transition-colors">Resto Solidaire</a>
-            <a href="mailto:joindre@cohabitat.cc" class="px-6 py-2 bg-primary text-secondary rounded-full hover:bg-emerald-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-300">
-                Nous joindre
-            </a>
-        </div>
-
-        <button class="md:hidden text-primary" onclick="toggleMobileMenu()">
-            <i data-lucide="menu" class="w-6 h-6"></i>
-        </button>
-    </div>
-    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-secondary border-b border-stone-200 shadow-xl md:hidden">
-        <div class="flex flex-col p-6 space-y-4 font-serif text-lg text-primary">
-            <a href="index.html#philosophie" class="block py-2" onclick="toggleMobileMenu()">Philosophie CC</a>
-            <a href="index.html#concept" class="block py-2" onclick="toggleMobileMenu()">Concept</a>
-            <a href="architecture.html" class="block py-2 text-accent" onclick="toggleMobileMenu()">Plan</a>
-            <a href="index.html#resto" class="block py-2 text-accent" onclick="toggleMobileMenu()">Resto Solidaire</a>
-            <a href="mailto:joindre@cohabitat.cc" class="block py-3 mt-4 text-center bg-primary text-secondary rounded-lg">Nous joindre</a>
-        </div>
-    </div>
-</nav>
+    <div id="header-placeholder"></div>
 
 <section class="pt-32 pb-20 bg-gradient-to-br from-primary/5 to-accent/5">
     <div class="max-w-6xl mx-auto px-6">
@@ -165,37 +136,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </section>
 
-<footer class="bg-stone-900 text-stone-300 py-16">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-        <div>
-            <a href="index.html" class="font-serif text-2xl text-white tracking-tight inline-flex items-center gap-2 mb-4">
-                <img src="logo.svg" alt="Cohabitat Logo" class="h-8 w-auto">Cohabitat<span class="text-accent">.cc</span>
-            </a>
-            <p class="text-sm leading-relaxed text-stone-400">Plan, mobilité et communauté au cœur d'un projet urbain durable.</p>
-        </div>
-        <div>
-            <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-4">Navigation</h3>
-            <ul class="space-y-3 text-sm text-stone-400">
-                <li><a href="index.html#concept" class="hover:text-white transition-colors">Concept</a></li>
-                <li><a href="index.html#resto" class="hover:text-white transition-colors">Resto Solidaire</a></li>
-                <li><a href="organisation.html" class="hover:text-white transition-colors">Organisation</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-4">Contact</h3>
-            <p class="text-sm text-stone-400">joindre@cohabitat.cc</p>
-            <p class="text-sm text-stone-400 mt-3">Montréal, Québec</p>
-        </div>
-    </div>
-</footer>
+    <div id="footer-placeholder"></div>
 
 <script src="validate-allocations.js"></script>
 <script>
-    function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
+    // Load header and footer
+    async function loadComponent(url, placeholderId) {
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            document.getElementById(placeholderId).innerHTML = html;
+        } catch (error) {
+            console.error('Error loading component:', error);
+        }
     }
 
+    // Load components
+        Promise.all([
+            loadComponent('header.html', 'header-placeholder'),
+            loadComponent('footer.html', 'footer-placeholder')
+        ]).then(() => {
+            // Set active link
+            const planLink = document.querySelector('a[href="architecture.html"]');
+            if (planLink) {
+                planLink.classList.add('text-accent', 'font-bold');
+            }
+            // Initialize icons after loading
+            lucide.createIcons();
+        });
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
