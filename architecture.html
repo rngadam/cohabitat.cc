@@ -51,7 +51,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div id="header-placeholder"></div>
 
-<section class="pt-32 pb-20 bg-gradient-to-br from-primary/5 to-accent/5">
+<section class="pt-32 pb-12 bg-gradient-to-br from-primary/5 to-accent/5">
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
             <div class="space-y-6 reveal active">
@@ -61,17 +61,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <h1 class="font-serif text-5xl md:text-6xl text-primary leading-tight">Plan d'usage et allocations d'espace</h1>
                 <p class="text-stone-600 text-lg leading-relaxed max-w-3xl">
-                    Cette page décrit le plan fonctionnel du bâtiment : sous-sol partagé, rez-de-chaussée mixte, mezzanine de services, cinq étages de studios, cour urbaine et toit technique.
+                    Cette page décrit le plan fonctionnel du bâtiment : sous-sol partagé, rez-de-chaussée mixte, étage mezzanine de services, et cinq étages résidentiels optimisés pour 36 studios, cour urbaine et toit technique.
                     Chaque niveau est calibré pour 3000 pi² (≈279 m²) et clarifie les choix de design pour le confort individuel et le partage collectif.
                 </p>
                 <div class="grid gap-4 sm:grid-cols-2">
                     <div class="rounded-3xl bg-white/90 p-6 border border-stone-200 shadow-sm">
                         <h2 class="font-serif text-xl text-primary mb-2">Objectif</h2>
-                        <p class="text-stone-500 text-sm leading-relaxed">Un plan simple et robuste : un bâtiment plus généreux à 3000 pi² par niveau, pour accueillir des espaces collectifs et des services partagés sur chaque étage.</p>
+                        <p class="text-stone-500 text-sm leading-relaxed">Un plan simple et robuste : atteindre une densité de 36 studios tout en préservant 30%+ d'espaces partagés, avec cuisine et salons collectifs à chaque étage.</p>
                     </div>
                     <div class="rounded-3xl bg-white/90 p-6 border border-stone-200 shadow-sm">
                         <h2 class="font-serif text-xl text-primary mb-2">Configuration</h2>
-                        <p class="text-stone-500 text-sm leading-relaxed">Sous-sol + RDC + mezzanine = partagés ; 5 étages de 4 studios ; cour extérieure et toit technique avec énergie renouvelable.</p>
+                        <p class="text-stone-500 text-sm leading-relaxed">Sous-sol + RDC + Mezzanine = Partagés ; 5 étages de 7 à 8 studios ; cour extérieure et toit technique avec énergie renouvelable.</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </section>
 
-<section class="pb-24 bg-secondary">
+<section class="pt-16 pb-24 bg-secondary">
     <div class="max-w-7xl mx-auto px-6">
         <div class="mb-12 text-center">
             <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3">Plan d'usage</p>
@@ -103,7 +103,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Validation issues will be displayed here -->
         </div>
 
-        <div id="allocation-table" class="overflow-x-auto rounded-3xl border border-stone-200 bg-white shadow-sm">
+        <div id="design-notes-cards" class="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            <!-- Design cards will be populated by JavaScript -->
+        </div>
+
+        <div id="allocation-table" class="overflow-x-auto rounded-3xl border border-stone-200 bg-white shadow-sm mt-8">
             <!-- Table will be populated by JavaScript -->
         </div>
     </div>
@@ -140,6 +144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="common.js"></script>
 <script src="validate-allocations.js"></script>
+<script src="costs.js"></script>
 <script>
     // Load components
         Promise.all([
@@ -174,16 +179,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let allocationsData = null;
     let useMetric = true; // true = m², false = pi²
 
-    // Load allocations data
-    fetch('allocations.json')
-        .then(response => response.json())
-        .then(data => {
-            allocationsData = data;
-            const issues = AllocationsValidator.validateAllocationsData(data);
-            renderValidationReport(issues);
-            renderTable();
-        })
-        .catch(error => console.error('Error loading allocations:', error));
+    let costCalculator = null;
+
+    // Load allocations and parameters data
+    Promise.all([
+        fetch('allocations.json').then(response => response.json()),
+        fetch('parametres.json').then(response => response.json())
+    ]).then(([allocations, params]) => {
+        allocationsData = allocations;
+        // Initialize CostCalculator (defined in costs.js)
+        costCalculator = new CostCalculator(params, allocations);
+        
+        const issues = AllocationsValidator.validateAllocationsData(allocationsData);
+        renderValidationReport(issues);
+        renderDesignCards();
+        renderTable();
+    })
+    .catch(error => console.error('Error loading data:', error));
 
     // Unit toggle button
     document.getElementById('unit-toggle').addEventListener('click', () => {
@@ -269,6 +281,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return { buildingFootprint, courtyardFootprint, groundSurface, totalSurface };
     }
 
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD' }).format(amount);
+    }
+
     function renderSummary() {
         const summaryContainer = document.getElementById('allocation-summary');
         const totals = calculateTotalsByType();
@@ -280,6 +296,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         const formatPercent = value => `${Math.round((value / totalArea) * 100)} %`;
         const siteMetrics = calculateSiteMetrics();
+        
+        let costsHtml = '';
+        if (costCalculator) {
+            const globalCosts = costCalculator.calculateGlobalCosts();
+            const perSuite = costCalculator.calculatePerSuiteCosts();
+            
+            costsHtml = `
+                <div class="mt-8 pt-8 border-t border-stone-200">
+                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-6">Modèle Financier (Obligations & Location)</h3>
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        <div class="rounded-3xl bg-stone-900 text-white p-6 shadow-lg">
+                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Structure de financement (Bâtiment)</p>
+                            <p class="text-3xl font-serif mb-4">${formatCurrency(globalCosts.mortgage.totalCost)}</p>
+                            <div class="space-y-2 text-sm opacity-90 border-t border-white/10 pt-4">
+                                <div class="flex justify-between"><span>Hypothèque (${globalCosts.mortgage.principal.toLocaleString()} $)</span> <span>${formatCurrency(globalCosts.mortgage.monthlyPayment)}/mois</span></div>
+                                <div class="flex justify-between"><span>Obligations (Mise de fonds)</span> <span>${formatCurrency(globalCosts.bonds.monthlyPayment)}/mois</span></div>
+                                <div class="flex justify-between"><span>Taxes & Assurances</span> <span>${formatCurrency(globalCosts.recurring.totalMonthly)}/mois</span></div>
+                                <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus locatifs</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome)}/mois</span></div>
+                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-lg"><span>Coût Net Projet</span> <span>${formatCurrency(globalCosts.totalMonthlyNet)}/mois</span></div>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl bg-accent text-white p-6 shadow-lg border-4 border-white/20">
+                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Coût Résidentiel /mois (36 suites)</p>
+                            <div class="mb-6">
+                                <p class="text-4xl font-serif mb-1">${formatCurrency(perSuite.totalMonthlyNet)} <span class="text-sm font-sans opacity-80">/mois</span></p>
+                                <p class="text-[10px] opacity-70">Loyer de base partagé équitablement</p>
+                            </div>
+                            <div class="space-y-4 text-sm opacity-90 border-t border-white/10 pt-4">
+                                <div class="bg-white/10 p-4 rounded-2xl">
+                                    <p class="font-bold mb-2">Pour les 12 co-fondateurs :</p>
+                                    <div class="flex justify-between opacity-80 mb-1"><span>Mise de fonds initiale</span> <span>${formatCurrency(perSuite.downpaymentPerFounder)}</span></div>
+                                    <div class="flex justify-between text-white font-bold"><span>Loyer effectif net*</span> <span>${formatCurrency(perSuite.totalMonthlyNetFounder)}/mois</span></div>
+                                    <p class="text-[9px] mt-2 italic">*Après remboursement de leur obligation à 5%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-stone-400 mt-4 italic">Note : Les obligations (mise de fonds de ${formatCurrency(globalCosts.bonds.principal)}) sont remboursées par le projet sur ${costCalculator.params.community_bonds.amortization_years} ans à 5% d'intérêt.</p>
+                </div>
+            `;
+        }
+
         summaryContainer.classList.remove('hidden');
         summaryContainer.innerHTML = `
             <div class="grid gap-4 lg:grid-cols-3">
@@ -311,6 +369,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p class="text-sm text-stone-500 mt-2">Somme de tous les niveaux et espaces du projet</p>
                 </div>
             </div>
+            ${costsHtml}
         `;
     }
 
@@ -343,6 +402,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return html;
     }
 
+    function renderDesignCards() {
+        const container = document.getElementById('design-notes-cards');
+        if (!allocationsData || !container) return;
+
+        let html = '';
+        allocationsData.floors.forEach(floor => {
+            if (floor.design_notes) {
+                html += `
+                    <div class="rounded-3xl bg-white border border-stone-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <p class="text-[10px] uppercase tracking-widest text-stone-400 mb-2">${floor.name}</p>
+                        <h4 class="font-semibold text-primary mb-3">Concept</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">${floor.design_notes}</p>
+                    </div>
+                `;
+            }
+        });
+        container.innerHTML = html;
+    }
+
     function renderTable() {
         const tableContainer = document.getElementById('allocation-table');
         let html = `
@@ -350,50 +428,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <thead class="bg-stone-100">
                     <tr>
                         <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Étage</th>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Espaces</th>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Notes de design</th>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Allocation</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Espaces & Fonction</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600 text-right">Allocation</th>
                     </tr>
                 </thead>
                 <tbody>`;
 
         allocationsData.floors.forEach(floor => {
             const isValid = validateSums(floor);
-            const floorDescriptions = {
-                "Sous-sol": "Atelier vélo, fablab, logistique active, stockages techniques, zone de livraison et services de maintenance.",
-                "Rez-de-chaussée": "Resto solidaire, accueil, espace café, comptoir de service et zones d'échange pour habitants et quartier.",
-                "Mezzanine": "Espace polyvalent, coworking, atelier créatif, micro-fablab et salon collectif ouvert sur le rez-de-chaussée.",
-                "Étage 1": "4 studios individuels, chacun avec kitchenette, salle de bain complète, walk-in, balcon privé avec corde à linge.",
-                "Étage 2": "4 studios individuels, walk-in closet, balcon, circulation légère et deux salons de palier.",
-                "Étage 3": "4 studios individuels, balcons, rangements walk-in, espaces de circulation éclairés et buanderie partagée.",
-                "Étage 4": "4 studios individuels, chacun avec walk-in, balcon et accès à des mezzanines de rangement supplémentaires.",
-                "Étage 5": "4 studios individuels, walk-in closet, balcon, et une circulaire commune qui relie tous les niveaux.",
-                "Toit": "Plates-formes solaires, éoliennes, bain tourbillon, cabine sauna et espace technique.",
-                "Cour": "Jardin et verger urbain, BBQ communautaire, espaces de détente et stationnement vélo abrité."
-            };
-
-            const floorDesignNotes = {
-                "Sous-sol": "Espaces techniques intégrés, flux de livraison séparés, hauteur libre adaptée et accès direct au rez-de-chaussée.",
-                "Rez-de-chaussée": "Front public attractif, relation directe avec la rue, terrasse partielle et circulation fluide vers les étages supérieurs.",
-                "Mezzanine": "Usage flexible, vues croisées, lumière naturelle et espaces facilement modulables pour réunions et ateliers.",
-                "Étage 1": "Optimisation du plan pour quatre studios compacts mais confortables, avec espace de rangements généreux.",
-                "Étage 2": "Recharge intime, ventilation croisée et interface douce entre l'espace privé et les espaces collectifs.",
-                "Étage 3": "Rapports d'espace clairs, orientation sur jardin et vues sur la cour intérieure du site.",
-                "Étage 4": "Confort individuel maximal sur un plan répétitif et raisonné, pour 20 studios au total sur 5 niveaux.",
-                "Étage 5": "Dernier niveau de logements pour garder la structure répétitive uniforme et la maintenance simple.",
-                "Toit": "Toit dédié à l'énergie renouvelable, au bien-être collectif et à la maintenance du bâtiment.",
-                "Cour": "Cour extérieure semi-privée favorisant les rencontres et les usages en lien avec le resto solidaire."
-            };
-
+            
             html += `
                 <tr class="floor-toggle cursor-pointer border-t border-stone-200 hover:bg-stone-50 transition-colors ${!isValid ? 'bg-red-50' : ''}">
-                    <td class="p-5 align-top font-semibold text-primary">${floor.name}</td>
-                    <td class="p-5 align-top text-stone-600">${floorDescriptions[floor.name] || ''}</td>
-                    <td class="p-5 align-top text-stone-600">${floorDesignNotes[floor.name] || ''}</td>
-                    <td class="p-5 align-top text-stone-600 font-mono">${formatArea(floor.total)}${!isValid ? ' ⚠️' : ''}</td>
+                    <td class="p-5 align-top font-semibold text-primary whitespace-nowrap">${floor.name}</td>
+                    <td class="p-5 align-top text-stone-600">${floor.description || ''}</td>
+                    <td class="p-5 align-top text-stone-600 font-mono text-right">${formatArea(floor.total)}${!isValid ? ' ⚠️' : ''}</td>
                 </tr>
                 <tr class="detail-row hidden bg-stone-50">
-                    <td colspan="4" class="p-5 text-stone-600">
+                    <td colspan="3" class="p-5 text-stone-600">
                         <ul class="space-y-2">
                             ${floor.items.map(item => renderItemHierarchy(item)).join('')}
                         </ul>

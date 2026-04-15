@@ -1,0 +1,30 @@
+{
+  "construction": {
+    "max_cost_m2_2023": 3317.69
+  },
+  "mortgage": {
+    "downpayment_pct": 20,
+    "amortization_years": 50,
+    "interest_rate_pct": 4.25
+  },
+  "taxes_and_fees": {
+    "municipal_tax_rate_pct": 3.16,
+    "school_tax_rate_pct": 0.08,
+    "insurance_rate_pct": 0.25,
+    "reserve_fund_rate_pct": 1.0
+  },
+  "constants": {
+    "sqft_to_m2": 0.09290304,
+    "comm_rent_sqft_year": 30.00
+  },
+  "population": {
+    "owners": 18,
+    "tenants": 18,
+    "total_suites": 36
+  },
+  "community_bonds": {
+    "holders_count": 12,
+    "interest_rate_pct": 5.0,
+    "amortization_years": 25
+  }
+}
