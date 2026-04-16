@@ -60,7 +60,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="pt-16 pb-6 bg-gradient-to-br from-primary/5 to-accent/5">
     <div class="max-w-6xl mx-auto px-6 text-center">
-        <div class="max-w-4xl mx-auto space-y-8 reveal active">
+        <div class="max-w-4xl mx-auto space-y-8  active">
             <div class="inline-flex items-center gap-3 text-accent mb-4">
                 <i data-lucide="layers" class="w-5 h-5"></i>
                 <span class="font-bold tracking-widest uppercase">Plan d'Usage</span>
@@ -81,7 +81,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="max-w-7xl mx-auto px-6">
         <div class="mb-8 text-center">
             <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3">Plan d'usage</p>
-            <h2 class="font-serif text-4xl text-primary">Tableau étage par étage</h2>
+            <h2 id="allocation-summary-title" class="font-serif text-4xl text-primary">Tableau étage par étage</h2>
             <p class="text-stone-600 max-w-3xl mx-auto mt-4">Chaque niveau correspond à un ensemble d'usages clarifiés par des principes de design, pour créer un habitat durable, collectif et convivial. Cliquez sur un étage pour voir la ventilation détaillée des allocations d'espace.</p>
             <div class="mt-6">
                 <button id="unit-toggle" class="px-6 py-2 bg-primary text-secondary rounded-lg hover:bg-emerald-800 transition-colors">
@@ -116,13 +116,100 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- Cost table will be populated by JavaScript -->
             </div>
         </div>
+
+        <!-- Simulateur de Scénarios (Interactif) -->
+        <div id="cost-reduction-strategies" class="mt-20">
+            <div class="mb-12">
+                <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Simulateur de Scénarios</p>
+                <h2 class="font-serif text-4xl text-primary text-center">Optimisations et Subventions</h2>
+                <p class="text-stone-600 max-w-3xl mx-auto mt-4 text-center italic">Activez les leviers ci-dessous pour voir l'impact sur l'investissement total et les frais d'exploitation du projet.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- SCHL APH Select -->
+                <label class="group relative cursor-pointer">
+                    <input type="checkbox" id="toggle-aph" class="peer sr-only" onchange="updateScenarios()">
+                    <div class="h-full bg-white p-6 rounded-3xl border-2 border-stone-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <i data-lucide="landmark"></i>
+                            </div>
+                            <h3 class="font-serif text-xl text-primary">SCHL (APH Select)</h3>
+                        </div>
+                        <p class="text-xs text-stone-500 leading-relaxed mb-4">Financement préférentiel et amortissement sur 50 ans.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 opacity-0 peer-checked:opacity-100"></i>
+                            <span class="peer-checked:hidden text-stone-400 font-normal">Activer (3,75% int.)</span>
+                            <span class="hidden peer-checked:inline">Taux réduit activé</span>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Ville de Montréal - Terrain -->
+                <label class="group relative cursor-pointer">
+                    <input type="checkbox" id="toggle-land" class="peer sr-only" onchange="updateScenarios()">
+                    <div class="h-full bg-white p-6 rounded-3xl border-2 border-stone-100 peer-checked:border-accent peer-checked:bg-accent/5 transition-all shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                <i data-lucide="map"></i>
+                            </div>
+                            <h3 class="font-serif text-xl text-primary">Cession Terrain</h3>
+                        </div>
+                        <p class="text-xs text-stone-500 leading-relaxed mb-4">Utilisation d'un terrain municipal via bail emphytéotique.</p>
+                        <div class="flex items-center gap-2 text-accent font-bold text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 opacity-0 peer-checked:opacity-100"></i>
+                            <span class="peer-checked:hidden text-stone-400 font-normal">Économie de 1,2 M$</span>
+                            <span class="hidden peer-checked:inline">Loyer foncier activé</span>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Taxes Exemption -->
+                <label class="group relative cursor-pointer">
+                    <input type="checkbox" id="toggle-taxes" class="peer sr-only" onchange="updateScenarios()">
+                    <div class="h-full bg-white p-6 rounded-3xl border-2 border-stone-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center text-stone-600 group-hover:scale-110 transition-transform">
+                                <i data-lucide="building"></i>
+                            </div>
+                            <h3 class="font-serif text-xl text-primary">Exemption Taxes</h3>
+                        </div>
+                        <p class="text-xs text-stone-500 leading-relaxed mb-4">Statut OBNL ou logement social (Municipal/Scolaire).</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 opacity-0 peer-checked:opacity-100"></i>
+                            <span class="peer-checked:hidden text-stone-400 font-normal">Économie 28k$/mois</span>
+                            <span class="hidden peer-checked:inline">Exemption activée</span>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Modular Construction -->
+                <label class="group relative cursor-pointer">
+                    <input type="checkbox" id="toggle-modular" class="peer sr-only" onchange="updateScenarios()">
+                    <div class="h-full bg-white p-6 rounded-3xl border-2 border-stone-100 peer-checked:border-stone-800 peer-checked:bg-stone-50 transition-all shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center text-stone-600 group-hover:scale-110 transition-transform">
+                                <i data-lucide="construction"></i>
+                            </div>
+                            <h3 class="font-serif text-xl text-primary">Modulaire</h3>
+                        </div>
+                        <p class="text-xs text-stone-500 leading-relaxed mb-4">Préfabrication réduisant les Hard Costs de 15%.</p>
+                        <div class="flex items-center gap-2 text-stone-800 font-bold text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 opacity-0 peer-checked:opacity-100"></i>
+                            <span class="peer-checked:hidden text-stone-400 font-normal">Vitesse & Économie</span>
+                            <span class="hidden peer-checked:inline">Modulaire activé</span>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
     </div>
 </section>
 
 <section class="pb-24 bg-white">
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-12 items-start">
-            <div class="reveal">
+            <div class="">
                 <h2 class="font-serif text-3xl text-primary mb-4">Principes de design</h2>
                 <ul class="space-y-4 text-stone-600">
                     <li class="rounded-3xl border border-stone-200 bg-secondary p-6">
@@ -139,7 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </li>
                 </ul>
             </div>
-            <div class="rounded-[2rem] overflow-hidden shadow-2xl reveal reveal-delay-200">
+            <div class="rounded-[2rem] overflow-hidden shadow-2xl  -delay-200">
                 <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop" alt="Plan d'étage" class="w-full h-full object-cover min-h-[28rem]">
             </div>
         </div>
@@ -153,6 +240,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="allocations-logic.js"></script>
 <script src="costs.js"></script>
 <script>
+    // Global state for ssubsidies and scenarios
+    let activeOverrides = {
+        aphSelect: false,
+        landGrant: false,
+        taxExemption: false,
+        modular: false
+    };
+
+    window.updateScenarios = function() {
+        activeOverrides.aphSelect = document.getElementById('toggle-aph').checked;
+        activeOverrides.landGrant = document.getElementById('toggle-land').checked;
+        activeOverrides.taxExemption = document.getElementById('toggle-taxes').checked;
+        activeOverrides.modular = document.getElementById('toggle-modular').checked;
+        
+        // Re-calculate and re-render everything
+        loadAllData();
+    };
+
     // Load components
         Promise.all([
             loadComponent('header.html', 'header-placeholder'),
@@ -166,47 +271,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Initialize icons after loading
             lucide.createIcons();
         });
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('reveal-active');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
-    });
-
     let allocationsData = null;
+    let paramsData = null;
+    let opexData = null;
     let constraintsData = null;
-    let useMetric = false; // Par défaut en pi² pour l'affichage informel (Québec)
+    let costCalculator = null; // Global instance for re-renders
+    let useMetric = false;
 
-    // Load all data
-    Promise.all([
-        fetch('allocations.json').then(response => response.json()),
-        fetch('parametres.json').then(response => response.json()),
-        fetch('opex.json').then(response => response.json()),
-        fetch('constraints.json').then(response => response.json())
-    ]).then(([allocations, params, opex, constraints]) => {
-        allocationsData = allocations;
-        constraintsData = constraints;
-        // Initialize CostCalculator with all 3 data sources
-        costCalculator = new CostCalculator(params, allocations, opex);
-        
-        const issues = AllocationsValidator.validateAllocationsData(allocationsData);
-        renderValidationReport(issues);
-        renderConstraints();
-        renderDesignCards();
-        renderTable();
-        renderCostTable(allocationsData, params);
-    })
-    .catch(error => console.error('Error loading data:', error));
+    async function loadAllData() {
+        try {
+            const [allocations, params, opex, constraints] = await Promise.all([
+                fetch('allocations.json').then(r => r.json()),
+                fetch('parametres.json').then(r => r.json()),
+                fetch('opex.json').then(r => r.json()),
+                fetch('constraints.json').then(r => r.json())
+            ]);
+
+            allocationsData = allocations;
+            paramsData = params;
+            opexData = opex;
+            constraintsData = constraints;
+
+            // Initialize/Update the global CostCalculator
+            costCalculator = new CostCalculator(params, allocations, opex, activeOverrides);
+            
+            renderSummary();
+            renderValidationReport(AllocationsValidator.validateAllocationsData(allocations));
+            renderConstraints(constraints);
+            renderDesignCards(allocations);
+            renderTable();
+            renderCostTable(allocations, params, activeOverrides);
+            
+            if (window.lucide) lucide.createIcons();
+
+            // Add visual hint if scenario is active
+            const isOptimized = Object.values(activeOverrides).some(v => v === true);
+            const summaryHeading = document.getElementById('allocation-summary-title');
+            if (summaryHeading) {
+                const existingBadge = summaryHeading.querySelector('.scenario-badge');
+                if (existingBadge) existingBadge.remove();
+                if (isOptimized) {
+                    summaryHeading.innerHTML += ` <span class="scenario-badge ml-4 inline-flex items-center px-3 py-1 rounded-full bg-accent text-white text-[10px] font-bold animate-pulse">MODÈLE OPTIMISÉ</span>`;
+                }
+            }
+
+        } catch (error) {
+            console.error('Error loading data:', error);
+        }
+    }
+
+    loadAllData();
 
     // Unit toggle button
     document.getElementById('unit-toggle').addEventListener('click', () => {
@@ -524,11 +638,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
     }
 
-    function renderCostTable(data, params) {
+    function renderCostTable(data, params, overrides = {}) {
         if (!data || !params) return;
         const container = document.getElementById('cost-table-container');
-        const interiorRate = params.construction.max_cost_m2;
-        const exteriorRate = 1000; // Taux forfaitaire pour aménagements extérieurs et balcons
+        
+        let interiorRate = params.construction.max_cost_m2;
+        if (overrides.modular) {
+            interiorRate = interiorRate * (1 - (params.scenarios.modular_reduction_pct / 100));
+        }
+        
+        const exteriorRate = 1000; 
 
         let html = `
             <table class="min-w-full text-left border-collapse">
@@ -564,20 +683,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             `;
         });
 
-        const landCost = params.construction.land_cost || 0;
+        const landCost = overrides.landGrant ? 0 : (params.construction.land_cost || 0);
         const totalInvestment = totalConstruction + landCost;
 
         html += `
                 <tr class="border-t-2 border-primary/20 bg-stone-50/50">
-                    <td class="p-5 font-bold text-primary">Acquisition du Terrain (6000 pi²)</td>
+                    <td class="p-5 font-bold text-primary">
+                        ${overrides.landGrant ? 'Terrain (Cession Municipale)' : 'Acquisition du Terrain (6000 pi²)'}
+                        ${overrides.landGrant ? '<span class="ml-2 px-2 py-0.5 bg-accent text-white text-[10px] rounded">OFFERT</span>' : ''}
+                    </td>
                     <td class="p-5"></td>
-                    <td class="p-5 text-stone-400 text-right text-xs italic">200 $/pi² approx.</td>
-                    <td class="p-5 text-stone-900 font-bold text-right">${landCost.toLocaleString('fr-CA')} $</td>
+                    <td class="p-5 text-stone-400 text-right text-xs italic">${overrides.landGrant ? 'Bail emphytéotique' : '200 $/pi² approx.'}</td>
+                    <td class="p-5 text-stone-900 font-bold text-right">${overrides.landGrant ? '0' : landCost.toLocaleString('fr-CA')} $</td>
                 </tr>
                 </tbody>
                 <tfoot class="bg-primary text-white">
                     <tr>
-                        <th class="p-6 font-bold uppercase tracking-widest text-sm">Investissement Total</th>
+                        <th class="p-6 font-bold uppercase tracking-widest text-sm">Investissement Total ${overrides.modular ? '(Optimisé)' : ''}</th>
                         <th class="p-6 font-mono text-right font-medium">${AllocationsLogic.formatArea(totalGFA)}</th>
                         <th class="p-6 font-mono text-right font-medium opacity-70 italic">${AllocationsLogic.formatArea(totalExt)}</th>
                         <th class="p-6 font-bold text-right text-2xl">${totalInvestment.toLocaleString('fr-CA')} $</th>
@@ -585,9 +707,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </tfoot>
             </table>
             <div class="p-5 bg-stone-50 border-t border-stone-200 text-[10px] text-stone-400 flex justify-between space-x-4">
-                <span>* Bâti : ${interiorRate.toLocaleString('fr-CA')} $/m²</span>
+                <span>* Bâti : ${Math.round(interiorRate).toLocaleString('fr-CA')} $/m² ${overrides.modular ? '(incl. -15% modulaire)' : ''}</span>
                 <span>* Aménagements : ${exteriorRate.toLocaleString('fr-CA')} $/m²</span>
-                <span>* Acquisition foncière incluse dans le total</span>
+                <span>* Acquisition foncière : ${overrides.landGrant ? 'Exclue' : 'Incluse'}</span>
             </div>`;
 
         container.innerHTML = html;

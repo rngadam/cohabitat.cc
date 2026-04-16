@@ -32,5 +32,9 @@
     "holders_count": 12,
     "interest_rate_pct": 5.0,
     "amortization_years": 25
+  },
+  "scenarios": {
+    "target_interest_rate_pct": 3.75,
+    "modular_reduction_pct": 15
   }
 }

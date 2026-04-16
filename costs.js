@@ -1,8 +1,9 @@
 class CostCalculator {
-    constructor(params, allocations, opex) {
+    constructor(params, allocations, opex, overrides = {}) {
         this.params = params;
         this.allocations = allocations;
         this.opex = opex;
+        this.overrides = overrides; // { landGrant, modular, aphSelect, taxExemption }
         this.M2_TO_SQFT = 10.7639104; // Used for display only
     }
 
@@ -12,12 +13,26 @@ class CostCalculator {
 
     calculateTotalConstructionCost() {
         const totalAreaM2 = this.calculateTotalAreaM2();
-        return totalAreaM2 * this.params.construction.max_cost_m2;
+        let cost = totalAreaM2 * this.params.construction.max_cost_m2;
+        
+        // Scenario: Modular Construction
+        if (this.overrides.modular) {
+            const reduction = this.params.scenarios.modular_reduction_pct / 100;
+            cost = cost * (1 - reduction);
+        }
+        
+        return cost;
     }
 
     calculateTotalInvestment() {
-        const landCost = this.params.construction.land_cost || 0;
         const constructionCost = this.calculateTotalConstructionCost();
+        
+        // Scenario: Municipal Land Grant (Eases land cost)
+        if (this.overrides.landGrant) {
+            return constructionCost;
+        }
+        
+        const landCost = this.params.construction.land_cost || 0;
         return landCost + constructionCost;
     }
 
@@ -25,7 +40,13 @@ class CostCalculator {
         const totalInvestment = this.calculateTotalInvestment();
         const downpayment = totalInvestment * (this.params.mortgage.downpayment_pct / 100);
         const principal = totalInvestment - downpayment;
-        const annualRate = this.params.mortgage.interest_rate_pct / 100;
+        
+        // Scenario: APH Select Interest Rate
+        let annualRate = this.params.mortgage.interest_rate_pct / 100;
+        if (this.overrides.aphSelect) {
+            annualRate = this.params.scenarios.target_interest_rate_pct / 100;
+        }
+        
         const monthlyRate = annualRate / 12;
         const numberOfPayments = this.params.mortgage.amortization_years * 12;
 
@@ -47,8 +68,15 @@ class CostCalculator {
         const totalAreaM2 = this.calculateTotalAreaM2();
         
         // Taxes and Insurance
-        const municipalTax = totalInvestment * (this.params.taxes_and_fees.municipal_tax_rate_pct / 100);
-        const schoolTax = totalInvestment * (this.params.taxes_and_fees.school_tax_rate_pct / 100);
+        let municipalTax = totalInvestment * (this.params.taxes_and_fees.municipal_tax_rate_pct / 100);
+        let schoolTax = totalInvestment * (this.params.taxes_and_fees.school_tax_rate_pct / 100);
+        
+        // Scenario: Tax Exemption
+        if (this.overrides.taxExemption) {
+            municipalTax = 0;
+            schoolTax = 0;
+        }
+
         const insurance = totalInvestment * (this.params.taxes_and_fees.insurance_rate_pct / 100);
         const reserveFund = totalInvestment * (this.params.taxes_and_fees.reserve_fund_rate_pct / 100);
 
