@@ -7,9 +7,9 @@ const AllocationsLogic = {
      * Formats an area in m2 and sqft.
      */
     formatArea: function(areaSqM) {
-        if (typeof areaSqM !== 'number') return '0.00 m² (0 pi²)';
+        if (typeof areaSqM !== 'number') return '0,00 m² (0 pi²)';
         const areaSqFt = Math.round(areaSqM / 0.09290304);
-        return `${areaSqM.toFixed(2).replace('.', ',')} m² (${areaSqFt} pi²)`;
+        return `${areaSqM.toFixed(2).replace('.', ',')} m² (${areaSqFt.toLocaleString()} pi²)`;
     },
 
     /**
@@ -38,6 +38,31 @@ const AllocationsLogic = {
     },
 
     /**
+     * Returns a breakdown of surface types.
+     */
+    calculateSurfaceBreakdown: function(items) {
+        let gfa = 0;
+        let exterior = 0;
+        
+        const process = (itemList) => {
+            itemList.forEach(item => {
+                const labels = this.getLabelsList(item);
+                if (labels.includes('extérieur')) {
+                    exterior += (item.area || 0);
+                } else {
+                    gfa += (item.area || 0);
+                }
+            });
+        };
+
+        process(items);
+        return {
+            gfa: Math.round(gfa * 100) / 100,
+            exterior: Math.round(exterior * 100) / 100
+        };
+    },
+
+    /**
      * Returns true if the floor's internal GFA matches its target total.
      */
     validateSums: function(floor) {
@@ -48,10 +73,12 @@ const AllocationsLogic = {
     },
 
     /**
-     * Calculates construction cost for a given area.
+     * Calculates construction cost for a given area breakdown.
      */
-    calculateConstructionCost: function(areaSqM, ratePerM2) {
-        return Math.round(areaSqM * ratePerM2);
+    calculateConstructionCost: function(breakdown, interiorRate, exteriorRate) {
+        const interiorCost = breakdown.gfa * interiorRate;
+        const exteriorCost = breakdown.exterior * exteriorRate;
+        return Math.round(interiorCost + exteriorCost);
     }
 };
 

@@ -15,10 +15,16 @@ class CostCalculator {
         return totalAreaM2 * this.params.construction.max_cost_m2;
     }
 
+    calculateTotalInvestment() {
+        const landCost = this.params.construction.land_cost || 0;
+        const constructionCost = this.calculateTotalConstructionCost();
+        return landCost + constructionCost;
+    }
+
     calculateMortgageDetails() {
-        const totalCost = this.calculateTotalConstructionCost();
-        const downpayment = totalCost * (this.params.mortgage.downpayment_pct / 100);
-        const principal = totalCost - downpayment;
+        const totalInvestment = this.calculateTotalInvestment();
+        const downpayment = totalInvestment * (this.params.mortgage.downpayment_pct / 100);
+        const principal = totalInvestment - downpayment;
         const annualRate = this.params.mortgage.interest_rate_pct / 100;
         const monthlyRate = annualRate / 12;
         const numberOfPayments = this.params.mortgage.amortization_years * 12;
@@ -28,7 +34,7 @@ class CostCalculator {
             (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
         return {
-            totalCost,
+            totalInvestment,
             downpayment,
             principal,
             monthlyPayment,
@@ -37,14 +43,14 @@ class CostCalculator {
     }
 
     calculateRecurringCosts() {
-        const totalCost = this.calculateTotalConstructionCost();
+        const totalInvestment = this.calculateTotalInvestment();
         const totalAreaM2 = this.calculateTotalAreaM2();
         
         // Taxes and Insurance
-        const municipalTax = totalCost * (this.params.taxes_and_fees.municipal_tax_rate_pct / 100);
-        const schoolTax = totalCost * (this.params.taxes_and_fees.school_tax_rate_pct / 100);
-        const insurance = totalCost * (this.params.taxes_and_fees.insurance_rate_pct / 100);
-        const reserveFund = totalCost * (this.params.taxes_and_fees.reserve_fund_rate_pct / 100);
+        const municipalTax = totalInvestment * (this.params.taxes_and_fees.municipal_tax_rate_pct / 100);
+        const schoolTax = totalInvestment * (this.params.taxes_and_fees.school_tax_rate_pct / 100);
+        const insurance = totalInvestment * (this.params.taxes_and_fees.insurance_rate_pct / 100);
+        const reserveFund = totalInvestment * (this.params.taxes_and_fees.reserve_fund_rate_pct / 100);
 
         // Operational Expenses (OPEX) from opex.json
         const monthlyServices = Object.values(this.opex.monthly_services).reduce((a, b) => a + b, 0);

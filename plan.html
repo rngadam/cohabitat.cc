@@ -103,7 +103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Table will be populated by JavaScript -->
         </div>
 
-        <div id="construction-costs" class="mt-16 reveal">
+        <div id="construction-costs" class="mt-16">
             <div class="mb-8">
                 <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Budget de Construction</p>
                 <h2 class="font-serif text-4xl text-primary text-center">Décomposition des Hard Costs</h2>
@@ -201,7 +201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         renderConstraints();
         renderDesignCards();
         renderTable();
-        renderCostTable();
+        renderCostTable(allocationsData, params);
     })
     .catch(error => console.error('Error loading data:', error));
 
@@ -521,10 +521,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
     }
 
-    function renderCostTable() {
-        if (!allocationsData || !costCalculator) return;
+    function renderCostTable(data, params) {
+        if (!data || !params) return;
         const container = document.getElementById('cost-table-container');
-        const ratePerM2 = 3317.69; // From parameters.json
+        const interiorRate = params.construction.max_cost_m2;
+        const exteriorRate = 1000; // Taux forfaitaire pour aménagements extérieurs et balcons
 
         let html = `
             <table class="min-w-full text-left border-collapse">
@@ -532,40 +533,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <tr>
                         <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500">Niveau</th>
                         <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Surface GFA</th>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Coût Estime</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Hors-GFA (Ext.)</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Coût Estimé</th>
                     </tr>
                 </thead>
                 <tbody>`;
 
         let totalGFA = 0;
-        let totalCost = 0;
+        let totalExt = 0;
+        let totalConstruction = 0;
 
-        allocationsData.floors.forEach(floor => {
-            const floorGFA = AllocationsLogic.calculateSubtotal(floor.items);
-            const floorCost = AllocationsLogic.calculateConstructionCost(floorGFA, ratePerM2);
+        data.floors.forEach(floor => {
+            const breakdown = AllocationsLogic.calculateSurfaceBreakdown(floor.items);
+            const floorCost = AllocationsLogic.calculateConstructionCost(breakdown, interiorRate, exteriorRate);
             
-            totalGFA += floorGFA;
-            totalCost += floorCost;
+            totalGFA += breakdown.gfa;
+            totalExt += breakdown.exterior;
+            totalConstruction += floorCost;
 
             html += `
                 <tr class="border-t border-stone-100 hover:bg-stone-50/50 transition-colors">
                     <td class="p-5 font-semibold text-primary whitespace-nowrap">${floor.name}</td>
-                    <td class="p-5 text-stone-600 font-mono text-right text-sm">${AllocationsLogic.formatArea(floorGFA)}</td>
+                    <td class="p-5 text-stone-600 font-mono text-right text-sm">${breakdown.gfa > 0 ? AllocationsLogic.formatArea(breakdown.gfa) : '-'}</td>
+                    <td class="p-5 text-stone-400 font-mono text-right text-sm italic">${breakdown.exterior > 0 ? AllocationsLogic.formatArea(breakdown.exterior) : '-'}</td>
                     <td class="p-5 text-stone-900 font-semibold text-right">${floorCost.toLocaleString('fr-CA')} $</td>
                 </tr>
             `;
         });
 
+        const landCost = params.construction.land_cost || 0;
+        const totalInvestment = totalConstruction + landCost;
+
         html += `
+                <tr class="border-t-2 border-primary/20 bg-stone-50/50">
+                    <td class="p-5 font-bold text-primary">Acquisition du Terrain (6000 pi²)</td>
+                    <td class="p-5"></td>
+                    <td class="p-5 text-stone-400 text-right text-xs italic">200 $/pi² approx.</td>
+                    <td class="p-5 text-stone-900 font-bold text-right">${landCost.toLocaleString('fr-CA')} $</td>
+                </tr>
                 </tbody>
-                <tfoot class="bg-primary/5">
+                <tfoot class="bg-primary text-white">
                     <tr>
-                        <th class="p-5 font-bold text-primary">TOTAL CONSTRUCTION</th>
-                        <th class="p-5 text-primary font-mono text-right font-bold">${AllocationsLogic.formatArea(totalGFA)}</th>
-                        <th class="p-5 text-primary font-bold text-right text-lg">${totalCost.toLocaleString('fr-CA')} $</th>
+                        <th class="p-6 font-bold uppercase tracking-widest text-sm">Investissement Total</th>
+                        <th class="p-6 font-mono text-right font-medium">${AllocationsLogic.formatArea(totalGFA)}</th>
+                        <th class="p-6 font-mono text-right font-medium opacity-70 italic">${AllocationsLogic.formatArea(totalExt)}</th>
+                        <th class="p-6 font-bold text-right text-2xl">${totalInvestment.toLocaleString('fr-CA')} $</th>
                     </tr>
                 </tfoot>
-            </table>`;
+            </table>
+            <div class="p-5 bg-stone-50 border-t border-stone-200 text-[10px] text-stone-400 flex justify-between space-x-4">
+                <span>* Bâti : ${interiorRate.toLocaleString('fr-CA')} $/m²</span>
+                <span>* Aménagements : ${exteriorRate.toLocaleString('fr-CA')} $/m²</span>
+                <span>* Acquisition foncière incluse dans le total</span>
+            </div>`;
 
         container.innerHTML = html;
     }
