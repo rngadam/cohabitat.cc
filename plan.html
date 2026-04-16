@@ -102,6 +102,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div id="allocation-table" class="overflow-x-auto rounded-3xl border border-stone-200 bg-white shadow-sm mt-8">
             <!-- Table will be populated by JavaScript -->
         </div>
+
+        <div id="construction-costs" class="mt-16 reveal">
+            <div class="mb-8">
+                <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Budget de Construction</p>
+                <h2 class="font-serif text-4xl text-primary text-center">Décomposition des Hard Costs</h2>
+                <p class="text-stone-600 max-w-3xl mx-auto mt-4 text-center">Estimation basée sur le coût au m² défini dans les paramètres financiers. Ce tableau détaille l'investissement nécessaire par pallier et par fonction.</p>
+            </div>
+            <div id="cost-table-container" class="overflow-x-auto rounded-3xl border border-stone-200 bg-white shadow-sm">
+                <!-- Cost table will be populated by JavaScript -->
+            </div>
+        </div>
     </div>
 </section>
 
@@ -136,6 +147,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="common.js"></script>
 <script src="validate-allocations.js"></script>
+<script src="allocations-logic.js"></script>
 <script src="costs.js"></script>
 <script>
     // Load components
@@ -189,6 +201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         renderConstraints();
         renderDesignCards();
         renderTable();
+        renderCostTable();
     })
     .catch(error => console.error('Error loading data:', error));
 
@@ -199,26 +212,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         button.textContent = useMetric ? 'Basculer vers pieds carrés' : 'Basculer vers mètres carrés';
         if (allocationsData) renderTable();
     });
-
-    function formatArea(areaSqM) {
-        if (useMetric) {
-            return `${areaSqM.toFixed(2)} m²`;
-        } else {
-            const areaSqFt = Math.round(areaSqM * 10.7639104);
-            return `${areaSqFt.toLocaleString()} pi²`;
-        }
-    }
-
-    function calculateSubtotal(items) {
-        const sum = items.reduce((sum, item) => sum + item.area, 0);
-        return Math.round(sum * 100) / 100;
-    }
-
-    function validateSums(floor) {
-        const itemTotal = calculateSubtotal(floor.items);
-        const EPSILON = 0.05;
-        return Math.abs(itemTotal - floor.total) < EPSILON;
-    }
 
     function renderValidationReport(issues) {
         const report = document.getElementById('validation-report');
@@ -369,15 +362,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     function renderItemHierarchy(item, level = 0) {
-        const indent = '  '.repeat(level);
+        const labels = Array.isArray(item.labels) ? item.labels : (item.labels ? [item.labels] : []);
+        const isExterior = labels.includes('extérieur');
+        const badgeColors = {
+            'privé': 'bg-blue-100 text-blue-700',
+            'partagé': 'bg-emerald-100 text-emerald-700',
+            'extérieur': 'bg-amber-100 text-amber-700',
+            'circulation': 'bg-stone-200 text-stone-600',
+            'résidentiel': 'bg-indigo-50 text-indigo-600',
+            'location': 'bg-rose-50 text-rose-600'
+        };
+
+        const badges = labels.map(l => 
+            `<span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-tight uppercase ${badgeColors[l] || 'bg-stone-100 text-stone-500'} mr-1">${l}</span>`
+        ).join('');
+
+        const areaHtml = `<span class="${isExterior ? 'italic text-stone-400' : 'text-stone-600 font-mono'}">${formatArea(item.area)}</span>`;
+
         let html = `<li class="mb-2 ${level > 0 ? 'ml-6' : ''}">
-            <div class="flex justify-between items-center">
-                <span class="font-medium">${indent}${item.name}</span>
-                <span class="text-stone-600 font-mono">${formatArea(item.area)}</span>
+            <div class="flex justify-between items-center py-1">
+                <span class="${level === 0 ? 'font-medium' : 'text-sm'} text-stone-700">
+                    ${level > 0 ? '┖ ' : ''}${item.name}
+                    <span class="ml-2">${badges}</span>
+                </span>
+                <span class="text-xs">${areaHtml}</span>
             </div>`;
 
         if (item.subitems && item.subitems.length > 0) {
-            const subTotal = calculateSubtotal(item.subitems);
+            const isExteriorParent = labels.includes('extérieur');
+            const subTotal = calculateSubtotal(item.subitems, isExteriorParent);
             const EPSILON = 0.05;
             const isValid = Math.abs(subTotal - item.area) < EPSILON;
 
@@ -388,8 +401,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             html += `</ul>`;
 
             if (!isValid) {
-                html += `<div class="text-red-600 text-sm mt-1 ml-6">
-                    ⚠️ Somme des sous-éléments (${formatArea(subTotal)}) ≠ total (${formatArea(item.area)})
+                html += `<div class="text-red-600 text-[10px] mt-1 ml-6 font-semibold">
+                    ⚠️ Somme (${formatArea(subTotal)}) ≠ ${formatArea(item.area)}
                 </div>`;
             }
         }
@@ -452,12 +465,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function renderTable() {
         const tableContainer = document.getElementById('allocation-table');
         let html = `
+            <div class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm mb-6">
             <table class="min-w-full text-left border-collapse">
-                <thead class="bg-stone-100">
+                <thead class="bg-stone-50/50">
                     <tr>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Étage</th>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600">Espaces & Fonction</th>
-                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-600 text-right">Allocation</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500">Étage</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500">Espaces & Fonction</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Allocation GFA</th>
                     </tr>
                 </thead>
                 <tbody>`;
@@ -466,26 +480,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const isValid = validateSums(floor);
             
             html += `
-                <tr class="floor-toggle cursor-pointer border-t border-stone-200 hover:bg-stone-50 transition-colors ${!isValid ? 'bg-red-50' : ''}">
+                <tr class="floor-toggle cursor-pointer border-t border-stone-200 hover:bg-stone-50/80 transition-colors ${!isValid ? 'bg-red-50/30' : ''}">
                     <td class="p-5 align-top font-semibold text-primary whitespace-nowrap">${floor.name}</td>
-                    <td class="p-5 align-top text-stone-600">${floor.description || ''}</td>
-                    <td class="p-5 align-top text-stone-600 font-mono text-right">${formatArea(floor.total)}${!isValid ? ' ⚠️' : ''}</td>
+                    <td class="p-5 align-top text-stone-600 text-sm leading-relaxed">${floor.description || ''}</td>
+                    <td class="p-5 align-top text-stone-900 font-mono text-right font-medium">${formatArea(floor.total)}${!isValid ? ' ⚠️' : ''}</td>
                 </tr>
-                <tr class="detail-row hidden bg-stone-50">
-                    <td colspan="3" class="p-5 text-stone-600">
-                        <ul class="space-y-2">
+                <tr class="detail-row hidden bg-stone-50/30">
+                    <td colspan="3" class="p-8">
+                        <div class="mb-4 flex items-center justify-between">
+                            <h5 class="text-xs font-bold uppercase tracking-widest text-stone-400">Détail des surfaces</h5>
+                            <span class="text-[10px] text-stone-400 italic">Les valeurs en italique (extérieur) sont exclues de la GFA</span>
+                        </div>
+                        <ul class="divide-y divide-stone-100">
                             ${floor.items.map(item => renderItemHierarchy(item)).join('')}
                         </ul>
-                        ${!isValid ? `<div class="text-red-600 text-sm mt-4 font-semibold">
-                            ⚠️ Somme des éléments (${formatArea(calculateSubtotal(floor.items))}) ≠ total de l'étage (${formatArea(floor.total)})
+                        ${!isValid ? `<div class="bg-red-50 text-red-700 text-xs mt-6 p-4 rounded-2xl border border-red-100">
+                            <strong>⚠️ Erreur GFA :</strong> La somme intérieure (${formatArea(calculateSubtotal(floor.items))}) ≠ total cible (${formatArea(floor.total)}).
                         </div>` : ''}
                     </td>
-                </tr>`;
+                </tr>
+            `;
         });
 
         html += `
                 </tbody>
-            </table>`;
+            </table>
+            </div>`;
 
         tableContainer.innerHTML = html;
         renderSummary();
@@ -500,6 +520,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
         });
     }
+
+    function renderCostTable() {
+        if (!allocationsData || !costCalculator) return;
+        const container = document.getElementById('cost-table-container');
+        const ratePerM2 = 3317.69; // From parameters.json
+
+        let html = `
+            <table class="min-w-full text-left border-collapse">
+                <thead class="bg-stone-50/50">
+                    <tr>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500">Niveau</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Surface GFA</th>
+                        <th class="p-5 text-sm font-semibold uppercase tracking-wide text-stone-500 text-right">Coût Estime</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+        let totalGFA = 0;
+        let totalCost = 0;
+
+        allocationsData.floors.forEach(floor => {
+            const floorGFA = AllocationsLogic.calculateSubtotal(floor.items);
+            const floorCost = AllocationsLogic.calculateConstructionCost(floorGFA, ratePerM2);
+            
+            totalGFA += floorGFA;
+            totalCost += floorCost;
+
+            html += `
+                <tr class="border-t border-stone-100 hover:bg-stone-50/50 transition-colors">
+                    <td class="p-5 font-semibold text-primary whitespace-nowrap">${floor.name}</td>
+                    <td class="p-5 text-stone-600 font-mono text-right text-sm">${AllocationsLogic.formatArea(floorGFA)}</td>
+                    <td class="p-5 text-stone-900 font-semibold text-right">${floorCost.toLocaleString('fr-CA')} $</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                </tbody>
+                <tfoot class="bg-primary/5">
+                    <tr>
+                        <th class="p-5 font-bold text-primary">TOTAL CONSTRUCTION</th>
+                        <th class="p-5 text-primary font-mono text-right font-bold">${AllocationsLogic.formatArea(totalGFA)}</th>
+                        <th class="p-5 text-primary font-bold text-right text-lg">${totalCost.toLocaleString('fr-CA')} $</th>
+                    </tr>
+                </tfoot>
+            </table>`;
+
+        container.innerHTML = html;
+    }
+
+    // Bridge functions to keep existing code working while using common logic
+    function formatArea(areaSqM) { return AllocationsLogic.formatArea(areaSqM); }
+    function calculateSubtotal(items, inc) { return AllocationsLogic.calculateSubtotal(items, inc); }
+    function validateSums(floor) { return AllocationsLogic.validateSums(floor); }
 
     lucide.createIcons();
 </script>

@@ -257,7 +257,6 @@
           "area": 4.63,
           "labels": [
             "partagé",
-            "extérieur",
             "circulation"
           ]
         }
@@ -272,11 +271,11 @@
       "items": [
         {
           "name": "Resto solidaire",
-          "area": 60.39,
+          "area": 78.97,
           "subitems": [
             {
               "name": "Salle à manger communautaire",
-              "area": 23.23,
+              "area": 41.81,
               "labels": [
                 "partagé"
               ]
@@ -406,7 +405,6 @@
           "area": 4.62,
           "labels": [
             "partagé",
-            "extérieur",
             "circulation"
           ]
         }
@@ -421,11 +419,11 @@
       "items": [
         {
           "name": "Coworking / salon collectif",
-          "area": 60.39,
+          "area": 69.68,
           "subitems": [
             {
               "name": "Postes de travail partagés",
-              "area": 26.01,
+              "area": 35.3,
               "labels": [
                 "partagé"
               ]
@@ -548,7 +546,6 @@
           "area": 4.62,
           "labels": [
             "partagé",
-            "extérieur",
             "circulation"
           ]
         }
@@ -586,15 +583,6 @@
           ]
         },
         {
-          "name": "Balcons collectifs partagés",
-          "area": 13.94,
-          "labels": [
-            "partagé",
-            "résidentiel",
-            "extérieur"
-          ]
-        },
-        {
           "name": "Circulations / Ascenseur / Escalier",
           "area": 13.94,
           "labels": [
@@ -605,7 +593,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -630,13 +618,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 2",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -661,13 +664,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 3",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -692,13 +710,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 4",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -723,13 +756,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 5",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -755,12 +803,27 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
         {
           "name": "Studio 6",
-          "area": 25.03,
+          "area": 27.37,
           "labels": [
             "privé",
             "résidentiel"
@@ -786,6 +849,21 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
@@ -806,9 +884,9 @@
           ]
         }
       ],
-      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
-      "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage.",
-      "design_keywords": "Intimité & Partage"
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 3",
@@ -839,15 +917,6 @@
           ]
         },
         {
-          "name": "Balcons collectifs partagés",
-          "area": 13.94,
-          "labels": [
-            "partagé",
-            "résidentiel",
-            "extérieur"
-          ]
-        },
-        {
           "name": "Circulations / Ascenseur / Escalier",
           "area": 13.94,
           "labels": [
@@ -858,7 +927,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -883,13 +952,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 2",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -914,13 +998,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 3",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -945,13 +1044,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 4",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -976,13 +1090,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 5",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1008,12 +1137,27 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
         {
           "name": "Studio 6",
-          "area": 25.03,
+          "area": 27.37,
           "labels": [
             "privé",
             "résidentiel"
@@ -1039,6 +1183,21 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
@@ -1059,9 +1218,9 @@
           ]
         }
       ],
-      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
-      "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage.",
-      "design_keywords": "Intimité & Partage"
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 4",
@@ -1092,15 +1251,6 @@
           ]
         },
         {
-          "name": "Balcons collectifs partagés",
-          "area": 13.94,
-          "labels": [
-            "partagé",
-            "résidentiel",
-            "extérieur"
-          ]
-        },
-        {
           "name": "Circulations / Ascenseur / Escalier",
           "area": 13.94,
           "labels": [
@@ -1111,7 +1261,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1136,13 +1286,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 2",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1167,13 +1332,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 3",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1198,13 +1378,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 4",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1229,13 +1424,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 5",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1261,12 +1471,27 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
         {
           "name": "Studio 6",
-          "area": 25.03,
+          "area": 27.37,
           "labels": [
             "privé",
             "résidentiel"
@@ -1292,6 +1517,21 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
@@ -1312,9 +1552,9 @@
           ]
         }
       ],
-      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
-      "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage.",
-      "design_keywords": "Intimité & Partage"
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 5",
@@ -1345,15 +1585,6 @@
           ]
         },
         {
-          "name": "Balcons collectifs partagés",
-          "area": 13.94,
-          "labels": [
-            "partagé",
-            "résidentiel",
-            "extérieur"
-          ]
-        },
-        {
           "name": "Circulations / Ascenseur / Escalier",
           "area": 13.94,
           "labels": [
@@ -1364,7 +1595,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1389,13 +1620,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 2",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1420,13 +1666,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 3",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1451,13 +1712,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 4",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1482,13 +1758,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 5",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1514,12 +1805,27 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
         {
           "name": "Studio 6",
-          "area": 25.03,
+          "area": 27.37,
           "labels": [
             "privé",
             "résidentiel"
@@ -1545,6 +1851,21 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
@@ -1565,9 +1886,9 @@
           ]
         }
       ],
-      "description": "6 studios individuels agrandis et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
-      "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage.",
-      "design_keywords": "Intimité & Partage"
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 6",
@@ -1598,15 +1919,6 @@
           ]
         },
         {
-          "name": "Balcons collectifs partagés",
-          "area": 13.94,
-          "labels": [
-            "partagé",
-            "résidentiel",
-            "extérieur"
-          ]
-        },
-        {
           "name": "Circulations / Ascenseur / Escalier",
           "area": 13.94,
           "labels": [
@@ -1617,7 +1929,7 @@
         },
         {
           "name": "Studio 1",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1642,13 +1954,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 2",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1673,13 +2000,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 3",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1704,13 +2046,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 4",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1735,13 +2092,28 @@
               "area": 4.64,
               "labels": [
                 "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
               ]
             }
           ]
         },
         {
           "name": "Studio 5",
-          "area": 25.01,
+          "area": 27.33,
           "labels": [
             "privé",
             "résidentiel"
@@ -1767,12 +2139,27 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
         {
           "name": "Studio 6",
-          "area": 25.03,
+          "area": 27.37,
           "labels": [
             "privé",
             "résidentiel"
@@ -1798,6 +2185,21 @@
               "labels": [
                 "privé"
               ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
             }
           ]
         },
@@ -1818,9 +2220,9 @@
           ]
         }
       ],
-      "description": "6 studios individuels et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier. (Étage standardisé)",
-      "design_notes": "Densité optimisée, interface douce entre privé et collectif, et cuisine partagée par étage.",
-      "design_keywords": "Intimité & Partage"
+      "description": "6 studios individuels avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier. (Étage standardisé)",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Toit",
@@ -1948,28 +2350,32 @@
           "name": "Jardin / verger urbain",
           "area": 83.61,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "BBQ & îlot convivial",
           "area": 23.23,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Stationnement vélo abrité",
           "area": 23.23,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Espaces détente",
           "area": 23.23,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
@@ -1984,14 +2390,16 @@
           "name": "Infrastructure verte / arrosage",
           "area": 13.94,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Aire de jeu enfants",
           "area": 18.58,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
@@ -2029,28 +2437,32 @@
             }
           ],
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Espaces ombragés",
           "area": 13.94,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Rangement extérieur",
           "area": 9.29,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Point d'eau / fontaine",
           "area": 4.63,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         }
       ],

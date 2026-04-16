@@ -11,9 +11,15 @@
     return `${areaSqM.toFixed(2)} m²`;
   }
 
-  function calculateSubtotal(items) {
+  function calculateSubtotal(items, includeExterior = false) {
     // Round to 2 decimals to avoid floating point issues (e.g. 0.1 + 0.2)
-    const sum = items.reduce((sum, item) => sum + item.area, 0);
+    const sum = items.reduce((sum, item) => {
+      const labels = getLabelsList(item);
+      if (!includeExterior && labels.includes('extérieur')) {
+        return sum; // Skip exterior items in GFA subtotal
+      }
+      return sum + item.area;
+    }, 0);
     return Math.round(sum * 100) / 100;
   }
 
@@ -136,6 +142,7 @@
     const itemPath = [...path, item.name].join(' > ');
     const expectedType = getExpectedType(item, path);
     const labelsList = getLabelsList(item);
+    const isExteriorChild = labelsList.includes('extérieur');
 
     if (!item.labels) {
       issues.push(`${itemPath}: labels manquant${expectedType ? ` (attendu: ${expectedType})` : ''}`);
@@ -144,7 +151,7 @@
     }
 
     if (item.subitems) {
-      const subTotal = calculateSubtotal(item.subitems);
+      const subTotal = calculateSubtotal(item.subitems, isExteriorChild);
       const EPSILON = 0.05; // Tolerance for cumulative rounding offsets
       if (Math.abs(subTotal - item.area) > EPSILON) {
         issues.push(`${itemPath}: somme des sous-éléments (${formatArea(subTotal)}) ≠ total (${formatArea(item.area)})`);
@@ -158,7 +165,8 @@
     data.floors.forEach(floor => {
       const floorSum = calculateSubtotal(floor.items);
       const EPSILON = 0.05;
-      if (Math.abs(floorSum - floor.total) > EPSILON) {
+      const isOutdoorLevel = ['toit', 'cour'].includes(floor.name.toLowerCase());
+      if (!isOutdoorLevel && Math.abs(floorSum - floor.total) > EPSILON) {
         issues.push(`${floor.name}: somme des éléments (${formatArea(floorSum)}) ≠ total (${formatArea(floor.total)})`);
       }
       floor.items.forEach(item => validateItem(item, [floor.name], issues, floor.name));
