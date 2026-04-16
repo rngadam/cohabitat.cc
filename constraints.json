@@ -9,14 +9,14 @@
     {
       "id": "density",
       "label": "Densité résidentielle",
-      "value": "36 suites",
-      "description": "Le projet optimise la surface bâtie en accueillant 36 suites (7 à 8 par étage) pour partager les coûts de base."
+      "value": "30 suites + 10 ch.",
+      "description": "Le projet optimise la surface bâtie en accueillant 30 suites permanentes et 10 chambres flottantes partagées."
     },
     {
       "id": "shared_space_ratio",
-      "label": "Ratio d'espaces partagés",
-      "value": "> 30 %",
-      "description": "Au moins 30% de la surface totale doit être dédiée aux usages collectifs (cuisines, salons, ateliers, jardins)."
+      "label": "Ratio de mutualisation",
+      "value": "> 50 %",
+      "description": "Plus de 50% de la surface totale est dédiée aux usages collectifs (cuisines, salons, ateliers, jardins, circulations)."
     },
     {
       "id": "co_founders",

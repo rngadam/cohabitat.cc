@@ -52,25 +52,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="header-placeholder"></div>
 
 <section class="pt-32 pb-12 bg-gradient-to-br from-primary/5 to-accent/5">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
-            <div class="space-y-6 reveal active">
-                <div class="inline-flex items-center gap-3 text-accent mb-4">
-                    <i data-lucide="layers" class="w-5 h-5"></i>
-                    <span class="font-bold tracking-widest uppercase">Plan</span>
-                </div>
-                <h1 class="font-serif text-5xl md:text-6xl text-primary leading-tight">Plan d'usage et allocations d'espace</h1>
-                <p class="text-stone-600 text-lg leading-relaxed max-w-3xl">
-                    Cette page décrit le plan fonctionnel du bâtiment : sous-sol partagé, rez-de-chaussée mixte, étage mezzanine de services, et cinq étages résidentiels optimisés pour 36 studios, cour urbaine et toit technique.
-                    Chaque niveau est calibré pour 3000 pi² (≈279 m²) et clarifie les choix de design pour le confort individuel et le partage collectif.
-                </p>
-                <div id="project-constraints" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-                    <!-- Constraints will be dynamically injected here -->
-                </div>
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-8 reveal active">
+            <div class="inline-flex items-center gap-3 text-accent mb-4">
+                <i data-lucide="layers" class="w-5 h-5"></i>
+                <span class="font-bold tracking-widest uppercase">Plan d'Usage</span>
             </div>
-            <div class="rounded-[2rem] overflow-hidden shadow-2xl reveal reveal-delay-200">
-                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop" alt="Esquisse de plan urbain" class="w-full h-full object-cover min-h-[24rem]">
+            <h1 class="font-serif text-5xl md:text-7xl text-primary leading-tight">Plan d'usage et allocations d'espace</h1>
+            <p class="text-stone-600 text-lg md:text-xl leading-relaxed mx-auto max-w-3xl">
+                Cette page décrit le plan fonctionnel du bâtiment : sous-sol partagé, rez-de-chaussée mixte ouvert sur le quartier, étage mezzanine de services, et cinq étages résidentiels standardisés pour 30 studios permanents et 10 chambres flottantes.
+            </p>
+            
+            <div id="project-constraints" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 pt-8">
+                <!-- Constraints will be dynamically injected here -->
             </div>
+        </div>
+
+        <div class="mt-16 rounded-[2rem] overflow-hidden shadow-2xl reveal reveal-delay-200 aspect-[21/9]">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop" alt="Esquisse de plan urbain" class="w-full h-full object-cover">
         </div>
     </div>
 </section>
@@ -145,7 +144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             loadComponent('footer.html', 'footer-placeholder')
         ]).then(() => {
             // Set active link
-            const planLinks = document.querySelectorAll('a[href="architecture.html"]');
+            const planLinks = document.querySelectorAll('a[href="plan.html"]');
             planLinks.forEach(link => {
                 link.classList.add('text-accent', 'font-bold');
             });
@@ -420,17 +419,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const container = document.getElementById('design-notes-cards');
         if (!allocationsData || !container) return;
 
-        let html = '';
+        const groups = [];
         allocationsData.floors.forEach(floor => {
-            if (floor.design_notes) {
-                html += `
-                    <div class="rounded-3xl bg-white border border-stone-200 p-6 shadow-sm hover:shadow-md transition-shadow">
-                        <p class="text-[10px] uppercase tracking-widest text-stone-400 mb-2">${floor.name}</p>
-                        <h4 class="font-semibold text-primary mb-3">Concept</h4>
-                        <p class="text-sm text-stone-600 leading-relaxed">${floor.design_notes}</p>
-                    </div>
-                `;
+            if (!floor.design_notes) return;
+            const lastGroup = groups[groups.length - 1];
+            if (lastGroup && lastGroup.notes === floor.design_notes) {
+                lastGroup.endFloor = floor.name;
+            } else {
+                groups.push({ 
+                    startFloor: floor.name, 
+                    endFloor: floor.name, 
+                    notes: floor.design_notes,
+                    keywords: floor.design_keywords || 'Concept'
+                });
             }
+        });
+
+        let html = '';
+        groups.forEach(group => {
+            const floorLabel = group.startFloor === group.endFloor ? group.startFloor : `${group.startFloor} à ${group.endFloor.split(' ')[1]}`;
+            html += `
+                <div class="rounded-3xl bg-white border border-stone-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <p class="text-[10px] uppercase tracking-widest text-stone-400 mb-2">${floorLabel}</p>
+                    <h4 class="font-semibold text-primary mb-3">${group.keywords}</h4>
+                    <p class="text-sm text-stone-600 leading-relaxed">${group.notes}</p>
+                </div>
+            `;
         });
         container.innerHTML = html;
     }
