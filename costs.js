@@ -11,6 +11,13 @@ class CostCalculator {
         return this.allocations.floors.reduce((sum, floor) => sum + floor.total, 0);
     }
 
+    calculatePreDevTotal() {
+        if (!this.params.pre_development_breakdown) return 0;
+        return this.params.pre_development_breakdown.intervenants.reduce((sum, item) => {
+            return sum + (item.rate * item.hours);
+        }, 0);
+    }
+
     calculateTotalConstructionCost() {
         const totalAreaM2 = this.calculateTotalAreaM2();
         let cost = totalAreaM2 * this.params.construction.max_cost_m2;
@@ -130,8 +137,16 @@ class CostCalculator {
     }
 
     calculateCommunityBondsDetails() {
-        const totalConstruction = this.calculateTotalConstructionCost();
-        const bondPrincipal = totalConstruction * (this.params.mortgage.downpayment_pct / 100);
+        const totalConstructionAndLand = this.calculateTotalInvestment();
+        const cashDownpayment = totalConstructionAndLand * (this.params.mortgage.downpayment_pct / 100);
+        
+        // Sweat Equity (Pre-dev)
+        let preDevTotal = this.calculatePreDevTotal();
+        if (this.overrides.fondsPlancher) {
+            preDevTotal = 0; // Subsidized
+        }
+
+        const bondPrincipal = cashDownpayment + preDevTotal;
         const annualRate = this.params.community_bonds.interest_rate_pct / 100;
         const monthlyRate = annualRate / 12;
         const numberOfPayments = this.params.community_bonds.amortization_years * 12;
@@ -141,10 +156,12 @@ class CostCalculator {
             (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
         return {
+            cashPrincipal: cashDownpayment,
+            sweatPrincipal: preDevTotal,
             principal: bondPrincipal,
             monthlyPayment,
             annualPayment: monthlyPayment * 12,
-            paymentPerHolder: monthlyPayment / this.params.community_bonds.holders_count
+            paymentPerHolder: monthlyPayment / (this.overrides.holdersCount || this.params.community_bonds.holders_count)
         };
     }
 
@@ -168,7 +185,7 @@ class CostCalculator {
     calculatePerSuiteCosts() {
         const global = this.calculateGlobalCosts();
         const numSuites = this.params.population.total_suites;
-        const numHolders = this.params.community_bonds.holders_count;
+        const numHolders = this.overrides.holdersCount || this.params.community_bonds.holders_count;
 
         // Floating rooms revenue logic
         // They pay 50% price with 80% occupancy. 
@@ -181,8 +198,9 @@ class CostCalculator {
 
         return {
             totalMonthlyNet: baseMonthlyNet,
-            constructionCost: global.mortgage.totalCost / numSuites, // Construction cost still shared by permanent residences
-            downpaymentPerFounder: global.mortgage.downpayment / numHolders,
+            constructionCost: global.mortgage.totalInvestment / numSuites, 
+            downpaymentPerFounder: global.bonds.cashPrincipal / numHolders,
+            sweatEquityPerFounder: global.bonds.sweatPrincipal / numHolders,
             monthlyMortgage: global.mortgage.monthlyPayment / numSuites,
             monthlyRecurring: global.recurring.totalMonthly / numSuites,
             monthlyRentalOffset: global.rental.monthlyIncome / numSuites,

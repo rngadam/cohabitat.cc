@@ -36,5 +36,15 @@
   "scenarios": {
     "target_interest_rate_pct": 3.75,
     "modular_reduction_pct": 15
+  },
+  "pre_development_breakdown": {
+    "intervenants": [
+      { "role": "Architecture & Esquisses", "rate": 100, "hours": 800, "description": "Conception préliminaire et études de masse" },
+      { "role": "Gouvernance & Juridique", "rate": 250, "hours": 120, "description": "Modèle OBNL, baux et structure légale" },
+      { "role": "Gestion de Projet", "rate": 100, "hours": 600, "description": "Coordination générale et planification" },
+      { "role": "Simulation & Modélisation", "rate": 100, "hours": 200, "description": "Outils interactifs et projections financières" },
+      { "role": "Mobilisation Citoyenne", "rate": 75, "hours": 400, "description": "Animation de communauté et ateliers" },
+      { "role": "Expertises de Site", "rate": 1, "hours": 30000, "description": "Études de sol et environnementales (fixe)" }
+    ]
   }
 }

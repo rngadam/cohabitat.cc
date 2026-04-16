@@ -164,6 +164,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </label>
 
+                <!-- Fonds Plancher Subsidy -->
+                <label class="group relative cursor-pointer">
+                    <input type="checkbox" id="toggle-fonds-plancher" class="peer sr-only" onchange="updateScenarios()">
+                    <div class="h-full bg-white p-6 rounded-3xl border-2 border-stone-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <i data-lucide="hand-helping"></i>
+                            </div>
+                            <h3 class="font-serif text-xl text-primary">Fonds Plancher</h3>
+                        </div>
+                        <p class="text-xs text-stone-500 leading-relaxed mb-4">Subvention au démarrage couvrant les frais de pré-développement.</p>
+                        <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 opacity-0 peer-checked:opacity-100"></i>
+                            <span class="peer-checked:hidden text-stone-400 font-normal">Couvre 250k$ de frais</span>
+                            <span class="hidden peer-checked:inline">Subvention activée</span>
+                        </div>
+                    </div>
+                </label>
+
                 <!-- Taxes Exemption -->
                 <label class="group relative cursor-pointer">
                     <input type="checkbox" id="toggle-taxes" class="peer sr-only" onchange="updateScenarios()">
@@ -233,30 +252,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </section>
 
+
     <div id="footer-placeholder"></div>
+
+<style>
+    /* Toolbar Animation Classes */
+    .toolbar-active {
+        translate: 0 0 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    .btn-active-primary {
+        background: #064e3b !important;
+        color: white !important;
+        border-color: #064e3b !important;
+        box-shadow: 0 4px 12px rgba(6, 78, 59, 0.2);
+    }
+    .btn-active-accent {
+        background: #d97706 !important;
+        color: white !important;
+        border-color: #d97706 !important;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+    }
+</style>
 
 <script src="common.js"></script>
 <script src="validate-allocations.js"></script>
 <script src="allocations-logic.js"></script>
 <script src="costs.js"></script>
 <script>
-    // Global state for ssubsidies and scenarios
+    // Global state for subsidies and scenarios
     let activeOverrides = {
         aphSelect: false,
         landGrant: false,
+        fondsPlancher: false,
         taxExemption: false,
-        modular: false
+        modular: false,
+        holdersCount: 12
     };
 
     window.updateScenarios = function() {
         activeOverrides.aphSelect = document.getElementById('toggle-aph').checked;
         activeOverrides.landGrant = document.getElementById('toggle-land').checked;
+        activeOverrides.fondsPlancher = document.getElementById('toggle-fonds-plancher').checked;
         activeOverrides.taxExemption = document.getElementById('toggle-taxes').checked;
         activeOverrides.modular = document.getElementById('toggle-modular').checked;
+        
+        // Sync floating buttons UI
+        updateFloatButtonsUI();
         
         // Re-calculate and re-render everything
         loadAllData();
     };
+
+    window.syncHolders = function(newVal) {
+        // Bounds checking
+        if (newVal < 5) newVal = 5;
+        if (newVal > 31) newVal = 31;
+        
+        activeOverrides.holdersCount = parseInt(newVal);
+        const valEl = document.getElementById('float-holders-value');
+        if (valEl) valEl.textContent = newVal;
+        loadAllData();
+    };
+
+    window.toggleFloat = function(checkboxId) {
+        const cb = document.getElementById(checkboxId);
+        cb.checked = !cb.checked;
+        updateScenarios();
+    };
+
+    function updateFloatButtonsUI() {
+        const config = [
+            { id: 'toggle-aph', btn: 'btn-float-aph', color: 'btn-active-primary' },
+            { id: 'toggle-land', btn: 'btn-float-land', color: 'btn-active-accent' },
+            { id: 'toggle-fonds-plancher', btn: 'btn-float-fonds-plancher', color: 'btn-active-primary' },
+            { id: 'toggle-taxes', btn: 'btn-float-taxes', color: 'btn-active-accent' },
+            { id: 'toggle-modular', btn: 'btn-float-modular', color: 'btn-active-primary' }
+        ];
+        
+        config.forEach(item => {
+            const isChecked = document.getElementById(item.id).checked;
+            const btn = document.getElementById(item.btn);
+            if (isChecked) {
+                btn.classList.add(item.color);
+                btn.classList.remove('bg-stone-100', 'text-stone-400');
+            } else {
+                btn.classList.remove(item.color);
+                btn.classList.add('bg-stone-100', 'text-stone-400');
+            }
+        });
+    }
+
+    // Floating toolbar visibility on scroll
+    window.addEventListener('scroll', () => {
+        const toolbar = document.getElementById('floating-simulator');
+        if (window.scrollY > 20) {
+            toolbar.style.opacity = "1";
+            toolbar.style.transform = "translate(0, -50%)";
+            toolbar.style.pointerEvents = "auto";
+        } else {
+            toolbar.style.opacity = "0";
+            toolbar.style.transform = "translate(40px, -50%)";
+            toolbar.style.pointerEvents = "none";
+        }
+    });
 
     // Load components
         Promise.all([
@@ -302,6 +403,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             renderTable();
             renderCostTable(allocations, params, activeOverrides);
             
+            // Update Floating Toolbar Result Peek
+            const perSuite = costCalculator.calculatePerSuiteCosts();
+            const floatRentEl = document.getElementById('float-net-rent');
+            if (floatRentEl) {
+                floatRentEl.textContent = formatCurrency(perSuite.totalMonthlyNet);
+                // Simple animation to highlight change
+                floatRentEl.classList.add('scale-110');
+                setTimeout(() => floatRentEl.classList.remove('scale-110'), 200);
+            }
+
             if (window.lucide) lucide.createIcons();
 
             // Add visual hint if scenario is active
@@ -431,10 +542,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </div>
                             <div class="space-y-4 text-sm opacity-90 border-t border-white/10 pt-4">
                                 <div class="bg-white/10 p-4 rounded-2xl">
-                                    <p class="font-bold mb-2">Pour les ${params.community_bonds.holders_count} co-fondateurs :</p>
-                                    <div class="flex justify-between opacity-80 mb-1"><span>Mise de fonds (Obligation)</span> <span>${formatCurrency(perSuite.downpaymentPerFounder)}</span></div>
+                                    <p class="font-bold mb-2">Pour les ${costCalculator.overrides.holdersCount || params.community_bonds.holders_count} co-fondateurs :</p>
+                                    <div class="flex justify-between opacity-80 mb-1"><span>Mise de fonds (Cash)</span> <span>${formatCurrency(perSuite.downpaymentPerFounder)}</span></div>
+                                    <div class="flex justify-between opacity-80 mb-4 pb-2 border-b border-white/10"><span>Temps valorisé (Sweat Equity)</span> <span>${formatCurrency(perSuite.sweatEquityPerFounder)}</span></div>
                                     <div class="flex justify-between text-white font-bold text-lg"><span>Loyer effectif net*</span> <span>${formatCurrency(perSuite.totalMonthlyNetFounder)}</span></div>
-                                    <p class="text-[9px] mt-2 italic">*Après remboursement de leur obligation communautaire</p>
+                                    <p class="text-[9px] mt-2 italic">*Après remboursement de leur mise de fonds et de leur temps investi</p>
                                 </div>
                             </div>
                         </div>
@@ -475,7 +587,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
             ${costsHtml}
+            <div id="pre-dev-details" class="mt-8"></div>
         `;
+        renderPreDevTable();
+    }
+
+    function renderPreDevTable() {
+        const container = document.getElementById('pre-dev-details');
+        if (!paramsData || !paramsData.pre_development_breakdown || !container) return;
+
+        const isSubsidized = activeOverrides.fondsPlancher;
+        
+        let html = `
+            <div class="mt-8 pt-8 border-t border-stone-200">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500">Détail du Pré-développement (Temps Valorisé)</h3>
+                    ${isSubsidized ? '<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full">SUBVENTIONNÉ PAR FONDS PLANCHER</span>' : ''}
+                </div>
+                <div class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
+                    <table class="min-w-full text-left border-collapse">
+                        <thead class="bg-stone-50/50">
+                            <tr>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500">Intervenant / Rôle</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500 text-right">Taux Horaire</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500 text-right">Heures Est.</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500 text-right">Valorisation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-100">
+        `;
+
+        let totalVal = 0;
+        paramsData.pre_development_breakdown.intervenants.forEach(item => {
+            const val = item.rate * item.hours;
+            totalVal += val;
+            html += `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="p-4">
+                        <p class="text-sm font-semibold text-primary">${item.role}</p>
+                        <p class="text-[10px] text-stone-400 italic">${item.description}</p>
+                    </td>
+                    <td class="p-4 text-right font-mono text-xs text-stone-600">${item.rate > 1 ? formatCurrency(item.rate) + '/h' : 'Forfait'}</td>
+                    <td class="p-4 text-right font-mono text-xs text-stone-600">${item.rate > 1 ? item.hours + ' h' : '-'}</td>
+                    <td class="p-4 text-right font-semibold text-stone-900">${formatCurrency(val)}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                        </tbody>
+                        <tfoot class="${isSubsidized ? 'bg-primary/10 text-primary' : 'bg-stone-900 text-white'} transition-colors">
+                            <tr>
+                                <th colspan="3" class="p-4 text-sm font-bold uppercase tracking-widest text-right">Investissement Pré-développement Total</th>
+                                <th class="p-4 text-lg font-bold text-right">${formatCurrency(totalVal)}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <p class="mt-4 text-[10px] text-stone-400 leading-relaxed italic">
+                    * Ce montant est converti en obligations communautaires remboursables par le projet sur 25 ans, 
+                    permettant de valoriser l'apport en temps des co-fondateurs sans nécessiter de liquidités immédiates.
+                </p>
+            </div>
+        `;
+
+        container.innerHTML = html;
     }
 
     function renderItemHierarchy(item, level = 0) {
@@ -532,13 +708,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const container = document.getElementById('project-constraints');
         if (!constraintsData || !container) return;
 
+        const holdersCount = (costCalculator && costCalculator.overrides.holdersCount) || 12;
+
         let html = '';
         constraintsData.constraints.forEach(constraint => {
+            let val = constraint.value;
+            let desc = constraint.description;
+
+            // Dynamic replacements for founder counts
+            if (constraint.id === 'co_founders') {
+                val = `${holdersCount} personnes`;
+                // Replace "12" in the description if it's the co_founders constraint
+                desc = desc.replace(/12/g, holdersCount);
+            }
+
             html += `
                 <div class="rounded-3xl bg-white/90 p-5 border border-stone-200 shadow-sm hover:border-accent/30 transition-colors">
                     <p class="text-[10px] uppercase tracking-widest text-accent mb-2 font-bold">${constraint.label}</p>
-                    <p class="text-2xl font-serif text-primary mb-2">${constraint.value}</p>
-                    <p class="text-stone-500 text-[11px] leading-relaxed">${constraint.description}</p>
+                    <p class="text-2xl font-serif text-primary mb-2">${val}</p>
+                    <p class="text-stone-500 text-[11px] leading-relaxed">${desc}</p>
                 </div>
             `;
         });
@@ -722,5 +910,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     lucide.createIcons();
 </script>
+
+<!-- Simulateur Flottant (Vertical) - Réglages de visibilité simplifiés -->
+<div id="floating-simulator" 
+     style="position: fixed; right: 24px; top: 50%; transform: translate(40px, -50%); opacity: 0; pointer-events: none; z-index: 9999; transition: all 0.5s ease-out;"
+     class="transform-gpu">
+    <div class="bg-white/90 backdrop-blur-xl border border-stone-200 shadow-[0_20px_50px_rgba(0,0,0,0.2)] rounded-full p-2 flex flex-col items-center gap-5 py-8 w-16 text-stone-900">
+        
+        <!-- Result Peek -->
+        <div id="float-result-peek" class="flex flex-col items-center border-b border-stone-200 pb-4 mb-1">
+            <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold mb-1">Loyer</p>
+            <p id="float-net-rent" class="font-serif text-sm text-accent font-bold">0 $</p>
+        </div>
+
+        <!-- Toggles -->
+        <div class="flex flex-col items-center gap-4 border-b border-stone-200 pb-6 mb-1">
+            <button onclick="toggleFloat('toggle-aph')" id="btn-float-aph" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
+                <i data-lucide="landmark" class="w-4 h-4"></i>
+                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">SCHL (APH Select)</span>
+            </button>
+            <button onclick="toggleFloat('toggle-land')" id="btn-float-land" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
+                <i data-lucide="map" class="w-4 h-4"></i>
+                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Cession Terrain</span>
+            </button>
+            <button onclick="toggleFloat('toggle-fonds-plancher')" id="btn-float-fonds-plancher" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
+                <i data-lucide="hand-helping" class="w-4 h-4"></i>
+                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Fonds Plancher</span>
+            </button>
+            <button onclick="toggleFloat('toggle-taxes')" id="btn-float-taxes" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
+                <i data-lucide="building" class="w-4 h-4"></i>
+                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Exemption Taxes</span>
+            </button>
+            <button onclick="toggleFloat('toggle-modular')" id="btn-float-modular" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
+                <i data-lucide="construction" class="w-4 h-4"></i>
+                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Modulaire</span>
+            </button>
+        </div>
+
+        <!-- Founders -->
+        <div class="flex flex-col items-center gap-2">
+            <button onclick="syncHolders(activeOverrides.holdersCount + 1)" class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+            </button>
+            <div class="flex flex-col items-center">
+                <span id="float-holders-value" class="font-serif text-lg text-primary leading-none">12</span>
+                <p class="text-[7px] uppercase tracking-tighter text-stone-400 font-bold mt-1">Founders</p>
+            </div>
+            <button onclick="syncHolders(activeOverrides.holdersCount - 1)" class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                <i data-lucide="minus" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
