@@ -7,64 +7,52 @@ on:
     branches: [ main, master ]
 
 jobs:
-  lint:
-    name: Lint & Link Check
+  validate:
+    name: Lint & Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-      - name: Validate HTML
-        run: npx htmlhint "**/*.html"
-      - name: Validate CSS
-        run: npx stylelint "**/*.css"
-      - name: Validate JS
-        run: npx eslint "**/*.js"
-      - name: Check Links
-        run: npx linkinator . --recurse --skip "^mailto:|example\.com|facebook\.com|linkedin\.com"
 
-  test:
-    name: Playwright Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: 24
           cache: 'npm'
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
+
+      - name: Run Linting
+        run: npm run lint
+
+      - name: Validate Allocations
+        run: npm run validate:allocations
+
+      - name: Run Unit Tests
+        run: npm run test:unit
+
+      - name: Run Unit Tests with Coverage
+        run: npm run test:coverage
+
+      - name: Run Playwright tests (E2E)
         run: npm test
+
       - name: Generate Verification Screenshot
         run: |
           npm run dev &
-          sleep 5
+          # Wait for server to be ready
+          npx wait-on http://localhost:8080/index.html -t 30000
           node screenshots/verify_changes.js
-      - name: Archive Screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: screenshots/
-      - name: Archive Playwright Reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-      - name: Archive Test Results
+
+      - name: Archive Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: test-results/
+          path: |
+            screenshots/
+            playwright-report/
+            test-results/

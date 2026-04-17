@@ -15,7 +15,10 @@ export default [
   pluginJs.configs.recommended,
   {
     rules: {
-      "no-unused-vars": ["error", { "varsIgnorePattern": "toggleEngineering|selectFloor|toggleUnit|loadComponent|toggleMobileMenu" }] // Ignore unused vars for these functions as they are called from HTML
+      "no-unused-vars": ["error", {
+        "varsIgnorePattern": "^(toggleEngineering|selectFloor|toggleUnit|loadComponent|toggleMobileMenu)$",
+        "argsIgnorePattern": "^_"
+      }]
     }
   }
 ];

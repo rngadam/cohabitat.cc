@@ -1,0 +1,50 @@
+{
+  "construction": {
+    "max_cost_m2": 3317.69,
+    "land_cost": 1200000
+  },
+  "mortgage": {
+    "downpayment_pct": 20,
+    "amortization_years": 50,
+    "interest_rate_pct": 4.25
+  },
+  "taxes_and_fees": {
+    "municipal_tax_rate_pct": 3.16,
+    "school_tax_rate_pct": 0.08,
+    "insurance_rate_pct": 0.25,
+    "reserve_fund_rate_pct": 1.0
+  },
+  "constants": {
+    "sqft_to_m2": 0.09290304,
+    "comm_rent_sqft_year": 30.00
+  },
+  "population": {
+    "owners": 12,
+    "tenants": 18,
+    "total_suites": 30
+  },
+  "floating_rooms": {
+    "count": 10,
+    "price_pct": 50,
+    "occupancy_rate_pct": 80
+  },
+  "community_bonds": {
+    "holders_count": 12,
+    "interest_rate_pct": 5.0,
+    "amortization_years": 25
+  },
+  "scenarios": {
+    "target_interest_rate_pct": 3.75,
+    "modular_reduction_pct": 15
+  },
+  "pre_development_breakdown": {
+    "intervenants": [
+      { "role": "Architecture & Esquisses", "rate": 100, "hours": 800, "description": "Conception préliminaire et études de masse" },
+      { "role": "Gouvernance & Juridique", "rate": 250, "hours": 120, "description": "Modèle OBNL, baux et structure légale" },
+      { "role": "Gestion de Projet", "rate": 100, "hours": 600, "description": "Coordination générale et planification" },
+      { "role": "Simulation & Modélisation", "rate": 100, "hours": 200, "description": "Outils interactifs et projections financières" },
+      { "role": "Mobilisation Citoyenne", "rate": 75, "hours": 400, "description": "Animation de communauté et ateliers" },
+      { "role": "Expertises de Site", "rate": 1, "hours": 30000, "description": "Études de sol et environnementales (fixe)" }
+    ]
+  }
+}

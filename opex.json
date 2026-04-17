@@ -1,0 +1,38 @@
+{
+  "monthly_services": {
+    "concierge_salary": 2500.00,
+    "internet_and_tech": 250.00,
+    "garden_and_greenhouse": 400.00,
+    "professional_fees": 300.00
+  },
+  "energy_costs": {
+    "electricity_heat_per_m2_year": 18.00
+  },
+  "equipment_amortization": [
+    {
+      "name": "Ameublement résidentiel",
+      "capital_value": 100000.00,
+      "lifespan_years": 10
+    },
+    {
+      "name": "Terrasse, Spa & Jardin",
+      "capital_value": 50000.00,
+      "lifespan_years": 15
+    },
+    {
+      "name": "Équipement Fablab & Garage",
+      "capital_value": 80000.00,
+      "lifespan_years": 10
+    },
+    {
+      "name": "Équipement Coworking",
+      "capital_value": 30000.00,
+      "lifespan_years": 7
+    },
+    {
+      "name": "Sécurité & Informatique",
+      "capital_value": 40000.00,
+      "lifespan_years": 5
+    }
+  ]
+}

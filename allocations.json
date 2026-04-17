@@ -2,29 +2,29 @@
   "floors": [
     {
       "name": "Sous-sol",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
           "name": "Atelier vélo",
-          "area": 450,
+          "area": 41.81,
           "subitems": [
             {
               "name": "Postes de réparation",
-              "area": 180,
+              "area": 16.72,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Rangement pièces & équipements",
-              "area": 140,
+              "area": 13.01,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Station de lavage & gonflage",
-              "area": 130,
+              "area": 12.08,
               "labels": [
                 "partagé"
               ]
@@ -36,25 +36,25 @@
         },
         {
           "name": "Fablab / réparation",
-          "area": 300,
+          "area": 27.87,
           "subitems": [
             {
               "name": "Atelier outils partagés",
-              "area": 140,
+              "area": 13.01,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Postes assemblage & soudure",
-              "area": 90,
+              "area": 8.36,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Étagères matériaux",
-              "area": 70,
+              "area": 6.5,
               "labels": [
                 "partagé"
               ]
@@ -66,25 +66,25 @@
         },
         {
           "name": "Stockages techniques",
-          "area": 250,
+          "area": 23.23,
           "subitems": [
             {
               "name": "Stockage électrique",
-              "area": 90,
+              "area": 8.36,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Stockage plomberie",
-              "area": 80,
+              "area": 7.43,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Stockage polyvalent",
-              "area": 80,
+              "area": 7.44,
               "labels": [
                 "partagé"
               ]
@@ -96,11 +96,11 @@
         },
         {
           "name": "Cages grillagées individuelles",
-          "area": 200,
+          "area": 18.58,
           "subitems": [
             {
               "name": "20 cages de 10 pi²",
-              "area": 200,
+              "area": 18.58,
               "labels": [
                 "privé"
               ]
@@ -112,67 +112,67 @@
         },
         {
           "name": "Stationnement vélos standard",
-          "area": 300,
+          "area": 27.87,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Stationnement vélos-cargos",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Zone de manœuvre & accès vélo",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Stockage accessoires vélo",
-          "area": 100,
+          "area": 9.29,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Aire de chargement vélos-cargos",
-          "area": 100,
+          "area": 9.29,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Espace vélo partagé / entretien léger",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Zone de livraison",
-          "area": 250,
+          "area": 23.23,
           "subitems": [
             {
               "name": "Quai d'accueil",
-              "area": 130,
+              "area": 12.08,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Zone dépose colis",
-              "area": 60,
+              "area": 5.57,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Passerelle & accès",
-              "area": 60,
+              "area": 5.58,
               "labels": [
                 "partagé"
               ]
@@ -184,25 +184,25 @@
         },
         {
           "name": "Services maintenance",
-          "area": 200,
+          "area": 18.58,
           "subitems": [
             {
               "name": "Bureau d'équipe",
-              "area": 80,
+              "area": 7.43,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Rangements d'outillage",
-              "area": 70,
+              "area": 6.5,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Atelier entretien",
-              "area": 50,
+              "area": 4.65,
               "labels": [
                 "partagé"
               ]
@@ -214,18 +214,18 @@
         },
         {
           "name": "Local support / circulation",
-          "area": 150,
+          "area": 13.94,
           "subitems": [
             {
               "name": "Accueil technique",
-              "area": 90,
+              "area": 8.36,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Couloirs & accès",
-              "area": 10,
+              "area": 0.93,
               "labels": [
                 "partagé",
                 "circulation"
@@ -233,7 +233,7 @@
             },
             {
               "name": "Vestiaire maintenance",
-              "area": 50,
+              "area": 4.65,
               "labels": [
                 "partagé"
               ]
@@ -246,7 +246,7 @@
         },
         {
           "name": "Ascenseur",
-          "area": 50,
+          "area": 4.65,
           "labels": [
             "partagé",
             "circulation"
@@ -254,80 +254,86 @@
         },
         {
           "name": "Escalier de secours",
-          "area": 50,
+          "area": 4.63,
           "labels": [
             "partagé",
-            "extérieur",
             "circulation"
           ]
         }
-      ]
+      ],
+      "description": "Atelier vélo, fablab, logistique active, stockages techniques, zone de livraison et services de maintenance.",
+      "design_notes": "Espaces techniques intégrés, flux de livraison séparés et accès direct au RDC.",
+      "design_keywords": "Logistique & Mobilité"
     },
     {
       "name": "Rez-de-chaussée",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
           "name": "Resto solidaire",
-          "area": 700,
+          "area": 78.97,
           "subitems": [
             {
               "name": "Salle à manger communautaire",
-              "area": 300,
+              "area": 41.81,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Cuisine sociale",
-              "area": 250,
+              "area": 23.23,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Zone de distribution",
-              "area": 150,
+              "area": 13.93,
               "labels": [
                 "partagé"
               ]
             }
           ],
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Accueil / comptoir",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Café & zone d'échange",
-          "area": 300,
+          "area": 18.58,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Terrasse / préau",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "location"
           ]
         },
         {
           "name": "Stockage service / cuisine",
-          "area": 250,
+          "area": 23.23,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Circulation / vestiaires",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé",
             "circulation"
@@ -335,56 +341,60 @@
         },
         {
           "name": "Cuisine partagée",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Ateliers culinaires",
-          "area": 150,
+          "area": 23.23,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Salle polyvalente",
-          "area": 200,
+          "area": 13.93,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Espace formation",
-          "area": 150,
+          "area": 23.23,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Sanitaires publics",
-          "area": 100,
+          "area": 9.29,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Rangement alimentaire",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Vestiaires / réception",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Ascenseur",
-          "area": 50,
+          "area": 4.65,
           "labels": [
             "partagé",
             "circulation"
@@ -392,80 +402,86 @@
         },
         {
           "name": "Escalier de secours",
-          "area": 50,
+          "area": 4.62,
           "labels": [
             "partagé",
-            "extérieur",
             "circulation"
           ]
         }
-      ]
+      ],
+      "description": "Resto solidaire, accueil, espace café, comptoir de service et zones d'échange pour habitants et quartier.",
+      "design_notes": "Front public attractif, relation directe avec la rue et terrasse partielle.",
+      "design_keywords": "Ancrage Public"
     },
     {
-      "name": "Mezzanine",
-      "total": 3000,
+      "name": "Étage 1 (Mezzanine)",
+      "total": 278.71,
       "items": [
         {
           "name": "Coworking / salon collectif",
-          "area": 650,
+          "area": 69.68,
           "subitems": [
             {
               "name": "Postes de travail partagés",
-              "area": 280,
+              "area": 35.3,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Banquettes de conversation",
-              "area": 200,
+              "area": 18.58,
               "labels": [
                 "partagé"
               ]
             },
             {
               "name": "Coin café / échange",
-              "area": 170,
+              "area": 15.8,
               "labels": [
                 "partagé"
               ]
             }
           ],
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Micro-fablab / atelier créatif",
-          "area": 350,
+          "area": 32.52,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Salon ouvert / détente",
-          "area": 250,
+          "area": 23.23,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Réunions / formation",
-          "area": 250,
+          "area": 23.23,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Support technique / stockage",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Circulations & services",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé",
             "circulation"
@@ -473,42 +489,45 @@
         },
         {
           "name": "Studio média / podcast",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Espace bien-être",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Salle de projection / conférence",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "partagé"
+            "partagé",
+            "location"
           ]
         },
         {
           "name": "Sanitaires / vestiaires",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Stockage polyvalent",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Jardin intérieur / pause",
-          "area": 100,
+          "area": 9.29,
           "labels": [
             "partagé",
             "extérieur"
@@ -516,7 +535,7 @@
         },
         {
           "name": "Ascenseur",
-          "area": 50,
+          "area": 4.65,
           "labels": [
             "partagé",
             "circulation"
@@ -524,952 +543,48 @@
         },
         {
           "name": "Escalier de secours",
-          "area": 50,
+          "area": 4.62,
           "labels": [
             "partagé",
-            "extérieur",
             "circulation"
           ]
         }
-      ]
-    },
-    {
-      "name": "Étage 1",
-      "total": 3000,
-      "items": [
-        {
-          "name": "Studio 1",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 2",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 3",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 4",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Balcons privés",
-          "area": 200,
-          "labels": [
-            "extérieur",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Buanderie / conciergerie",
-          "area": 240,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Circulations / paliers",
-          "area": 60,
-          "labels": [
-            "partagé",
-            "résidentiel",
-            "circulation"
-          ]
-        },
-        {
-          "name": "Local mécanique / services",
-          "area": 100,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grand salon",
-          "area": 300,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande cuisine",
-          "area": 250,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande table à manger",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Toilette partagée",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Chambre visiteur / enfant partagée",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Ascenseur",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "circulation",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Escalier de secours",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "extérieur",
-            "circulation",
-            "résidentiel"
-          ]
-        }
-      ]
+      ],
+      "description": "Espace polyvalent, coworking, atelier créatif et salon collectif ouvert sur le rez-de-chaussée.",
+      "design_notes": "Usage flexible, vues croisées et lumière naturelle.",
+      "design_keywords": "Travail & Communauté"
     },
     {
       "name": "Étage 2",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
-          "name": "Studio 1",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 2",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 3",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 4",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Balcons privés",
-          "area": 200,
-          "labels": [
-            "extérieur",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Buanderie / conciergerie",
-          "area": 240,
+          "name": "Grande cuisine & salle à manger communautaire",
+          "area": 37.16,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Circulations / paliers",
-          "area": 60,
+          "name": "Grand salon de palier / espace détente",
+          "area": 27.87,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Buanderie & services techniques",
+          "area": 16.72,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Circulations / Ascenseur / Escalier",
+          "area": 13.94,
           "labels": [
             "partagé",
             "résidentiel",
@@ -1477,505 +592,333 @@
           ]
         },
         {
-          "name": "Local mécanique / services",
-          "area": 100,
+          "name": "Studio 1",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 2",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 3",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 4",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 5",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 6",
+          "area": 27.37,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.14,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Grand salon",
-          "area": 300,
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande cuisine",
-          "area": 250,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande table à manger",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Toilette partagée",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Chambre visiteur / enfant partagée",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Ascenseur",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "circulation",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Escalier de secours",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "extérieur",
-            "circulation",
             "résidentiel"
           ]
         }
-      ]
+      ],
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 3",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
-          "name": "Studio 1",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 2",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 3",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 4",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Balcons privés",
-          "area": 200,
-          "labels": [
-            "extérieur",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Buanderie / conciergerie",
-          "area": 240,
+          "name": "Grande cuisine & salle à manger communautaire",
+          "area": 37.16,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Circulations / paliers",
-          "area": 60,
+          "name": "Grand salon de palier / espace détente",
+          "area": 27.87,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Buanderie & services techniques",
+          "area": 16.72,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Circulations / Ascenseur / Escalier",
+          "area": 13.94,
           "labels": [
             "partagé",
             "résidentiel",
@@ -1983,505 +926,333 @@
           ]
         },
         {
-          "name": "Local mécanique / services",
-          "area": 100,
+          "name": "Studio 1",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 2",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 3",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 4",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 5",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 6",
+          "area": 27.37,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.14,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Grand salon",
-          "area": 300,
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande cuisine",
-          "area": 250,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande table à manger",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Toilette partagée",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Chambre visiteur / enfant partagée",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Ascenseur",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "circulation",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Escalier de secours",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "extérieur",
-            "circulation",
             "résidentiel"
           ]
         }
-      ]
+      ],
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 4",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
-          "name": "Studio 1",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 2",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 3",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 4",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Balcons privés",
-          "area": 200,
-          "labels": [
-            "extérieur",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Buanderie / conciergerie",
-          "area": 240,
+          "name": "Grande cuisine & salle à manger communautaire",
+          "area": 37.16,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Circulations / paliers",
-          "area": 60,
+          "name": "Grand salon de palier / espace détente",
+          "area": 27.87,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Buanderie & services techniques",
+          "area": 16.72,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Circulations / Ascenseur / Escalier",
+          "area": 13.94,
           "labels": [
             "partagé",
             "résidentiel",
@@ -2489,505 +1260,333 @@
           ]
         },
         {
-          "name": "Local mécanique / services",
-          "area": 100,
+          "name": "Studio 1",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 2",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 3",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 4",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 5",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 6",
+          "area": 27.37,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.14,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Grand salon",
-          "area": 300,
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande cuisine",
-          "area": 250,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande table à manger",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Toilette partagée",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Chambre visiteur / enfant partagée",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Ascenseur",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "circulation",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Escalier de secours",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "extérieur",
-            "circulation",
             "résidentiel"
           ]
         }
-      ]
+      ],
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Étage 5",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
-          "name": "Studio 1",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 2",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 3",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Studio 4",
-          "area": 325,
-          "subitems": [
-            {
-              "name": "Espace principal",
-              "area": 200,
-              "subitems": [
-                {
-                  "name": "Lit",
-                  "area": 120,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Fauteuil",
-                  "area": 35,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Table pour deux personnes",
-                  "area": 45,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Salle de bain",
-              "area": 50,
-              "subitems": [
-                {
-                  "name": "Bain / douche combiné",
-                  "area": 20,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Comptoir",
-                  "area": 10,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Toilette",
-                  "area": 5,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                },
-                {
-                  "name": "Rangements / dégagement",
-                  "area": 15,
-                  "labels": [
-                    "privé",
-                    "résidentiel"
-                  ]
-                }
-              ],
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Kitchenette",
-              "area": 40,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            },
-            {
-              "name": "Walk-in closet",
-              "area": 35,
-              "labels": [
-                "privé",
-                "résidentiel"
-              ]
-            }
-          ],
-          "labels": [
-            "privé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Balcons privés",
-          "area": 200,
-          "labels": [
-            "extérieur",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Buanderie / conciergerie",
-          "area": 240,
+          "name": "Grande cuisine & salle à manger communautaire",
+          "area": 37.16,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Circulations / paliers",
-          "area": 60,
+          "name": "Grand salon de palier / espace détente",
+          "area": 27.87,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Buanderie & services techniques",
+          "area": 16.72,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Circulations / Ascenseur / Escalier",
+          "area": 13.94,
           "labels": [
             "partagé",
             "résidentiel",
@@ -2995,116 +1594,678 @@
           ]
         },
         {
-          "name": "Local mécanique / services",
-          "area": 100,
+          "name": "Studio 1",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 2",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 3",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 4",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 5",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 6",
+          "area": 27.37,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.14,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
             "résidentiel"
           ]
         },
         {
-          "name": "Grand salon",
-          "area": 300,
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
           "labels": [
             "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande cuisine",
-          "area": 250,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Grande table à manger",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Toilette partagée",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Chambre visiteur / enfant partagée",
-          "area": 200,
-          "labels": [
-            "partagé",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Ascenseur",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "circulation",
-            "résidentiel"
-          ]
-        },
-        {
-          "name": "Escalier de secours",
-          "area": 50,
-          "labels": [
-            "partagé",
-            "extérieur",
-            "circulation",
             "résidentiel"
           ]
         }
-      ]
+      ],
+      "description": "6 studios individuels agrandis avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier.",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
+    },
+    {
+      "name": "Étage 6",
+      "total": 278.71,
+      "items": [
+        {
+          "name": "Grande cuisine & salle à manger communautaire",
+          "area": 37.16,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Grand salon de palier / espace détente",
+          "area": 27.87,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Buanderie & services techniques",
+          "area": 16.72,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Circulations / Ascenseur / Escalier",
+          "area": 13.94,
+          "labels": [
+            "partagé",
+            "résidentiel",
+            "circulation"
+          ]
+        },
+        {
+          "name": "Studio 1",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 2",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 3",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 4",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 5",
+          "area": 27.33,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.12,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.32,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Studio 6",
+          "area": 27.37,
+          "labels": [
+            "privé",
+            "résidentiel"
+          ],
+          "subitems": [
+            {
+              "name": "Espace principal (Lit/Bureau/Comptoir)",
+              "area": 17.14,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Kitchenette optimisée",
+              "area": 3.25,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Salle d'eau (Douche/WC)",
+              "area": 4.64,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Walk-in closet / Rangement intégré",
+              "area": 2.34,
+              "labels": [
+                "privé"
+              ]
+            },
+            {
+              "name": "Balcon privé (extérieur)",
+              "area": 3.72,
+              "labels": [
+                "privé",
+                "extérieur"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Chambre flottante A (invités/gardes)",
+          "area": 9.5,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        },
+        {
+          "name": "Chambre flottante B (invités/gardes)",
+          "area": 9.5,
+          "labels": [
+            "partagé",
+            "résidentiel"
+          ]
+        }
+      ],
+      "description": "6 studios individuels avec balcons privés et 2 chambres flottantes pour invités/gardes. Cuisine et salon communautaires sur le palier. (Étage standardisé)",
+      "design_notes": "Densité optimisée avec walk-in closets privés. Balcons collectifs désormais comptés en bonus extérieur (hors GFA).",
+      "design_keywords": "Intimité & Rangement"
     },
     {
       "name": "Toit",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
           "name": "Plates-formes solaires",
-          "area": 500,
+          "area": 46.45,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Éoliennes",
-          "area": 350,
+          "area": 32.52,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Bain tourbillon",
-          "area": 300,
+          "area": 27.87,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Cabine sauna",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Technique / entretien",
-          "area": 400,
+          "area": 37.16,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Circulation / espace détente",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé",
             "circulation"
@@ -3112,56 +2273,56 @@
         },
         {
           "name": "Terrasse panoramique",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Potager & jardin comestible",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Solarium & espace repos",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Aire ombragée",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Stockage entretien",
-          "area": 150,
+          "area": 13.94,
           "labels": [
             "partagé"
           ]
         },
         {
           "name": "Point d'eau / fontaine",
-          "area": 100,
+          "area": 9.29,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Espace yoga extérieur",
-          "area": 50,
+          "area": 4.65,
           "labels": [
             "extérieur"
           ]
         },
         {
           "name": "Ascenseur",
-          "area": 50,
+          "area": 4.65,
           "labels": [
             "partagé",
             "circulation"
@@ -3169,71 +2330,81 @@
         },
         {
           "name": "Escalier de secours",
-          "area": 50,
+          "area": 4.62,
           "labels": [
             "partagé",
             "extérieur",
             "circulation"
           ]
         }
-      ]
+      ],
+      "description": "Plates-formes solaires, éoliennes, bien-être collectif (sauna, bain tourbillon) et espace technique.",
+      "design_notes": "Dédié à l'autonomie énergétique et au bien-être collectif panoramique.",
+      "design_keywords": "Autonomie & Bien-être"
     },
     {
       "name": "Cour",
-      "total": 3000,
+      "total": 278.71,
       "items": [
         {
           "name": "Jardin / verger urbain",
-          "area": 900,
+          "area": 83.61,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "BBQ & îlot convivial",
-          "area": 250,
+          "area": 23.23,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Stationnement vélo abrité",
-          "area": 250,
+          "area": 23.23,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Espaces détente",
-          "area": 250,
+          "area": 23.23,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Circulation piétonne",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Infrastructure verte / arrosage",
-          "area": 150,
+          "area": 13.94,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Aire de jeu enfants",
-          "area": 200,
+          "area": 18.58,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Jardin potager partagé",
-          "area": 200,
+          "area": 18.58,
           "labels": [
             "partagé",
             "extérieur"
@@ -3241,56 +2412,63 @@
         },
         {
           "name": "Station Communauto (2 véhicules)",
-          "area": 300,
+          "area": 27.87,
           "subitems": [
             {
               "name": "Place de stationnement véhicule 1",
-              "area": 120,
+              "area": 11.15,
               "labels": [
                 "extérieur"
               ]
             },
             {
               "name": "Place de stationnement véhicule 2",
-              "area": 120,
+              "area": 11.15,
               "labels": [
                 "extérieur"
               ]
             },
             {
               "name": "Zone de manoeuvre / accès",
-              "area": 60,
+              "area": 5.57,
               "labels": [
                 "extérieur"
               ]
             }
           ],
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Espaces ombragés",
-          "area": 150,
+          "area": 13.94,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Rangement extérieur",
-          "area": 100,
+          "area": 9.29,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         },
         {
           "name": "Point d'eau / fontaine",
-          "area": 50,
+          "area": 4.63,
           "labels": [
-            "extérieur"
+            "extérieur",
+            "partagé"
           ]
         }
-      ]
+      ],
+      "description": "Jardin et verger urbain, BBQ communautaire, stationnement vélo abrité et espaces de détente.",
+      "design_notes": "Espace extérieur favorisant les rencontres sociales en lien avec le resto solidaire.",
+      "design_keywords": "Nature & Détente"
     }
   ]
 }

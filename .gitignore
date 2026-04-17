@@ -5,3 +5,4 @@ screenshots/index_changes.png
 # Test artifacts
 playwright-report/
 test-results/
+coverage/

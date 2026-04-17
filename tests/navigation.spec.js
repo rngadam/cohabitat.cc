@@ -9,18 +9,6 @@ test.describe('Header and Footer Components', () => {
     await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
   });
 
-  test('should load header and footer on architecture page', async ({ page }) => {
-    await page.goto('/architecture.html');
-    await expect(page.locator('#navbar')).toBeVisible();
-    await expect(page.locator('footer')).toBeVisible();
-
-    // Check active link for architecture
-    await expect(page.locator('#navbar a[href="architecture.html"]').first()).toHaveClass(/text-accent/);
-
-    // Check footer is loaded
-    await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
-  });
-
   test('should load header and footer on organisation page', async ({ page }) => {
     await page.goto('/organisation.html');
     await expect(page.locator('#navbar')).toBeVisible();
@@ -28,6 +16,18 @@ test.describe('Header and Footer Components', () => {
 
     // Check active link for organisation
     await expect(page.locator('#navbar a[href="organisation.html"]').first()).toHaveClass(/text-accent/);
+
+    // Check footer is loaded
+    await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
+  });
+
+  test('should load header and footer on plan page', async ({ page }) => {
+    await page.goto('/plan.html');
+    await expect(page.locator('#navbar')).toBeVisible();
+    await expect(page.locator('footer')).toBeVisible();
+
+    // Check active link for plan
+    await expect(page.locator('#navbar a[href="plan.html"]').first()).toHaveClass(/text-accent/);
 
     // Check footer is loaded
     await expect(page.locator('footer')).toContainText('© 2026 Cohabitat.cc');
@@ -45,7 +45,7 @@ test.describe('Header and Footer Components', () => {
 
 test.describe('Navigation Links', () => {
   test('logo should link to index page', async ({ page }) => {
-    await page.goto('/architecture.html');
+    await page.goto('/plan.html');
     await page.waitForSelector('#navbar');
 
     // Logo link is usually the first index.html link
@@ -57,7 +57,7 @@ test.describe('Navigation Links', () => {
   });
 
   test('menu links should navigate to correct sections', async ({ page }) => {
-    await page.goto('/architecture.html');
+    await page.goto('/plan.html');
     await page.waitForSelector('#navbar');
 
     // Click the menu button (now unified)
@@ -79,9 +79,9 @@ test.describe('Navigation Links', () => {
     await menuButton.click();
     await expect(page.locator('#mobile-menu')).toBeVisible();
 
-    await page.locator('#mobile-menu a[href="architecture.html"]').click();
+    await page.locator('#mobile-menu a[href="plan.html"]').click();
 
-    await expect(page).toHaveURL(/architecture\.html$/);
+    await expect(page).toHaveURL(/plan\.html$/);
   });
 
   test('mobile menu should work', async ({ page }) => {
@@ -95,8 +95,8 @@ test.describe('Navigation Links', () => {
     await expect(page.locator('#mobile-menu')).toBeVisible();
 
     // Click a link
-    await page.locator('#mobile-menu a[href="architecture.html"]').click();
-    await expect(page).toHaveURL(/architecture\.html$/);
+    await page.locator('#mobile-menu a[href="plan.html"]').click();
+    await expect(page).toHaveURL(/plan\.html$/);
   });
 });
 

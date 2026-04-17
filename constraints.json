@@ -1,0 +1,34 @@
+{
+  "constraints": [
+    {
+      "id": "financial_target",
+      "label": "Cible financière",
+      "value": "1500 $ / mois",
+      "description": "L'objectif principal est de maintenir le coût net par suite sous le seuil de 1500$ par mois pour assurer l'abordabilité."
+    },
+    {
+      "id": "density",
+      "label": "Densité résidentielle",
+      "value": "30 suites + 10 ch.",
+      "description": "Le projet optimise la surface bâtie en accueillant 30 suites permanentes et 10 chambres flottantes partagées."
+    },
+    {
+      "id": "shared_space_ratio",
+      "label": "Ratio de mutualisation",
+      "value": "> 50 %",
+      "description": "Plus de 50% de la surface totale est dédiée aux usages collectifs (cuisines, salons, ateliers, jardins, circulations)."
+    },
+    {
+      "id": "co_founders",
+      "label": "Cœur de fondateurs",
+      "value": "12 personnes",
+      "description": "Le financement initial (mise de fonds) est assuré par 12 obligataires qui sont également résidants."
+    },
+    {
+      "id": "financial_return",
+      "label": "Rendement social",
+      "value": "5 %",
+      "description": "Les obligations communautaires offrent un rendement fixe de 5% par an, remboursé par le projet sur 25 ans."
+    }
+  ]
+}
