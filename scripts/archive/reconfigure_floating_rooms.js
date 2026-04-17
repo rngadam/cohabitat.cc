@@ -56,7 +56,7 @@ data.floors.forEach(floor => {
             itemInArray.area = round(itemInArray.area + split);
             distributed = round(distributed + split);
         }
-        
+
         // Adjust subitems if they exist (principal space gets the extra area)
         if (itemInArray.subitems) {
             const principal = itemInArray.subitems.find(si => si.name.includes('principal'));

@@ -22,16 +22,15 @@ data.floors.forEach(floor => {
     }
 
     // Identify exterior items
-    const exteriorItems = floor.items.filter(i => getLabelsList(i).includes('extérieur'));
     const internalItems = floor.items.filter(i => !getLabelsList(i).includes('extérieur'));
-    
+
     const internalSum = round(internalItems.reduce((s, i) => s + i.area, 0));
     const targetInternalTotal = floor.total; // e.g., 278.71
 
     if (internalSum !== targetInternalTotal) {
         const diff = round(targetInternalTotal - internalSum);
         console.log(`Floor ${floor.name}: GFA Gap of ${diff} m2 (External items excluded). redistributing...`);
-        
+
         // Find the "best" item to receive the extra space
         // For residential floors, distribute among studios
         const studios = internalItems.filter(i => i.name.startsWith('Studio'));
@@ -40,7 +39,7 @@ data.floors.forEach(floor => {
             studios.forEach((studio, idx) => {
                 const actualAdd = (idx === studios.length - 1) ? round(diff - addPerStudio * (studios.length - 1)) : addPerStudio;
                 studio.area = round(studio.area + actualAdd);
-                
+
                 // Add to Walk-in closet subitem (created in previous turn)
                 if (!studio.subitems) studio.subitems = [];
                 let walkin = studio.subitems.find(s => s.name.includes('Walk-in'));

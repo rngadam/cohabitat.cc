@@ -18,7 +18,7 @@ data.floors.forEach(floor => {
 
     const areaToMove = balcony.area;
     balcony.area = 0; // The balcony is now "exterior bonus", non-GFA.
-    
+
     // Some naming cleanup for the balcony item
     balcony.name = "Balcons collectifs (Bonus extérieur)";
     if (!balcony.labels) balcony.labels = [];
@@ -30,7 +30,7 @@ data.floors.forEach(floor => {
     studios.forEach(studio => {
         studio.area = round(studio.area + addPerStudio);
         if (!studio.subitems) studio.subitems = [];
-        
+
         studio.subitems.push({
             name: "Walk-in closet / Rangement intégré",
             area: addPerStudio,

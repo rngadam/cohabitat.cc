@@ -10,14 +10,14 @@ function round(val) {
 function updateLabels(item) {
     if (!item.labels) item.labels = [];
     if (!Array.isArray(item.labels)) item.labels = [item.labels];
-    
+
     // Promise: All circulation is shared
     if (/circulation|escalier|ascenseur/i.test(item.name)) {
         if (!item.labels.includes('partagé')) {
             item.labels.push('partagé');
         }
     }
-    
+
     if (item.subitems) {
         item.subitems.forEach(updateLabels);
     }
@@ -36,7 +36,7 @@ data.floors.forEach(floor => {
         const polyvalente = floor.items.find(i => i.name === 'Salle polyvalente');
 
         const TARGET_SIZE = 23.23; // 250 pi2
-        
+
         const atelierDiff = round(TARGET_SIZE - atelier.area);
         const formationDiff = round(TARGET_SIZE - formation.area);
         const totalIncrease = round(atelierDiff + formationDiff);

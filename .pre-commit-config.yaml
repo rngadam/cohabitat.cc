@@ -1,0 +1,31 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: check-yaml
+    - id: check-added-large-files
+
+- repo: local
+  hooks:
+    - id: lint
+      name: ESLint
+      entry: npm run lint
+      language: system
+      types: [javascript]
+      pass_filenames: false
+
+    - id: test-unit
+      name: Unit Tests
+      entry: npm run test:unit
+      language: system
+      types: [javascript]
+      pass_filenames: false
+
+    - id: validate-allocations
+      name: Validate Allocations
+      entry: npm run validate:allocations
+      language: system
+      files: ^allocations\.json$
+      pass_filenames: false

@@ -69,7 +69,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="text-stone-600 text-lg md:text-xl leading-relaxed mx-auto max-w-3xl">
                 Cette page décrit le plan fonctionnel du bâtiment : sous-sol partagé, rez-de-chaussée mixte ouvert sur le quartier, étage mezzanine de services, et cinq étages résidentiels standardisés pour 30 studios permanents et 10 chambres flottantes.
             </p>
-            
+
             <div id="project-constraints" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 pt-8">
                 <!-- Constraints will be dynamically injected here -->
             </div>
@@ -262,7 +262,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         opacity: 1 !important;
         pointer-events: auto !important;
     }
-    
+
     .btn-active-primary {
         background: #064e3b !important;
         color: white !important;
@@ -298,10 +298,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         activeOverrides.fondsPlancher = document.getElementById('toggle-fonds-plancher').checked;
         activeOverrides.taxExemption = document.getElementById('toggle-taxes').checked;
         activeOverrides.modular = document.getElementById('toggle-modular').checked;
-        
+
         // Sync floating buttons UI
         updateFloatButtonsUI();
-        
+
         // Re-calculate and re-render everything
         loadAllData();
     };
@@ -310,7 +310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Bounds checking
         if (newVal < 5) newVal = 5;
         if (newVal > 31) newVal = 31;
-        
+
         activeOverrides.holdersCount = parseInt(newVal);
         const valEl = document.getElementById('float-holders-value');
         if (valEl) valEl.textContent = newVal;
@@ -331,7 +331,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             { id: 'toggle-taxes', btn: 'btn-float-taxes', color: 'btn-active-accent' },
             { id: 'toggle-modular', btn: 'btn-float-modular', color: 'btn-active-primary' }
         ];
-        
+
         config.forEach(item => {
             const isChecked = document.getElementById(item.id).checked;
             const btn = document.getElementById(item.btn);
@@ -395,14 +395,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             // Initialize/Update the global CostCalculator
             costCalculator = new CostCalculator(params, allocations, opex, activeOverrides);
-            
+
             renderSummary();
             renderValidationReport(AllocationsValidator.validateAllocationsData(allocations));
             renderConstraints(constraints);
             renderDesignCards(allocations);
             renderTable();
             renderCostTable(allocations, params, activeOverrides);
-            
+
             // Update Floating Toolbar Result Peek
             const perSuite = costCalculator.calculatePerSuiteCosts();
             const floatRentEl = document.getElementById('float-net-rent');
@@ -509,13 +509,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         const formatPercent = value => `${Math.round((value / totalArea) * 100)} %`;
         const siteMetrics = calculateSiteMetrics();
-        
+
         let costsHtml = '';
         if (costCalculator) {
             const globalCosts = costCalculator.calculateGlobalCosts();
             const perSuite = costCalculator.calculatePerSuiteCosts();
             const params = costCalculator.params;
-            
+
             costsHtml = `
                 <div class="mt-8 pt-8 border-t border-stone-200">
                     <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-6">Financement & Opérations</h3>
@@ -597,7 +597,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (!paramsData || !paramsData.pre_development_breakdown || !container) return;
 
         const isSubsidized = activeOverrides.fondsPlancher;
-        
+
         let html = `
             <div class="mt-8 pt-8 border-t border-stone-200">
                 <div class="flex items-center justify-between mb-6">
@@ -645,7 +645,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </table>
                 </div>
                 <p class="mt-4 text-[10px] text-stone-400 leading-relaxed italic">
-                    * Ce montant est converti en obligations communautaires remboursables par le projet sur 25 ans, 
+                    * Ce montant est converti en obligations communautaires remboursables par le projet sur 25 ans,
                     permettant de valoriser l'apport en temps des co-fondateurs sans nécessiter de liquidités immédiates.
                 </p>
             </div>
@@ -666,7 +666,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             'location': 'bg-rose-50 text-rose-600'
         };
 
-        const badges = labels.map(l => 
+        const badges = labels.map(l =>
             `<span class="inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-tight uppercase ${badgeColors[l] || 'bg-stone-100 text-stone-500'} mr-1">${l}</span>`
         ).join('');
 
@@ -744,9 +744,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (lastGroup && lastGroup.notes === floor.design_notes) {
                 lastGroup.endFloor = floor.name;
             } else {
-                groups.push({ 
-                    startFloor: floor.name, 
-                    endFloor: floor.name, 
+                groups.push({
+                    startFloor: floor.name,
+                    endFloor: floor.name,
                     notes: floor.design_notes,
                     keywords: floor.design_keywords || 'Concept'
                 });
@@ -783,7 +783,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         allocationsData.floors.forEach(floor => {
             const isValid = validateSums(floor);
-            
+
             html += `
                 <tr class="floor-toggle cursor-pointer border-t border-stone-200 hover:bg-stone-50/80 transition-colors ${!isValid ? 'bg-red-50/30' : ''}">
                     <td class="p-5 align-top font-semibold text-primary whitespace-nowrap">${floor.name}</td>
@@ -829,13 +829,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function renderCostTable(data, params, overrides = {}) {
         if (!data || !params) return;
         const container = document.getElementById('cost-table-container');
-        
+
         let interiorRate = params.construction.max_cost_m2;
         if (overrides.modular) {
             interiorRate = interiorRate * (1 - (params.scenarios.modular_reduction_pct / 100));
         }
-        
-        const exteriorRate = 1000; 
+
+        const exteriorRate = 1000;
 
         let html = `
             <table class="min-w-full text-left border-collapse">
@@ -856,7 +856,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         data.floors.forEach(floor => {
             const breakdown = AllocationsLogic.calculateSurfaceBreakdown(floor.items);
             const floorCost = AllocationsLogic.calculateConstructionCost(breakdown, interiorRate, exteriorRate);
-            
+
             totalGFA += breakdown.gfa;
             totalExt += breakdown.exterior;
             totalConstruction += floorCost;
@@ -912,11 +912,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <!-- Simulateur Flottant (Vertical) - Réglages de visibilité simplifiés -->
-<div id="floating-simulator" 
+<div id="floating-simulator"
      style="position: fixed; right: 24px; top: 50%; transform: translate(40px, -50%); opacity: 0; pointer-events: none; z-index: 9999; transition: all 0.5s ease-out;"
      class="transform-gpu">
     <div class="bg-white/90 backdrop-blur-xl border border-stone-200 shadow-[0_20px_50px_rgba(0,0,0,0.2)] rounded-full p-2 flex flex-col items-center gap-5 py-8 w-16 text-stone-900">
-        
+
         <!-- Result Peek -->
         <div id="float-result-peek" class="flex flex-col items-center border-b border-stone-200 pb-4 mb-1">
             <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold mb-1">Loyer</p>

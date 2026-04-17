@@ -7,64 +7,41 @@ on:
     branches: [ main, master ]
 
 jobs:
-  lint:
-    name: Lint & Link Check
+  validate:
+    name: Lint & Test (Nix)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-      - name: Validate HTML
-        run: npx htmlhint "**/*.html"
-      - name: Validate CSS
-        run: npx stylelint "**/*.css"
-      - name: Validate JS
-        run: npx eslint "**/*.js"
-      - name: Check Links
-        run: npx linkinator . --recurse --skip "^mailto:|example\.com|facebook\.com|linkedin\.com"
 
-  test:
-    name: Playwright Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
         with:
-          node-version: '24'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm install
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - name: Setup Cache
+        uses: cachix/cachix-action@v15
+        with:
+          name: modern-resume-env
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          # Fallback to public cache if no token
+          skipPush: ${{ secrets.CACHIX_AUTH_TOKEN == '' }}
+
+      - name: Lint & Link Check
+        run: nix develop --command bash -c "npm install && npx htmlhint '**/*.html' && npx stylelint '**/*.css' && npx eslint '**/*.js' && npx linkinator . --recurse --skip '^mailto:|example\.com|facebook\.com|linkedin\.com'"
+
       - name: Run Playwright tests
-        run: npm test
+        run: nix develop --command bash -c "npx playwright install --with-deps && npm test"
+
       - name: Generate Verification Screenshot
         run: |
-          npm run dev &
-          sleep 5
-          node screenshots/verify_changes.js
-      - name: Archive Screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: screenshots/
-      - name: Archive Playwright Reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-      - name: Archive Test Results
+          nix develop --command bash -c "npm run dev & sleep 5 && node screenshots/verify_changes.js"
+
+      - name: Archive Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: test-results/
+          path: |
+            screenshots/
+            playwright-report/
+            test-results/

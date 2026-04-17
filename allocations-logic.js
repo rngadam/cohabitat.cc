@@ -43,7 +43,7 @@ const AllocationsLogic = {
     calculateSurfaceBreakdown: function(items) {
         let gfa = 0;
         let exterior = 0;
-        
+
         const process = (itemList) => {
             itemList.forEach(item => {
                 const labels = this.getLabelsList(item);

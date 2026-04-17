@@ -11,7 +11,7 @@ data.floors.forEach(floor => {
         const totalShared = 1180;
         const remainingForStudios = floor.total - totalShared;
         const areaPerStudio = Math.floor(remainingForStudios / numStudios);
-        
+
         floor.items = [
             // Shared items on each floor
             {

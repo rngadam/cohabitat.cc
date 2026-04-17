@@ -21,24 +21,24 @@ class CostCalculator {
     calculateTotalConstructionCost() {
         const totalAreaM2 = this.calculateTotalAreaM2();
         let cost = totalAreaM2 * this.params.construction.max_cost_m2;
-        
+
         // Scenario: Modular Construction
         if (this.overrides.modular) {
             const reduction = this.params.scenarios.modular_reduction_pct / 100;
             cost = cost * (1 - reduction);
         }
-        
+
         return cost;
     }
 
     calculateTotalInvestment() {
         const constructionCost = this.calculateTotalConstructionCost();
-        
+
         // Scenario: Municipal Land Grant (Eases land cost)
         if (this.overrides.landGrant) {
             return constructionCost;
         }
-        
+
         const landCost = this.params.construction.land_cost || 0;
         return landCost + constructionCost;
     }
@@ -47,18 +47,18 @@ class CostCalculator {
         const totalInvestment = this.calculateTotalInvestment();
         const downpayment = totalInvestment * (this.params.mortgage.downpayment_pct / 100);
         const principal = totalInvestment - downpayment;
-        
+
         // Scenario: APH Select Interest Rate
         let annualRate = this.params.mortgage.interest_rate_pct / 100;
         if (this.overrides.aphSelect) {
             annualRate = this.params.scenarios.target_interest_rate_pct / 100;
         }
-        
+
         const monthlyRate = annualRate / 12;
         const numberOfPayments = this.params.mortgage.amortization_years * 12;
 
-        const monthlyPayment = principal * 
-            (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+        const monthlyPayment = principal *
+            (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
             (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
         return {
@@ -73,11 +73,11 @@ class CostCalculator {
     calculateRecurringCosts() {
         const totalInvestment = this.calculateTotalInvestment();
         const totalAreaM2 = this.calculateTotalAreaM2();
-        
+
         // Taxes and Insurance
         let municipalTax = totalInvestment * (this.params.taxes_and_fees.municipal_tax_rate_pct / 100);
         let schoolTax = totalInvestment * (this.params.taxes_and_fees.school_tax_rate_pct / 100);
-        
+
         // Scenario: Tax Exemption
         if (this.overrides.taxExemption) {
             municipalTax = 0;
@@ -90,7 +90,7 @@ class CostCalculator {
         // Operational Expenses (OPEX) from opex.json
         const monthlyServices = Object.values(this.opex.monthly_services).reduce((a, b) => a + b, 0);
         const monthlyEnergy = (this.opex.energy_costs.electricity_heat_per_m2_year * totalAreaM2) / 12;
-        
+
         // Amortization
         let annualAmortization = 0;
         this.opex.equipment_amortization.forEach(equip => {
@@ -127,7 +127,7 @@ class CostCalculator {
         // Current rent constant is $/sqft/year. Let's convert area to sqft for the calculation
         const totalRentalAreaSqFt = totalRentalAreaM2 * this.M2_TO_SQFT;
         const annualIncome = totalRentalAreaSqFt * this.params.constants.comm_rent_sqft_year;
-        
+
         return {
             totalRentalAreaM2,
             totalRentalAreaSqFt,
@@ -139,7 +139,7 @@ class CostCalculator {
     calculateCommunityBondsDetails() {
         const totalConstructionAndLand = this.calculateTotalInvestment();
         const cashDownpayment = totalConstructionAndLand * (this.params.mortgage.downpayment_pct / 100);
-        
+
         // Sweat Equity (Pre-dev)
         let preDevTotal = this.calculatePreDevTotal();
         if (this.overrides.fondsPlancher) {
@@ -151,8 +151,8 @@ class CostCalculator {
         const monthlyRate = annualRate / 12;
         const numberOfPayments = this.params.community_bonds.amortization_years * 12;
 
-        const monthlyPayment = bondPrincipal * 
-            (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
+        const monthlyPayment = bondPrincipal *
+            (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
             (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
         return {
@@ -170,7 +170,7 @@ class CostCalculator {
         const recurring = this.calculateRecurringCosts();
         const rental = this.calculateRentalIncome();
         const bonds = this.calculateCommunityBondsDetails();
-        
+
         const totalMonthlyNet = mortgage.monthlyPayment + recurring.totalMonthly + bonds.monthlyPayment - rental.monthlyIncome;
 
         return {
@@ -188,17 +188,17 @@ class CostCalculator {
         const numHolders = this.overrides.holdersCount || this.params.community_bonds.holders_count;
 
         // Floating rooms revenue logic
-        // They pay 50% price with 80% occupancy. 
+        // They pay 50% price with 80% occupancy.
         // Effective suite equivalents: 31 + (10 * 0.5 * 0.8) = 35
         const floatingConfig = this.params.floating_rooms;
         const suiteEquivalents = numSuites + (floatingConfig.count * (floatingConfig.price_pct / 100) * (floatingConfig.occupancy_rate_pct / 100));
-        
+
         const baseMonthlyNet = global.totalMonthlyNet / suiteEquivalents;
         const floatingRoomRevenue = baseMonthlyNet * (suiteEquivalents - numSuites);
 
         return {
             totalMonthlyNet: baseMonthlyNet,
-            constructionCost: global.mortgage.totalInvestment / numSuites, 
+            constructionCost: global.mortgage.totalInvestment / numSuites,
             downpaymentPerFounder: global.bonds.cashPrincipal / numHolders,
             sweatEquityPerFounder: global.bonds.sweatPrincipal / numHolders,
             monthlyMortgage: global.mortgage.monthlyPayment / numSuites,

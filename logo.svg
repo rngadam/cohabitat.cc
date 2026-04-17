@@ -1,20 +1,20 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="512" height="512" fill="#F3F4F1" />
-  
+
   <!-- Wheels -->
   <circle cx="140" cy="340" r="85" stroke="#1A472A" stroke-width="18" fill="none"/>
   <circle cx="372" cy="340" r="85" stroke="#1A472A" stroke-width="18" fill="none"/>
-  
+
   <!-- Hubs -->
   <circle cx="140" cy="340" r="10" fill="#1A472A"/>
   <circle cx="372" cy="340" r="10" fill="#1A472A"/>
 
   <!-- Frame & House Structure -->
   <path d="
-    M 140 340 
-    L 205 210 
-    L 315 210 
+    M 140 340
+    L 205 210
+    L 315 210
     L 372 340
     M 205 210
     L 245 340
@@ -32,7 +32,7 @@
 
   <!-- Roof -->
   <path d="M 215 135 L 325 80 L 325 160" stroke="#1A472A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  
+
   <!-- Windows -->
   <rect x="250" y="140" width="18" height="18" fill="#1A472A"/>
   <rect x="275" y="140" width="18" height="18" fill="#1A472A"/>
