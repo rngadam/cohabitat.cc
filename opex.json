@@ -3,7 +3,8 @@
     "concierge_salary": 2500.00,
     "internet_and_tech": 250.00,
     "garden_and_greenhouse": 400.00,
-    "professional_fees": 300.00
+    "professional_fees": 300.00,
+    "management_fees": 1000.00
   },
   "energy_costs": {
     "electricity_heat_per_m2_year": 18.00
@@ -33,6 +34,16 @@
       "name": "Sécurité & Informatique",
       "capital_value": 40000.00,
       "lifespan_years": 5
+    },
+    {
+      "name": "Équipement de cuisine commerciale",
+      "capital_value": 60000.00,
+      "lifespan_years": 10
+    },
+    {
+      "name": "Électroménagers (Buanderie & Suites)",
+      "capital_value": 40000.00,
+      "lifespan_years": 8
     }
   ]
 }

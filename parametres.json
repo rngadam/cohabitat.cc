@@ -31,7 +31,11 @@
   "community_bonds": {
     "holders_count": 12,
     "interest_rate_pct": 5.0,
-    "amortization_years": 25
+    "amortization_years": 20,
+    "pme_mtl": {
+      "max_interest_rate_pct": 2.0,
+      "max_amortization_years": 5
+    }
   },
   "scenarios": {
     "target_interest_rate_pct": 3.75,
@@ -40,11 +44,11 @@
   "pre_development_breakdown": {
     "intervenants": [
       { "role": "Architecture & Esquisses", "rate": 100, "hours": 800, "description": "Conception préliminaire et études de masse" },
-      { "role": "Gouvernance & Juridique", "rate": 250, "hours": 120, "description": "Modèle OBNL, baux et structure légale" },
-      { "role": "Gestion de Projet", "rate": 100, "hours": 600, "description": "Coordination générale et planification" },
-      { "role": "Simulation & Modélisation", "rate": 100, "hours": 200, "description": "Outils interactifs et projections financières" },
-      { "role": "Mobilisation Citoyenne", "rate": 75, "hours": 400, "description": "Animation de communauté et ateliers" },
-      { "role": "Expertises de Site", "rate": 1, "hours": 30000, "description": "Études de sol et environnementales (fixe)" }
+      { "role": "Gouvernance & Juridique", "rate": 200, "hours": 120, "description": "Modèle OBNL, baux et structure légale" },
+      { "role": "Gestion de Projet & Modélisation", "rate": 100, "hours": 800, "description": "Coordination générale et outils financiers" },
+      { "role": "Mobilisation & Animation", "rate": 75, "hours": 400, "description": "Animation de communauté et ateliers" },
+      { "role": "Matériel & Équipements", "rate": 1, "hours": 125000, "description": "Investissement matériel initial (fondateurs)" },
+      { "role": "Fonds de démarrage (Seed)", "rate": 1, "hours": 50000, "description": "Liquidités initiales pour frais de démarrage" }
     ]
   }
 }

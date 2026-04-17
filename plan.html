@@ -220,6 +220,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                 </label>
+                <input type="checkbox" id="toggle-pme-mtl" class="peer sr-only hidden" onchange="updateScenarios()">
+                <input type="checkbox" id="toggle-tasks" class="peer sr-only hidden" onchange="updateScenarios()">
             </div>
         </div>
     </div>
@@ -275,6 +277,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         border-color: #d97706 !important;
         box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
     }
+
+    /* Mobile Bottom Bar & Drawer Styles */
+    #mobile-simulator-bar {
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #mobile-simulator-drawer, #desktop-simulator-panel {
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-handle {
+        width: 40px;
+        height: 5px;
+        background-color: #e5e7eb;
+        border-radius: 10px;
+        margin: 0 auto 1.5rem auto;
+    }
+
+    /* Range slider styling */
+    input[type='range'] {
+        -webkit-appearance: none;
+        height: 6px;
+        background: #e5e7eb;
+        border-radius: 5px;
+        outline: none;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #064E3B;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.1s ease;
+    }
+    input[type='range']::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+    }
 </style>
 
 <script src="common.js"></script>
@@ -288,75 +328,185 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         landGrant: false,
         fondsPlancher: false,
         taxExemption: false,
+        pmeMtlMatching: false,
         modular: false,
-        holdersCount: 12
+        mutualizedTasks: false,
+        holdersCount: 12,
+        bondRate: 5,
+        bondDuration: 20
     };
 
-    window.updateScenarios = function() {
+    window.updateScenarios = async function() {
         activeOverrides.aphSelect = document.getElementById('toggle-aph').checked;
         activeOverrides.landGrant = document.getElementById('toggle-land').checked;
         activeOverrides.fondsPlancher = document.getElementById('toggle-fonds-plancher').checked;
+        activeOverrides.pmeMtlMatching = document.getElementById('toggle-pme-mtl').checked;
         activeOverrides.taxExemption = document.getElementById('toggle-taxes').checked;
         activeOverrides.modular = document.getElementById('toggle-modular').checked;
+        activeOverrides.mutualizedTasks = document.getElementById('toggle-tasks').checked;
 
-        // Sync floating buttons UI
-        updateFloatButtonsUI();
+        // PME-MTL adjustments visibility
+        const pmeAdjustments = document.getElementById('pme-mtl-adjustments');
+        const mobilePmeAdjustments = document.getElementById('mobile-pme-mtl-adjustments');
+        if (pmeAdjustments) pmeAdjustments.classList.toggle('hidden', !activeOverrides.pmeMtlMatching);
+        if (mobilePmeAdjustments) mobilePmeAdjustments.classList.toggle('hidden', !activeOverrides.pmeMtlMatching);
+
+        // Sync UI
+        syncUIState();
 
         // Re-calculate and re-render everything
-        loadAllData();
+        await loadAllData();
     };
 
     window.syncHolders = function(newVal) {
-        // Bounds checking
         if (newVal < 5) newVal = 5;
         if (newVal > 31) newVal = 31;
-
         activeOverrides.holdersCount = parseInt(newVal);
-        const valEl = document.getElementById('float-holders-value');
-        if (valEl) valEl.textContent = newVal;
+        syncUIState();
         loadAllData();
     };
 
-    window.toggleFloat = function(checkboxId) {
-        const cb = document.getElementById(checkboxId);
-        cb.checked = !cb.checked;
-        updateScenarios();
+    window.syncBondRate = function(newVal) {
+        if (newVal < 0) newVal = 0;
+        if (newVal > 15) newVal = 15;
+        activeOverrides.bondRate = parseFloat(newVal);
+        syncUIState();
+        loadAllData();
     };
 
-    function updateFloatButtonsUI() {
-        const config = [
-            { id: 'toggle-aph', btn: 'btn-float-aph', color: 'btn-active-primary' },
-            { id: 'toggle-land', btn: 'btn-float-land', color: 'btn-active-accent' },
-            { id: 'toggle-fonds-plancher', btn: 'btn-float-fonds-plancher', color: 'btn-active-primary' },
-            { id: 'toggle-taxes', btn: 'btn-float-taxes', color: 'btn-active-accent' },
-            { id: 'toggle-modular', btn: 'btn-float-modular', color: 'btn-active-primary' }
+    function syncBondDuration(value) {
+        activeOverrides.bondDuration = parseInt(value);
+        document.getElementById('panel-bond-duration-value').textContent = value + ' ans';
+        document.getElementById('panel-bond-duration-input').value = value;
+        document.getElementById('mobile-bond-duration-value').textContent = value + ' ans';
+        document.getElementById('mobile-bond-duration-input').value = value;
+        updateScenarios();
+    }
+
+    function syncPmeMtlRate(value) {
+        activeOverrides.pmeMtlRate = parseFloat(value);
+        document.getElementById('panel-pme-rate-value').textContent = value + ' %';
+        document.getElementById('panel-pme-rate-input').value = value;
+        document.getElementById('mobile-pme-rate-value').textContent = value + ' %';
+        document.getElementById('mobile-pme-rate-input').value = value;
+        updateScenarios();
+    }
+
+    function syncPmeMtlDuration(value) {
+        activeOverrides.pmeMtlDuration = parseInt(value);
+        document.getElementById('panel-pme-duration-value').textContent = value + ' ans';
+        document.getElementById('panel-pme-duration-input').value = value;
+        document.getElementById('mobile-pme-duration-value').textContent = value + ' ans';
+        document.getElementById('mobile-pme-duration-input').value = value;
+        updateScenarios();
+    }
+
+    window.toggleFloat = function(checkboxId) {
+        const cb = document.getElementById(checkboxId);
+        if (cb) {
+            cb.checked = !cb.checked;
+            updateScenarios();
+        }
+    };
+
+    window.toggleSimulatorPanel = function(show) {
+        const isMobile = window.innerWidth < 768;
+        const panel = isMobile ? document.getElementById('mobile-simulator-drawer') : document.getElementById('desktop-simulator-panel');
+        const overlay = document.getElementById('simulator-overlay');
+
+        if (show) {
+            if (panel) panel.classList.remove(isMobile ? 'translate-y-full' : 'translate-x-full');
+            if (overlay) overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        } else {
+            const mPanel = document.getElementById('mobile-simulator-drawer');
+            const dPanel = document.getElementById('desktop-simulator-panel');
+            if (mPanel) mPanel.classList.add('translate-y-full');
+            if (dPanel) dPanel.classList.add('translate-x-full');
+            if (overlay) overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+    };
+
+    function syncUIState() {
+        const toggles = [
+            { id: 'toggle-aph', mBtn: 'btn-mobile-aph', dBtn: 'btn-panel-aph', color: 'bg-primary' },
+            { id: 'toggle-land', mBtn: 'btn-mobile-land', dBtn: 'btn-panel-land', color: 'bg-accent' },
+            { id: 'toggle-fonds-plancher', mBtn: 'btn-mobile-fonds-plancher', dBtn: 'btn-panel-fonds-plancher', color: 'bg-primary' },
+            { id: 'toggle-pme-mtl', mBtn: 'btn-mobile-pme-mtl', dBtn: 'btn-panel-pme-mtl', color: 'bg-primary' },
+            { id: 'toggle-taxes', mBtn: 'btn-mobile-taxes', dBtn: 'btn-panel-taxes', color: 'bg-accent' },
+            { id: 'toggle-modular', mBtn: 'btn-mobile-modular', dBtn: 'btn-panel-modular', color: 'bg-primary' },
+            { id: 'toggle-tasks', mBtn: 'btn-mobile-tasks', dBtn: 'btn-panel-tasks', color: 'bg-accent' }
         ];
 
-        config.forEach(item => {
+        toggles.forEach(item => {
             const isChecked = document.getElementById(item.id).checked;
-            const btn = document.getElementById(item.btn);
-            if (isChecked) {
-                btn.classList.add(item.color);
-                btn.classList.remove('bg-stone-100', 'text-stone-400');
-            } else {
-                btn.classList.remove(item.color);
-                btn.classList.add('bg-stone-100', 'text-stone-400');
-            }
+            [item.mBtn, item.dBtn].forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btn) {
+                    if (isChecked) {
+                        btn.classList.add(item.color, 'text-white', 'border-transparent');
+                        btn.classList.remove('bg-stone-50', 'text-stone-900', 'border-stone-100');
+                    } else {
+                        btn.classList.remove(item.color, 'text-white', 'border-transparent');
+                        btn.classList.add('bg-stone-50', 'text-stone-900', 'border-stone-100');
+                    }
+                }
+            });
+        });
+
+        // Sync values across all labels
+        const holders = activeOverrides.holdersCount;
+        ['float-holders-value', 'mobile-float-holders-value', 'mobile-float-holders-inner-value', 'panel-holders-value'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = holders;
+        });
+
+        const rate = activeOverrides.bondRate;
+        ['panel-bond-rate-value', 'panel-bond-rate-input', 'mobile-bond-rate-input'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.tagName === 'INPUT') el.value = rate;
+            else if (el) el.textContent = rate + ' %';
+        });
+
+        const duration = activeOverrides.bondDuration;
+        ['panel-bond-duration-value', 'panel-bond-duration-input', 'mobile-bond-duration-input'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.tagName === 'INPUT') el.value = duration;
+            else if (el) el.textContent = duration + ' ans';
         });
     }
 
     // Floating toolbar visibility on scroll
     window.addEventListener('scroll', () => {
         const toolbar = document.getElementById('floating-simulator');
+        const mobileBar = document.getElementById('mobile-simulator-bar');
+
         if (window.scrollY > 20) {
-            toolbar.style.opacity = "1";
-            toolbar.style.transform = "translate(0, -50%)";
-            toolbar.style.pointerEvents = "auto";
+            if (toolbar) {
+                toolbar.style.opacity = "1";
+                toolbar.style.transform = "translate(0, -50%)";
+                toolbar.style.pointerEvents = "auto";
+            }
+            if (mobileBar) {
+                mobileBar.classList.remove('translate-y-full');
+            }
         } else {
-            toolbar.style.opacity = "0";
-            toolbar.style.transform = "translate(40px, -50%)";
-            toolbar.style.pointerEvents = "none";
+            if (toolbar) {
+                toolbar.style.opacity = "0";
+                toolbar.style.transform = "translate(40px, -50%)";
+                toolbar.style.pointerEvents = "none";
+            }
+            if (mobileBar) {
+                mobileBar.classList.add('translate-y-full');
+            }
         }
+    });
+
+    // Handle clicks outside panel to close
+    window.addEventListener('click', (e) => {
+        const overlay = document.getElementById('simulator-overlay');
+        if (e.target === overlay) toggleSimulatorPanel(false);
     });
 
     // Load components
@@ -381,11 +531,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     async function loadAllData() {
         try {
+            const v = Date.now();
             const [allocations, params, opex, constraints] = await Promise.all([
-                fetch('allocations.json').then(r => r.json()),
-                fetch('parametres.json').then(r => r.json()),
-                fetch('opex.json').then(r => r.json()),
-                fetch('constraints.json').then(r => r.json())
+                fetch(`allocations.json?v=${v}`).then(r => r.json()),
+                fetch(`parametres.json?v=${v}`).then(r => r.json()),
+                fetch(`opex.json?v=${v}`).then(r => r.json()),
+                fetch(`constraints.json?v=${v}`).then(r => r.json())
             ]);
 
             allocationsData = allocations;
@@ -411,6 +562,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 // Simple animation to highlight change
                 floatRentEl.classList.add('scale-110');
                 setTimeout(() => floatRentEl.classList.remove('scale-110'), 200);
+            }
+
+            // Update Mobile Bar Results
+            const mobileRentEl = document.getElementById('mobile-float-net-rent');
+            const mobileCostEl = document.getElementById('mobile-float-total-cost');
+            if (mobileRentEl) mobileRentEl.textContent = formatCurrency(perSuite.totalMonthlyNet);
+            if (mobileCostEl) {
+                const globalCosts = costCalculator.calculateGlobalCosts();
+                mobileCostEl.textContent = formatCurrency(globalCosts.mortgage.totalInvestment).replace(',00', '').replace('$', '$');
             }
 
             if (window.lucide) lucide.createIcons();
@@ -502,7 +662,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const summaryContainer = document.getElementById('allocation-summary');
         const totals = calculateTotalsByType();
         const totalArea = totals.privé + totals.partagé + totals.extérieur;
-        if (totalArea === 0) {
+        if (totalArea === 0 || !opexData) {
             summaryContainer.classList.add('hidden');
             return;
         }
@@ -518,38 +678,134 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             costsHtml = `
                 <div class="mt-8 pt-8 border-t border-stone-200">
-                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500 mb-6">Financement & Opérations</h3>
-                    <div class="grid gap-6 lg:grid-cols-2">
-                        <div class="rounded-3xl bg-stone-900 text-white p-6 shadow-lg">
-                            <p class="text-xs uppercase tracking-widest opacity-80 mb-4">Structure Mensuelle (Projet Global)</p>
-                            <div class="space-y-3 text-sm opacity-90">
-                                <div class="flex justify-between"><span>Hypothèque (${formatCurrency(globalCosts.mortgage.principal)})</span> <span>${formatCurrency(globalCosts.mortgage.monthlyPayment)}</span></div>
-                                <div class="flex justify-between"><span>Obligations (${params.community_bonds.interest_rate_pct}%)</span> <span>${formatCurrency(globalCosts.bonds.monthlyPayment)}</span></div>
-                                <div class="flex justify-between border-t border-white/10 pt-2"><span>Taxes (Municipales & Scolaires)</span> <span>${formatCurrency((globalCosts.recurring.municipalTax + globalCosts.recurring.schoolTax)/12)}</span></div>
-                                <div class="flex justify-between"><span>Assurances & Fonds de réserve</span> <span>${formatCurrency((globalCosts.recurring.insurance + globalCosts.recurring.reserveFund)/12)}</span></div>
-                                <div class="flex justify-between font-bold text-amber-400"><span>Opérations (OPEX)</span> <span>${formatCurrency(globalCosts.recurring.monthlyServices + globalCosts.recurring.monthlyEnergy + globalCosts.recurring.monthlyAmortization)}</span></div>
-                                <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus locatifs commerciaux</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome)}</span></div>
-                                <div class="flex justify-between text-emerald-400 font-bold"><span>Revenus chambres flottantes</span> <span>+ ${formatCurrency(perSuite.floatingRoomRevenue)}</span></div>
-                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-xl"><span>Coût Net à couvrir</span> <span>${formatCurrency(globalCosts.totalMonthlyNet - perSuite.floatingRoomRevenue)}*</span></div>
-                                <p class="text-[9px] opacity-60 mt-1 italic text-right">*Après déduction de tous les revenus tiers</p>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500">Financement & Opérations</h3>
+                        <div class="flex gap-2">
+                            ${activeOverrides.mutualizedTasks ? '<span class="px-3 py-1 bg-accent text-white text-[10px] font-bold rounded-full border border-accent uppercase tracking-tighter">Mutualisation Active (3h/sem)</span>' : ''}
+                            ${activeOverrides.pmeMtlMatching ? '<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold rounded-full border border-emerald-200 uppercase tracking-tighter">Match PME-MTL Actif (1:1)</span>' : ''}
+                        </div>
+                    </div>
+                    <div id="financial-summary-grid" class="grid gap-6 lg:grid-cols-2">
+                        <!-- Card 1: Global Project -->
+                        <div class="rounded-3xl bg-stone-900 text-white p-6 shadow-lg flex flex-col">
+                            <p class="text-[10px] uppercase tracking-widest opacity-80 mb-4 font-bold text-stone-400">Projet Global (Mensuel)</p>
+                            <div class="space-y-3 text-sm opacity-90 flex-1">
+                                <div class="flex justify-between"><span>Hypothèques</span> <span>${formatCurrency(globalCosts.mortgage.monthlyPayment)}</span></div>
+                                <div class="flex justify-between"><span>Obligations Comm.</span> <span>${formatCurrency(globalCosts.bonds.founderMonthlyPayment)}</span></div>
+                                ${activeOverrides.pmeMtlMatching ? `<div class="flex justify-between text-emerald-400"><span>Service Dette PME-MTL</span> <span>${formatCurrency(globalCosts.bonds.pmeMtlMonthlyPayment)}</span></div>` : ''}
+                                <div class="flex justify-between border-t border-white/10 pt-2 font-bold text-amber-400"><span>OPEX Total (Détail ci-contre)</span> <span>${formatCurrency(globalCosts.recurring.totalMonthly)}</span></div>
+                                <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus (Comm. + Flottantes)</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome + perSuite.floatingRoomRevenue)}</span></div>
+                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-lg mt-auto"><span>Solde Net Mensuel</span> <span>${formatCurrency(globalCosts.totalMonthlyNet - perSuite.floatingRoomRevenue)}*</span></div>
                             </div>
                         </div>
-                        <div class="rounded-3xl bg-accent text-white p-6 shadow-lg border-4 border-white/20">
-                            <p class="text-xs uppercase tracking-widest opacity-80 mb-2">Coût Résidentiel (${params.population.total_suites} suites + ${params.floating_rooms.count} chambres flottantes)</p>
+
+                        <!-- Card 2: OPEX DETAILS with Mutualization info -->
+                        <div class="rounded-3xl bg-stone-50 text-stone-900 p-6 shadow-lg flex flex-col border border-stone-200">
+                             <div class="flex justify-between items-start mb-4">
+                                 <p class="text-[10px] uppercase tracking-widest text-stone-500 font-bold">Détail des Frais d'Opération (Mensuel)</p>
+                                 ${activeOverrides.mutualizedTasks ? '<i data-lucide="users-2" class="w-4 h-4 text-accent"></i>' : ''}
+                             </div>
+                             <div class="space-y-4 text-sm flex-1">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <p class="font-bold text-[10px] uppercase tracking-wider text-primary">Services & Gestion</p>
+                                        ${activeOverrides.mutualizedTasks ? '<span class="text-[9px] bg-accent/10 text-accent px-2 py-0.5 rounded font-bold uppercase">Pool 3h/semaine</span>' : ''}
+                                    </div>
+                                    <div class="space-y-1 opacity-80">
+                                        <div class="flex justify-between">
+                                            <span>Maintenance & Nettoyage</span>
+                                            <span class="${activeOverrides.mutualizedTasks ? 'line-through opacity-50' : ''}">${formatCurrency(opexData.monthly_services.concierge_salary)}</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Gestion Administrative</span>
+                                            <span class="${activeOverrides.mutualizedTasks ? 'line-through opacity-50' : ''}">${formatCurrency(opexData.monthly_services.management_fees)}</span>
+                                        </div>
+                                        <div class="flex justify-between"><span>Internet & Tech</span> <span>${formatCurrency(opexData.monthly_services.internet_and_tech)}</span></div>
+                                        <div class="flex justify-between"><span>Vérification Comptable</span> <span>${formatCurrency(opexData.monthly_services.professional_fees)}</span></div>
+                                    </div>
+                                    ${activeOverrides.mutualizedTasks ? `
+                                        <div class="mt-2 p-2 bg-accent/5 border border-accent/10 rounded-xl text-[10px] text-accent font-medium italic">
+                                            Économie de ${formatCurrency(opexData.monthly_services.concierge_salary + opexData.monthly_services.management_fees)}/mois via autogestion.
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                <div class="pt-3 border-t border-stone-200">
+                                    <div class="flex justify-between"><span>Énergie & Chauffage</span> <span class="font-bold">${formatCurrency(globalCosts.recurring.monthlyEnergy)}</span></div>
+                                    <div class="flex justify-between"><span>Provision Amortissement (Détail ci-dessous)</span> <span class="font-bold">${formatCurrency(globalCosts.recurring.monthlyAmortization)}</span></div>
+                                </div>
+                             </div>
+                        </div>
+
+                        <!-- Card 3: Per Suite Residency -->
+                        <div class="rounded-3xl bg-accent text-white p-6 shadow-lg flex flex-col border-4 border-white/10">
+                            <p class="text-[10px] uppercase tracking-widest opacity-80 mb-4 font-bold">Loyers Fondateurs (Par Suite)</p>
                             <div class="mb-6">
-                                <p class="text-4xl font-serif mb-1">${formatCurrency(perSuite.totalMonthlyNet)} <span class="text-sm font-sans opacity-80">/mois</span></p>
-                                <p class="text-[10px] opacity-70">Loyer résident permanent (Chambre flottante : ${formatCurrency(perSuite.floatingRoomPrice)})</p>
+                                <p class="text-3xl font-serif mb-1">${formatCurrency(perSuite.totalMonthlyNet)} <span class="text-sm font-sans opacity-80">/mois</span></p>
+                                <p class="text-[10px] opacity-70">Remboursement dette + Opex</p>
                             </div>
-                            <div class="space-y-4 text-sm opacity-90 border-t border-white/10 pt-4">
-                                <div class="bg-white/10 p-4 rounded-2xl">
-                                    <p class="font-bold mb-2">Pour les ${costCalculator.overrides.holdersCount || params.community_bonds.holders_count} co-fondateurs :</p>
-                                    <div class="flex justify-between opacity-80 mb-1"><span>Mise de fonds (Cash)</span> <span>${formatCurrency(perSuite.downpaymentPerFounder)}</span></div>
-                                    <div class="flex justify-between opacity-80 mb-4 pb-2 border-b border-white/10"><span>Temps valorisé (Sweat Equity)</span> <span>${formatCurrency(perSuite.sweatEquityPerFounder)}</span></div>
-                                    <div class="flex justify-between text-white font-bold text-lg"><span>Loyer effectif net*</span> <span>${formatCurrency(perSuite.totalMonthlyNetFounder)}</span></div>
-                                    <p class="text-[9px] mt-2 italic">*Après remboursement de leur mise de fonds et de leur temps investi</p>
+                            <div class="space-y-3 text-sm opacity-90 pt-4 border-t border-white/10 mt-auto">
+                                <p class="font-bold text-xs opacity-80 mb-1">Impact Apport Initial :</p>
+                                <div class="flex justify-between"><span>Remboursement obligations</span> <span class="text-emerald-300 font-bold">- ${formatCurrency(perSuite.monthlyBondRepaymentToFounder)}</span></div>
+                                <div class="flex justify-between text-white font-bold text-xl border-t border-white/20 pt-2 mt-2"><span>Coût net réel</span> <span>${formatCurrency(perSuite.totalMonthlyNetFounder)}</span></div>
+                                <p class="text-[9px] opacity-60 italic mt-1 leading-normal">
+                                    * Equivalent à un loyer incluant taxes, énergie et amortissement, après récupération de l'investissement.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Initial Investment Refactored -->
+                        <div class="rounded-3xl bg-amber-50 text-stone-900 p-6 shadow-lg flex flex-col border border-amber-100">
+                             <p class="text-[10px] uppercase tracking-widest text-amber-700 mb-4 font-bold">Apport par fondateur (${activeOverrides.holdersCount})</p>
+                             <div class="mb-6">
+                                <p class="text-3xl font-serif text-stone-900 mb-1">${formatCurrency(perSuite.downpaymentPerFounder + perSuite.initialInvestmentPerFounder)}</p>
+                                <p class="text-[10px] text-stone-500">Total Capital injecté de départ</p>
+                            </div>
+                            <div class="space-y-3 text-sm pt-4 border-t border-amber-200 mt-auto">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold text-stone-500 uppercase tracking-tighter">1. Mise de fonds Hypothécaire</span>
+                                    <span class="font-bold">${formatCurrency(perSuite.downpaymentPerFounder)}</span>
+                                </div>
+                                <p class="text-[9px] text-stone-400 italic mb-2 tracking-tight">Liquidités nécessaires à l'acquisition (Mise de fonds 20%)</p>
+
+                                <div class="flex justify-between items-center pt-2 border-t border-amber-100">
+                                    <span class="text-xs font-bold text-stone-500 uppercase tracking-tighter">2. Frais de Lancement</span>
+                                    <span class="font-bold">${formatCurrency(perSuite.initialInvestmentPerFounder)}</span>
+                                </div>
+                                <p class="text-[9px] text-stone-400 italic tracking-tight">Valorisation du temps et dépenses de design (Sweat Equity)</p>
+
+                                <div class="mt-4 p-3 bg-white/50 border border-amber-200 rounded-2xl text-[10px] text-amber-900 font-medium leading-normal">
+                                    PME-MTL match (1:1) ${activeOverrides.pmeMtlMatching ? 'ACTIF : Diminue l\'apport nécessaire par cofondateur.' : 'INACTIF : Augmente l\'apport personnel.'}
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Amortization Card (Full Width Below) -->
+                    <div class="mt-6 rounded-3xl border border-stone-200 bg-white overflow-hidden shadow-sm">
+                        <div class="p-5 bg-stone-50 border-b border-stone-200 flex justify-between items-center">
+                            <h4 class="text-[10px] uppercase tracking-[0.2em] text-stone-500 font-bold">Détail des Équipements et Amortissement</h4>
+                            <p class="text-xs font-bold text-primary">Total Amortissement: ${formatCurrency(globalCosts.recurring.monthlyAmortization)}/mois</p>
+                        </div>
+                        <table class="min-w-full text-left border-collapse">
+                            <thead class="bg-stone-50/50">
+                                <tr class="border-b border-stone-100">
+                                    <th class="p-4 text-[10px] font-bold text-stone-400 uppercase tracking-wider">Équipement</th>
+                                    <th class="p-4 text-[10px] font-bold text-stone-400 uppercase tracking-wider text-right">Durée de vie</th>
+                                    <th class="p-4 text-[10px] font-bold text-stone-400 uppercase tracking-wider text-right">Valeur Capital</th>
+                                    <th class="p-4 text-[10px] font-bold text-stone-400 uppercase tracking-wider text-right">Provision Mensuelle</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-50">
+                                ${opexData.equipment_amortization.map(equip => `
+                                    <tr class="hover:bg-stone-50/50 transition-colors">
+                                        <td class="p-4 text-xs font-semibold text-primary truncate max-w-[200px]">${equip.name}</td>
+                                        <td class="p-4 text-right font-mono text-xs text-stone-500">${equip.lifespan_years} ans</td>
+                                        <td class="p-4 text-right font-mono text-xs text-stone-900">${formatCurrency(equip.capital_value)}</td>
+                                        <td class="p-4 text-right font-semibold text-primary">${formatCurrency(equip.capital_value / equip.lifespan_years / 12)}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             `;
@@ -557,7 +813,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         summaryContainer.classList.remove('hidden');
         summaryContainer.innerHTML = `
-            <div class="grid gap-4 lg:grid-cols-3">
+            <div class="grid gap-4 lg:grid-cols-3 mb-8">
                 <div class="rounded-3xl bg-primary/5 p-5">
                     <p class="text-sm uppercase tracking-[0.3em] text-primary/80 mb-3">Privé</p>
                     <p class="text-3xl font-semibold text-primary">${formatArea(totals.privé)}</p>
@@ -590,37 +846,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div id="pre-dev-details" class="mt-8"></div>
         `;
         renderPreDevTable();
+        if (window.lucide) lucide.createIcons();
     }
 
     function renderPreDevTable() {
         const container = document.getElementById('pre-dev-details');
-        if (!paramsData || !paramsData.pre_development_breakdown || !container) return;
+        if (!paramsData || !paramsData.pre_development_breakdown || !container || !costCalculator) return;
 
         const isSubsidized = activeOverrides.fondsPlancher;
+        const globalCosts = costCalculator.calculateGlobalCosts();
+        const downpayment = globalCosts.mortgage.downpayment;
 
         let html = `
             <div class="mt-8 pt-8 border-t border-stone-200">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500">Détail du Pré-développement (Temps Valorisé)</h3>
+                    <h3 class="text-sm uppercase tracking-[0.3em] text-stone-500">Détail de l'Investissement Initial (Apport Fondateurs)</h3>
                     ${isSubsidized ? '<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full">SUBVENTIONNÉ PAR FONDS PLANCHER</span>' : ''}
                 </div>
-                <div class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
+
+                <div class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm mb-6">
+                    <p class="px-6 py-4 bg-stone-50 border-b border-stone-200 text-[10px] font-bold uppercase tracking-widest text-stone-500">1. Dépenses de Lancement (Pre-development)</p>
                     <table class="min-w-full text-left border-collapse">
-                        <thead class="bg-stone-50/50">
+                        <thead class="bg-stone-50/20">
                             <tr>
-                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500">Intervenant / Rôle</th>
-                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500 text-right">Taux Horaire</th>
-                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500 text-right">Heures Est.</th>
-                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-500 text-right">Valorisation</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-400">Intervenant / Rôle</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-400 text-right">Taux Horaire</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-400 text-right">Heures Est.</th>
+                                <th class="p-4 text-[10px] font-bold uppercase tracking-wider text-stone-400 text-right">Valorisation</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-stone-100">
         `;
 
-        let totalVal = 0;
+        let totalLaunch = 0;
         paramsData.pre_development_breakdown.intervenants.forEach(item => {
             const val = item.rate * item.hours;
-            totalVal += val;
+            totalLaunch += val;
             html += `
                 <tr class="hover:bg-stone-50 transition-colors">
                     <td class="p-4">
@@ -636,17 +897,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         html += `
                         </tbody>
-                        <tfoot class="${isSubsidized ? 'bg-primary/10 text-primary' : 'bg-stone-900 text-white'} transition-colors">
+                        <tfoot class="bg-stone-50 text-stone-600 border-t border-stone-200">
                             <tr>
-                                <th colspan="3" class="p-4 text-sm font-bold uppercase tracking-widest text-right">Investissement Pré-développement Total</th>
-                                <th class="p-4 text-lg font-bold text-right">${formatCurrency(totalVal)}</th>
+                                <th colspan="3" class="p-4 text-xs font-bold uppercase tracking-widest text-right">Sous-total Lancement</th>
+                                <th class="p-4 text-sm font-bold text-right">${formatCurrency(totalLaunch)}</th>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-                <p class="mt-4 text-[10px] text-stone-400 leading-relaxed italic">
-                    * Ce montant est converti en obligations communautaires remboursables par le projet sur 25 ans,
-                    permettant de valoriser l'apport en temps des co-fondateurs sans nécessiter de liquidités immédiates.
+
+                <div class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm mb-6">
+                    <p class="px-6 py-4 bg-stone-50 border-b border-stone-200 text-[10px] font-bold uppercase tracking-widest text-stone-500">2. Acquisition du bâtiment (Mise de fonds Cash)</p>
+                    <table class="min-w-full text-left border-collapse">
+                        <tbody class="divide-y divide-stone-100">
+                            <tr>
+                                <td class="p-4 text-sm font-semibold text-primary">Mise de Fonds Hypothécaire (20%)</td>
+                                <td class="p-4 text-right font-semibold text-stone-900">${formatCurrency(downpayment)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="overflow-hidden rounded-3xl bg-stone-900 text-white shadow-lg p-6 flex justify-between items-center mb-4">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.2em] opacity-60 font-bold mb-1">Apport Total des Fondateurs</p>
+                        <p class="text-xs opacity-40 italic">Inclut le temps valorisé et la mise de fonds cash</p>
+                    </div>
+                    <p class="text-3xl font-serif text-amber-400">${formatCurrency(totalLaunch + downpayment)}</p>
+                </div>
+
+                <p class="text-[10px] text-stone-400 leading-relaxed italic">
+                    * Ce montant est converti en obligations communautaires remboursables par le projet sur ${activeOverrides.bondDuration} ans.
                 </p>
             </div>
         `;
@@ -911,54 +1192,268 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     lucide.createIcons();
 </script>
 
-<!-- Simulateur Flottant (Vertical) - Réglages de visibilité simplifiés -->
-<div id="floating-simulator"
-     style="position: fixed; right: 24px; top: 50%; transform: translate(40px, -50%); opacity: 0; pointer-events: none; z-index: 9999; transition: all 0.5s ease-out;"
-     class="transform-gpu">
-    <div class="bg-white/90 backdrop-blur-xl border border-stone-200 shadow-[0_20px_50px_rgba(0,0,0,0.2)] rounded-full p-2 flex flex-col items-center gap-5 py-8 w-16 text-stone-900">
+<!-- Overlay Global -->
+<div id="simulator-overlay" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-[9999] hidden"></div>
 
-        <!-- Result Peek -->
-        <div id="float-result-peek" class="flex flex-col items-center border-b border-stone-200 pb-4 mb-1">
-            <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold mb-1">Loyer</p>
+<!-- Simulateur Résumé (Vertical) - Desktop Only -->
+<div id="floating-simulator"
+     style="position: fixed; right: 32px; top: 50%; transform: translate(40px, -50%); opacity: 0; pointer-events: none; z-index: 9998; transition: all 0.5s ease-out;"
+     class="transform-gpu hidden md:block">
+    <div class="bg-white/95 backdrop-blur-xl border border-stone-200 shadow-[0_20px_50px_rgba(0,0,0,0.2)] rounded-full p-2 flex flex-col items-center gap-6 py-8 w-20 text-stone-900">
+
+        <div class="flex flex-col items-center gap-1">
+            <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold">Loyer</p>
             <p id="float-net-rent" class="font-serif text-sm text-accent font-bold">0 $</p>
         </div>
 
-        <!-- Toggles -->
-        <div class="flex flex-col items-center gap-4 border-b border-stone-200 pb-6 mb-1">
-            <button onclick="toggleFloat('toggle-aph')" id="btn-float-aph" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
-                <i data-lucide="landmark" class="w-4 h-4"></i>
-                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">SCHL (APH Select)</span>
-            </button>
-            <button onclick="toggleFloat('toggle-land')" id="btn-float-land" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
-                <i data-lucide="map" class="w-4 h-4"></i>
-                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Cession Terrain</span>
-            </button>
-            <button onclick="toggleFloat('toggle-fonds-plancher')" id="btn-float-fonds-plancher" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
-                <i data-lucide="hand-helping" class="w-4 h-4"></i>
-                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Fonds Plancher</span>
-            </button>
-            <button onclick="toggleFloat('toggle-taxes')" id="btn-float-taxes" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
-                <i data-lucide="building" class="w-4 h-4"></i>
-                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Exemption Taxes</span>
-            </button>
-            <button onclick="toggleFloat('toggle-modular')" id="btn-float-modular" class="w-10 h-10 rounded-full border-2 border-transparent bg-stone-100 flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-all group relative">
-                <i data-lucide="construction" class="w-4 h-4"></i>
-                <span class="absolute right-14 top-1/2 -translate-y-1/2 bg-stone-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Modulaire</span>
-            </button>
+        <div class="w-8 h-px bg-stone-100"></div>
+
+        <div class="flex flex-col items-center gap-1">
+            <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold">Founders</p>
+            <p id="float-holders-value" class="font-serif text-sm text-primary font-bold">12</p>
         </div>
 
-        <!-- Founders -->
-        <div class="flex flex-col items-center gap-2">
-            <button onclick="syncHolders(activeOverrides.holdersCount + 1)" class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
-                <i data-lucide="plus" class="w-4 h-4"></i>
-            </button>
-            <div class="flex flex-col items-center">
-                <span id="float-holders-value" class="font-serif text-lg text-primary leading-none">12</span>
-                <p class="text-[7px] uppercase tracking-tighter text-stone-400 font-bold mt-1">Founders</p>
+        <div class="w-8 h-px bg-stone-100"></div>
+
+        <button onclick="toggleSimulatorPanel(true)" class="w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
+            <i data-lucide="settings-2" class="w-6 h-6"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Panneau Configuration (Côté) - Desktop Only -->
+<div id="desktop-simulator-panel"
+     class="fixed top-0 right-0 bottom-0 w-[450px] bg-white shadow-[-20px_0_50px_rgba(0,0,0,0.1)] z-[10000] transform translate-x-full md:block hidden p-10 overflow-y-auto">
+
+    <div class="flex items-center justify-between mb-10">
+        <h3 class="font-serif text-3xl text-primary">Configuration du Projet</h3>
+        <button onclick="toggleSimulatorPanel(false)" class="p-2 text-stone-400 hover:text-stone-900 transition-colors">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+    </div>
+
+    <div class="space-y-12">
+        <!-- Leviers Scénarios -->
+        <div class="space-y-6">
+            <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Options et Leviers Stratégiques</p>
+            <div class="grid grid-cols-1 gap-3">
+                <button onclick="toggleFloat('toggle-aph')" id="btn-panel-aph" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="landmark" class="w-5 h-5 text-primary"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">SCHL (APH Select)</p>
+                        <p class="text-[10px] opacity-60">Réduction taux d'intérêt</p>
+                    </div>
+                </button>
+                <button onclick="toggleFloat('toggle-land')" id="btn-panel-land" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="map" class="w-5 h-5 text-accent"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">Cession de Terrain</p>
+                        <p class="text-[10px] opacity-60">Gratuité foncière (bail)</p>
+                    </div>
+                </button>
+                <button onclick="toggleFloat('toggle-fonds-plancher')" id="btn-panel-fonds-plancher" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="hand-helping" class="w-5 h-5 text-primary"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">Fonds Plancher</p>
+                        <p class="text-[10px] opacity-60">Subvention investissement initial</p>
+                    </div>
+                </button>
+                <button onclick="toggleFloat('toggle-pme-mtl')" id="btn-panel-pme-mtl" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="trending-up" class="w-5 h-5 text-primary"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">Match PME-MTL (1:1)</p>
+                        <p class="text-[10px] opacity-60">Financement obligations (2% / 5 ans)</p>
+                    </div>
+                </button>
+                <button onclick="toggleFloat('toggle-taxes')" id="btn-panel-taxes" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="building" class="w-5 h-5 text-accent"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">Exemption Taxes</p>
+                        <p class="text-[10px] opacity-60">Statut OBNL / Logement social</p>
+                    </div>
+                </button>
+                <button onclick="toggleFloat('toggle-modular')" id="btn-panel-modular" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="construction" class="w-5 h-5 text-primary"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">Modulaire</p>
+                        <p class="text-[10px] opacity-60">Économie de 15% sur construction</p>
+                    </div>
+                </button>
+                <button onclick="toggleFloat('toggle-tasks')" id="btn-panel-tasks" class="flex items-center gap-4 p-5 rounded-3xl border-2 border-stone-100 transition-all bg-stone-50 text-left w-full">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center"><i data-lucide="users-2" class="w-5 h-5 text-accent"></i></div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold leading-none mb-1">Mutualisation (Autogestion)</p>
+                        <p class="text-[10px] opacity-60">Participation 3h/semaine par résident</p>
+                    </div>
+                </button>
             </div>
-            <button onclick="syncHolders(activeOverrides.holdersCount - 1)" class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
-                <i data-lucide="minus" class="w-4 h-4"></i>
-            </button>
+        </div>
+
+        <!-- Paramètres Avancés -->
+        <div class="space-y-8 pt-8 border-t border-stone-100">
+            <!-- Founders -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Co-fondateurs</p>
+                    <span id="panel-holders-value" class="font-serif text-2xl text-primary">12</span>
+                </div>
+                <input type="range" id="panel-holders-input" min="5" max="31" step="1" value="12" oninput="syncHolders(this.value)" class="w-full">
+            </div>
+
+            <!-- Bond Rate -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Taux Obligations Comm.</p>
+                    <span id="panel-bond-rate-value" class="font-serif text-2xl text-primary">5 %</span>
+                </div>
+                <input type="range" id="panel-bond-rate-input" min="0" max="15" step="0.5" value="5" oninput="syncBondRate(this.value)" class="w-full">
+            </div>
+
+            <!-- Bond Duration -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Durée Remboursement</p>
+                    <span id="panel-bond-duration-value" class="font-serif text-2xl text-primary">20 ans</span>
+                </div>
+                <input type="range" id="panel-bond-duration-input" min="1" max="50" step="1" value="20" oninput="syncBondDuration(this.value)" class="w-full">
+            </div>
+
+            <!-- PME-MTL Adjustments (Conditional) -->
+            <div id="pme-mtl-adjustments" class="space-y-8 pt-8 border-t border-stone-100 hidden">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-end">
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Taux PME-MTL</p>
+                        <span id="panel-pme-rate-value" class="font-serif text-2xl text-primary">2 %</span>
+                    </div>
+                    <input type="range" id="panel-pme-rate-input" min="0.1" max="2" step="0.1" value="2" oninput="syncPmeMtlRate(this.value)" class="w-full">
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-end">
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold">Durée PME-MTL</p>
+                        <span id="panel-pme-duration-value" class="font-serif text-2xl text-primary">5 ans</span>
+                    </div>
+                    <input type="range" id="panel-pme-duration-input" min="1" max="5" step="1" value="5" oninput="syncPmeMtlDuration(this.value)" class="w-full">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Simulateur Mobile (Barre de résumé en bas) -->
+<div id="mobile-simulator-bar"
+     class="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-xl border-t border-stone-200 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] z-[10000] flex justify-around items-center translate-y-full md:hidden">
+
+    <div class="flex flex-col items-center">
+        <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold">Loyer</p>
+        <p id="mobile-float-net-rent" class="font-serif text-sm text-accent font-bold">0 $</p>
+    </div>
+
+    <div class="w-px h-8 bg-stone-200"></div>
+
+    <div class="flex flex-col items-center">
+        <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold">Founders</p>
+        <p id="mobile-float-holders-value" class="font-serif text-sm text-primary font-bold">12</p>
+    </div>
+
+    <div class="w-px h-8 bg-stone-200"></div>
+
+    <div class="flex flex-col items-center">
+        <p class="text-[8px] uppercase tracking-widest text-stone-500 font-bold">Coût Total</p>
+        <p id="mobile-float-total-cost" class="font-serif text-sm text-primary font-bold">0 $</p>
+    </div>
+
+    <button onclick="toggleSimulatorPanel(true)" class="p-3 bg-primary text-white rounded-full shadow-lg">
+        <i data-lucide="settings-2" class="w-5 h-5"></i>
+    </button>
+</div>
+
+<!-- Tiroir Mobile (Simulator Toolbox) -->
+<div id="mobile-simulator-drawer"
+     class="fixed bottom-0 left-0 right-0 h-[75vh] bg-white rounded-t-[2.5rem] shadow-[0_-20px_50px_rgba(0,0,0,0.2)] z-[10001] transform translate-y-full transition-transform duration-500 ease-out p-8 overflow-y-auto md:hidden">
+
+    <div class="drawer-handle" onclick="toggleSimulatorPanel(false)"></div>
+
+    <div class="flex items-center justify-between mb-8">
+        <h3 class="font-serif text-2xl text-primary">Simulateur</h3>
+        <button onclick="toggleSimulatorPanel(false)" class="p-2 text-stone-400">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 pb-12">
+        <!-- Toggles Section -->
+        <div class="space-y-4">
+            <p class="text-xs uppercase tracking-widest text-stone-400 font-bold">Scénarios & Leviers</p>
+
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="toggleFloat('toggle-aph')" id="btn-mobile-aph" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="landmark" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">SCHL</span>
+                </button>
+                <button onclick="toggleFloat('toggle-land')" id="btn-mobile-land" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="map" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">Terrain</span>
+                </button>
+                <button onclick="toggleFloat('toggle-fonds-plancher')" id="btn-mobile-fonds-plancher" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="hand-helping" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">Fonds Plancher</span>
+                </button>
+                <button onclick="toggleFloat('toggle-pme-mtl')" id="btn-mobile-pme-mtl" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">PME-MTL Match</span>
+                </button>
+                <button onclick="toggleFloat('toggle-taxes')" id="btn-mobile-taxes" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="building" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">Exemption Taxes</span>
+                </button>
+                <button onclick="toggleFloat('toggle-modular')" id="btn-mobile-modular" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="construction" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">Modulaire</span>
+                </button>
+                <button onclick="toggleFloat('toggle-tasks')" id="btn-mobile-tasks" class="flex flex-col items-center gap-2 p-4 rounded-2xl border-2 border-stone-100 transition-all bg-stone-50">
+                    <i data-lucide="users-2" class="w-6 h-6"></i>
+                    <span class="text-[10px] font-bold text-center">Autogestion</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Parameters Section -->
+        <div class="space-y-8 border-t border-stone-100 pt-8">
+            <!-- Founders Slider -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <p class="text-xs uppercase tracking-widest text-stone-400 font-bold">Co-fondateurs</p>
+                    <span id="mobile-float-holders-inner-value" class="font-serif text-2xl text-primary leading-none">12</span>
+                </div>
+                <input type="range" id="mobile-holders-input" min="5" max="31" step="1" value="12" oninput="syncHolders(this.value)" class="w-full">
+            </div>
+
+            <!-- Bond Rate Slider -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <p class="text-xs uppercase tracking-widest text-stone-400 font-bold">Taux Obligations</p>
+                    <span id="mobile-bond-rate-value" class="font-serif text-2xl text-primary leading-none">5 %</span>
+                </div>
+                <input type="range" id="mobile-bond-rate-input" min="0" max="15" step="0.5" value="5" oninput="syncBondRate(this.value)" class="w-full">
+            </div>
+
+            <!-- PME-MTL Adjustments Mobile (Conditional) -->
+            <div id="mobile-pme-mtl-adjustments" class="space-y-4 hidden">
+                <div class="space-y-2">
+                    <div class="flex justify-between items-end">
+                        <p class="text-xs uppercase tracking-widest text-stone-400 font-bold">Taux PME-MTL</p>
+                        <span id="mobile-pme-rate-value" class="font-serif text-2xl text-primary leading-none">2 %</span>
+                    </div>
+                    <input type="range" id="mobile-pme-rate-input" min="0.1" max="2" step="0.1" value="2" oninput="syncPmeMtlRate(this.value)" class="w-full">
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-end">
+                        <p class="text-xs uppercase tracking-widest text-stone-400 font-bold">Remboursement PME-MTL</p>
+                        <span id="mobile-pme-duration-value" class="font-serif text-2xl text-primary leading-none">5 ans</span>
+                    </div>
+                    <input type="range" id="mobile-pme-duration-input" min="1" max="5" step="1" value="5" oninput="syncPmeMtlDuration(this.value)" class="w-full">
+                </div>
+            </div>
         </div>
     </div>
 </div>
