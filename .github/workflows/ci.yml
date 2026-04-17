@@ -8,33 +8,44 @@ on:
 
 jobs:
   validate:
-    name: Lint & Test (Nix)
+    name: Lint & Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Nix
-        uses: cachix/install-nix-action@v30
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
+          node-version: 24
+          cache: 'npm'
 
-      - name: Setup Cache
-        uses: cachix/cachix-action@v15
-        with:
-          name: modern-resume-env
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          # Fallback to public cache if no token
-          skipPush: ${{ secrets.CACHIX_AUTH_TOKEN == '' }}
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Lint & Link Check
-        run: nix develop --command bash -c "npm install && npx htmlhint '**/*.html' && npx stylelint '**/*.css' && npx eslint '**/*.js' && npx linkinator . --recurse --skip '^mailto:|example\.com|facebook\.com|linkedin\.com'"
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: nix develop --command bash -c "npx playwright install --with-deps && npm test"
+      - name: Run Linting
+        run: npm run lint
+
+      - name: Validate Allocations
+        run: npm run validate:allocations
+
+      - name: Run Unit Tests
+        run: npm run test:unit
+
+      - name: Run Unit Tests with Coverage
+        run: npm run test:coverage
+
+      - name: Run Playwright tests (E2E)
+        run: npm test
 
       - name: Generate Verification Screenshot
         run: |
-          nix develop --command bash -c "npm run dev & sleep 5 && node screenshots/verify_changes.js"
+          npm run dev &
+          # Wait for server to be ready
+          npx wait-on http://localhost:8080/index.html -t 30000
+          node screenshots/verify_changes.js
 
       - name: Archive Artifacts
         if: always()
