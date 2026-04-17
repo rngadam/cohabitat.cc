@@ -61,8 +61,8 @@ test.describe('Simulator V2 - Unified Experience', () => {
     const rateSlider = page.locator('#panel-bond-rate-input');
     await rateSlider.fill('10'); // Set to 10%
 
-    // Wait for recalculation
-    await page.waitForTimeout(500);
+    // Wait for recalculation with robust assertion
+    await expect(rentEl).not.toHaveText(initialRent);
 
     const updatedRent = await rentEl.textContent();
     expect(updatedRent).not.toBe(initialRent);
@@ -132,6 +132,10 @@ test.describe('Simulator V2 - Unified Experience', () => {
     const opexSelector = 'div:has-text("OPEX Total (Détail ci-contre)") span:last-child';
     const initialOpexText = await page.locator(opexSelector).first().textContent();
     const initialOpex = parseFloat(initialOpexText.replace(/[^0-9,.-]/g, '').replace(',', '.'));
+
+    // Toggle Mutualisation via the panel button
+    const tasksBtn = (viewport && viewport.width < 1024) ? page.locator('#btn-mobile-tasks') : page.locator('#btn-panel-tasks');
+    await tasksBtn.click();
 
     // Verify OPEX reduced - wait for visual change and badge
     await expect(page.locator('span:has-text("Mutualisation Active")')).toBeVisible();

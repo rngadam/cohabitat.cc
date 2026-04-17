@@ -200,7 +200,8 @@ test('CostCalculator - community bonds details', () => {
         construction: { max_cost_m2: 1000, land_cost: 0 },
         mortgage: { downpayment_pct: 20 },
         pre_development_breakdown: { intervenants: [{ rate: 100, hours: 100 }] }, // 10k
-        community_bonds: { interest_rate_pct: 4, amortization_years: 10, holders_count: 10 }
+        community_bonds: { interest_rate_pct: 4, amortization_years: 10, holders_count: 10 },
+        fonds_plancher: { subsidy_amount: 250000 }
     };
     const allocations = { floors: [{ total: 1000 }] }; // 1M
     // Cash downpayment = 200k. Sweat = 10k. Total bond = 210k.

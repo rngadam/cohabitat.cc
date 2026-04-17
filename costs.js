@@ -153,8 +153,9 @@ class CostCalculator {
 
         // Initial Investment (Pre-dev, Material, Seed)
         let initialInvestment = this.calculatePreDevTotal();
-        if (this.overrides.fondsPlancher) {
-            initialInvestment = Math.max(0, initialInvestment - 250000);
+        if (this.overrides.fonds_plancher || this.overrides.fondsPlancher) {
+            const subsidy = this.params.fonds_plancher?.subsidy_amount ?? 250000;
+            initialInvestment = Math.max(0, initialInvestment - subsidy);
         }
 
         const totalBondPrincipal = cashDownpayment + initialInvestment;

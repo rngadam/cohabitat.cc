@@ -177,7 +177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="text-xs text-stone-500 leading-relaxed mb-4">Subvention au démarrage couvrant les frais de pré-développement.</p>
                         <div class="flex items-center gap-2 text-primary font-bold text-sm">
                             <i data-lucide="check-circle-2" class="w-4 h-4 opacity-0 peer-checked:opacity-100"></i>
-                            <span class="peer-checked:hidden text-stone-400 font-normal">Couvre 250k$ de frais</span>
+                            <span id="fonds-plancher-subsidy-label" class="peer-checked:hidden text-stone-400 font-normal">Couvre 250k$ de frais</span>
                             <span class="hidden peer-checked:inline">Subvention activée</span>
                         </div>
                     </div>
@@ -475,6 +475,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (el && el.tagName === 'INPUT') el.value = duration;
             else if (el) el.textContent = duration + ' ans';
         });
+
+        // Sync PME-MTL state
+        const pmeRate = activeOverrides.pmeMtlRate;
+        ['panel-pme-rate-value', 'panel-pme-rate-input', 'mobile-pme-rate-value', 'mobile-pme-rate-input'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.tagName === 'INPUT') el.value = pmeRate;
+            else if (el) el.textContent = pmeRate + ' %';
+        });
+
+        const pmeDuration = activeOverrides.pmeMtlDuration;
+        ['panel-pme-duration-value', 'panel-pme-duration-input', 'mobile-pme-duration-value', 'mobile-pme-duration-input'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.tagName === 'INPUT') el.value = pmeDuration;
+            else if (el) el.textContent = pmeDuration + ' ans';
+        });
+
+        // Update subsidy label from config
+        if (parameters && parameters.fonds_plancher) {
+            const subsidyVal = parameters.fonds_plancher.subsidy_amount / 1000;
+            const subsidyLabel = document.getElementById('fonds-plancher-subsidy-label');
+            if (subsidyLabel) subsidyLabel.textContent = `Couvre ${subsidyVal}k$ de frais`;
+        }
     }
 
     // Floating toolbar visibility on scroll

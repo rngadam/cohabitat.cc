@@ -1,4 +1,7 @@
 {
+  "fonds_plancher": {
+    "subsidy_amount": 250000
+  },
   "construction": {
     "max_cost_m2": 3317.69,
     "land_cost": 1200000
