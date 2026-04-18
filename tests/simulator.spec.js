@@ -51,7 +51,7 @@ test.describe('Simulator V2 - Unified Experience', () => {
     await page.evaluate(() => window.scrollTo(0, 500));
 
     // Get initial rent
-    const rentEl = page.locator('#float-net-rent');
+    const rentEl = page.locator('#summary-net-rent');
     const initialRent = await rentEl.textContent();
 
     // Open panel
@@ -128,9 +128,11 @@ test.describe('Simulator V2 - Unified Experience', () => {
     }
     await settingsBtn.click();
 
-    // Get initial OPEX Total (Card 1)
-    const opexSelector = 'div:has-text("OPEX Total (Détail ci-contre)") span:last-child';
-    const initialOpexText = await page.locator(opexSelector).first().textContent();
+    // Get initial OPEX Total
+    const opexSelector = '#summary-opex-total';
+    const opexLocator = page.locator(opexSelector);
+    await expect(opexLocator).not.toBeEmpty();
+    const initialOpexText = await opexLocator.textContent();
     const initialOpex = parseFloat(initialOpexText.replace(/[^0-9,.-]/g, '').replace(',', '.'));
 
     // Toggle Mutualisation via the panel button
@@ -139,16 +141,15 @@ test.describe('Simulator V2 - Unified Experience', () => {
 
     // Verify OPEX reduced - wait for visual change and badge
     await expect(page.locator('span:has-text("Mutualisation Active")')).toBeVisible();
-
-    // Check for line-through on concierge salary in Detail card
     const conciergeValue = page.locator('span:has-text("Maintenance & Nettoyage") + span');
     await expect(conciergeValue).toHaveClass(/line-through/);
 
-    // Verify numeric reduction in summary
-    const opexLocator = page.locator('div:has-text("OPEX Total (Détail ci-contre)") span').last();
-    const newText = await opexLocator.textContent();
-    const newOpex = parseFloat(newText.replace(/[^0-9,.-]/g, '').replace(',', '.'));
-    expect(newOpex).toBeLessThan(initialOpex);
+    // Dynamic wait for calculation update
+    await expect(async () => {
+      const newText = await opexLocator.textContent();
+      const newOpex = parseFloat(newText.replace(/[^0-9,.-]/g, '').replace(',', '.'));
+      expect(newOpex).toBeLessThan(initialOpex);
+    }).toPass();
   });
 
   test('Calculations: PME-MTL matching should split bond debt', async ({ page }) => {

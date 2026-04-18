@@ -492,8 +492,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
 
         // Update subsidy label from config
-        if (parameters && parameters.fonds_plancher) {
-            const subsidyVal = parameters.fonds_plancher.subsidy_amount / 1000;
+        if (paramsData && paramsData.fonds_plancher) {
+            const subsidyVal = paramsData.fonds_plancher.subsidy_amount / 1000;
             const subsidyLabel = document.getElementById('fonds-plancher-subsidy-label');
             if (subsidyLabel) subsidyLabel.textContent = `Couvre ${subsidyVal}k$ de frais`;
         }
@@ -715,9 +715,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="flex justify-between"><span>Hypothèques</span> <span>${formatCurrency(globalCosts.mortgage.monthlyPayment)}</span></div>
                                 <div class="flex justify-between"><span>Obligations Comm.</span> <span>${formatCurrency(globalCosts.bonds.founderMonthlyPayment)}</span></div>
                                 ${activeOverrides.pmeMtlMatching ? `<div class="flex justify-between text-emerald-400"><span>Service Dette PME-MTL</span> <span>${formatCurrency(globalCosts.bonds.pmeMtlMonthlyPayment)}</span></div>` : ''}
-                                <div class="flex justify-between border-t border-white/10 pt-2 font-bold text-amber-400"><span>OPEX Total (Détail ci-contre)</span> <span>${formatCurrency(globalCosts.recurring.totalMonthly)}</span></div>
+                                <div class="flex justify-between border-t border-white/10 pt-2 font-bold text-amber-400"><span>OPEX Total (Détail ci-contre)</span> <span id="summary-opex-total">${formatCurrency(globalCosts.recurring.totalMonthly)}</span></div>
                                 <div class="flex justify-between text-emerald-400 font-bold border-t border-white/10 pt-2"><span>Revenus (Comm. + Flottantes)</span> <span>+ ${formatCurrency(globalCosts.rental.monthlyIncome + perSuite.floatingRoomRevenue)}</span></div>
-                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-lg mt-auto"><span>Solde Net Mensuel</span> <span>${formatCurrency(globalCosts.totalMonthlyNet - perSuite.floatingRoomRevenue)}*</span></div>
+                                <div class="flex justify-between border-t border-white/20 pt-2 font-bold text-lg mt-auto"><span>Solde Net Mensuel</span> <span id="summary-net-rent">${formatCurrency(globalCosts.totalMonthlyNet - perSuite.floatingRoomRevenue)}*</span></div>
                             </div>
                         </div>
 

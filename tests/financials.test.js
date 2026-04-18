@@ -219,3 +219,29 @@ test('CostCalculator - community bonds details', () => {
     assert.strictEqual(bondsSub.sweatPrincipal, 0);
     assert.strictEqual(bondsSub.principal, 200000);
 });
+
+test('CostCalculator - mutualized tasks scenario', () => {
+    const params = {
+        construction: { land_cost: 1000000 },
+        taxes_and_fees: { municipal_tax_rate_pct: 0, school_tax_rate_pct: 0, insurance_rate_pct: 0, reserve_fund_rate_pct: 0 }
+    };
+    const allocations = { floors: [{ total: 1000 }] };
+    const opex = {
+        monthly_services: {
+            concierge_salary: 2500,
+            management_fees: 1000,
+            other: 500
+        },
+        energy_costs: { electricity_heat_per_m2_year: 0 },
+        equipment_amortization: []
+    };
+
+    const calc = new CostCalculator(params, allocations, opex);
+    const recurring = calc.calculateRecurringCosts();
+    assert.strictEqual(recurring.monthlyServices, 4000);
+
+    const calcMut = new CostCalculator(params, allocations, opex, { mutualizedTasks: true });
+    const recurringMut = calcMut.calculateRecurringCosts();
+    // 4000 - (2500 + 1000) = 500
+    assert.strictEqual(recurringMut.monthlyServices, 500);
+});

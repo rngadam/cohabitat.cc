@@ -88,9 +88,9 @@ class CostCalculator {
         const reserveFund = totalInvestment * (this.params.taxes_and_fees.reserve_fund_rate_pct / 100);
 
         // Operational Expenses (OPEX) from opex.json
-        let monthlyServices = Object.values(this.opex.monthly_services || {}).reduce((a, b) => a + b, 0);
-        let conciergeSalary = (this.opex.monthly_services && this.opex.monthly_services.concierge_salary) || 0;
-        let managementFees = (this.opex.monthly_services && this.opex.monthly_services.management_fees) || 0;
+        let monthlyServices = Object.values(this.opex.monthly_services || {}).reduce((a, b) => a + Number(b), 0);
+        let conciergeSalary = Number((this.opex.monthly_services && this.opex.monthly_services.concierge_salary) || 0);
+        let managementFees = Number((this.opex.monthly_services && this.opex.monthly_services.management_fees) || 0);
 
         if (this.overrides.mutualizedTasks) {
             monthlyServices = Math.max(0, monthlyServices - (conciergeSalary + managementFees));
