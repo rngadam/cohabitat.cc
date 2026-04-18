@@ -200,7 +200,8 @@ test('CostCalculator - community bonds details', () => {
         construction: { max_cost_m2: 1000, land_cost: 0 },
         mortgage: { downpayment_pct: 20 },
         pre_development_breakdown: { intervenants: [{ rate: 100, hours: 100 }] }, // 10k
-        community_bonds: { interest_rate_pct: 4, amortization_years: 10, holders_count: 10 }
+        community_bonds: { interest_rate_pct: 4, amortization_years: 10, holders_count: 10 },
+        fonds_plancher: { subsidy_amount: 250000 }
     };
     const allocations = { floors: [{ total: 1000 }] }; // 1M
     // Cash downpayment = 200k. Sweat = 10k. Total bond = 210k.
@@ -217,4 +218,30 @@ test('CostCalculator - community bonds details', () => {
     const bondsSub = calcSubsidized.calculateCommunityBondsDetails();
     assert.strictEqual(bondsSub.sweatPrincipal, 0);
     assert.strictEqual(bondsSub.principal, 200000);
+});
+
+test('CostCalculator - mutualized tasks scenario', () => {
+    const params = {
+        construction: { land_cost: 1000000 },
+        taxes_and_fees: { municipal_tax_rate_pct: 0, school_tax_rate_pct: 0, insurance_rate_pct: 0, reserve_fund_rate_pct: 0 }
+    };
+    const allocations = { floors: [{ total: 1000 }] };
+    const opex = {
+        monthly_services: {
+            concierge_salary: 2500,
+            management_fees: 1000,
+            other: 500
+        },
+        energy_costs: { electricity_heat_per_m2_year: 0 },
+        equipment_amortization: []
+    };
+
+    const calc = new CostCalculator(params, allocations, opex);
+    const recurring = calc.calculateRecurringCosts();
+    assert.strictEqual(recurring.monthlyServices, 4000);
+
+    const calcMut = new CostCalculator(params, allocations, opex, { mutualizedTasks: true });
+    const recurringMut = calcMut.calculateRecurringCosts();
+    // 4000 - (2500 + 1000) = 500
+    assert.strictEqual(recurringMut.monthlyServices, 500);
 });

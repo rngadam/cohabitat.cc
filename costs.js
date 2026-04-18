@@ -88,7 +88,16 @@ class CostCalculator {
         const reserveFund = totalInvestment * (this.params.taxes_and_fees.reserve_fund_rate_pct / 100);
 
         // Operational Expenses (OPEX) from opex.json
-        const monthlyServices = Object.values(this.opex.monthly_services).reduce((a, b) => a + b, 0);
+        let monthlyServices = Object.values(this.opex.monthly_services || {}).reduce((a, b) => a + Number(b), 0);
+        let conciergeSalary = Number((this.opex.monthly_services && this.opex.monthly_services.concierge_salary) || 0);
+        let managementFees = Number((this.opex.monthly_services && this.opex.monthly_services.management_fees) || 0);
+
+        if (this.overrides.mutualizedTasks) {
+            monthlyServices = Math.max(0, monthlyServices - (conciergeSalary + managementFees));
+            conciergeSalary = 0;
+            managementFees = 0;
+        }
+
         const monthlyEnergy = (this.opex.energy_costs.electricity_heat_per_m2_year * totalAreaM2) / 12;
 
         // Amortization
@@ -107,6 +116,8 @@ class CostCalculator {
             insurance,
             reserveFund,
             monthlyServices,
+            conciergeSalary,
+            managementFees,
             monthlyEnergy,
             monthlyAmortization,
             totalMonthly: totalMonthlyFixed + totalMonthlyOpex
@@ -138,30 +149,68 @@ class CostCalculator {
 
     calculateCommunityBondsDetails() {
         const totalConstructionAndLand = this.calculateTotalInvestment();
-        const cashDownpayment = totalConstructionAndLand * (this.params.mortgage.downpayment_pct / 100);
+        let cashDownpayment = totalConstructionAndLand * (this.params.mortgage.downpayment_pct / 100);
 
-        // Sweat Equity (Pre-dev)
-        let preDevTotal = this.calculatePreDevTotal();
-        if (this.overrides.fondsPlancher) {
-            preDevTotal = 0; // Subsidized
+        // Initial Investment (Pre-dev, Material, Seed)
+        let initialInvestment = this.calculatePreDevTotal();
+        if (this.overrides.fonds_plancher || this.overrides.fondsPlancher) {
+            const subsidy = this.params.fonds_plancher?.subsidy_amount ?? 250000;
+            initialInvestment = Math.max(0, initialInvestment - subsidy);
         }
 
-        const bondPrincipal = cashDownpayment + preDevTotal;
-        const annualRate = this.params.community_bonds.interest_rate_pct / 100;
-        const monthlyRate = annualRate / 12;
-        const numberOfPayments = this.params.community_bonds.amortization_years * 12;
+        const totalBondPrincipal = cashDownpayment + initialInvestment;
+        const numHolders = this.overrides.holdersCount || this.params.community_bonds.holders_count;
 
-        const monthlyPayment = bondPrincipal *
-            (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
-            (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+        // Settings overrides or defaults
+        const founderRate = (this.overrides.bondRate || this.params.community_bonds.interest_rate_pct) / 100;
+        const founderDuration = this.overrides.bondDuration || this.params.community_bonds.amortization_years;
+
+        let totalMonthlyPayment;
+        let paymentPerHolder;
+        let foundersPrincipal = totalBondPrincipal;
+        let pmeMtlPrincipal = 0;
+        let pmeMtlMonthlyPayment = 0;
+
+        // Helper for amortization
+        const getMonthlyPayment = (P, annualRate, years) => {
+            if (annualRate === 0) return P / (years * 12);
+            const r = annualRate / 12;
+            const n = years * 12;
+            return P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        };
+
+        if (this.overrides.pmeMtlMatching) {
+            foundersPrincipal = totalBondPrincipal / 2;
+            pmeMtlPrincipal = totalBondPrincipal / 2;
+
+            const foundersMonthly = getMonthlyPayment(foundersPrincipal, founderRate, founderDuration);
+            const pmeConfig = this.params.community_bonds.pme_mtl;
+            const pmeRate = (this.overrides.pmeMtlRate || pmeConfig.max_interest_rate_pct) / 100;
+            const pmeDuration = this.overrides.pmeMtlDuration || pmeConfig.max_amortization_years;
+            pmeMtlMonthlyPayment = getMonthlyPayment(pmeMtlPrincipal, pmeRate, pmeDuration);
+
+            totalMonthlyPayment = foundersMonthly + pmeMtlMonthlyPayment;
+            paymentPerHolder = foundersMonthly / numHolders;
+
+            // For the summary cards, we show the founder's portion of principal
+            cashDownpayment /= 2;
+            initialInvestment /= 2;
+        } else {
+            totalMonthlyPayment = getMonthlyPayment(totalBondPrincipal, founderRate, founderDuration);
+            paymentPerHolder = totalMonthlyPayment / numHolders;
+        }
 
         return {
             cashPrincipal: cashDownpayment,
-            sweatPrincipal: preDevTotal,
-            principal: bondPrincipal,
-            monthlyPayment,
-            annualPayment: monthlyPayment * 12,
-            paymentPerHolder: monthlyPayment / (this.overrides.holdersCount || this.params.community_bonds.holders_count)
+            sweatPrincipal: initialInvestment,
+            investmentPrincipal: initialInvestment,
+            principal: totalBondPrincipal,
+            foundersPrincipal,
+            pmeMtlPrincipal,
+            monthlyPayment: totalMonthlyPayment,
+            founderMonthlyPayment: paymentPerHolder * numHolders,
+            pmeMtlMonthlyPayment,
+            paymentPerHolder
         };
     }
 
@@ -200,7 +249,7 @@ class CostCalculator {
             totalMonthlyNet: baseMonthlyNet,
             constructionCost: global.mortgage.totalInvestment / numSuites,
             downpaymentPerFounder: global.bonds.cashPrincipal / numHolders,
-            sweatEquityPerFounder: global.bonds.sweatPrincipal / numHolders,
+            initialInvestmentPerFounder: global.bonds.investmentPrincipal / numHolders,
             monthlyMortgage: global.mortgage.monthlyPayment / numSuites,
             monthlyRecurring: global.recurring.totalMonthly / numSuites,
             monthlyRentalOffset: global.rental.monthlyIncome / numSuites,
