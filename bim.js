@@ -214,8 +214,8 @@ const buildingData = {
     rdc: {
         title: "Rez-de-chaussée - Mixité Active",
         content: `<ul class="space-y-4">
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="utensils" class="w-4 h-4"></i></div><span>Restaurant Solidaire & Accueil (RDC)</span></li>
-                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Café-bar (RDC)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="coffee" class="w-4 h-4"></i></div><span>Café & Espace d'Échange (RDC)</span></li>
+                    <li class="flex items-start gap-3"><div class="mt-1 p-1 bg-primary/10 rounded text-primary"><i data-lucide="briefcase" class="w-4 h-4"></i></div><span>Coworking & Ateliers (RDC)</span></li>
                 </ul>`,
         icon: "building",
         floorPlan: {
@@ -226,12 +226,12 @@ const buildingData = {
                 { x: 40, y: 0, w: 2, h: 100 }, // Split Left/Right
             ],
             areas: [
-                { label: "Restaurant", x: 45, y: 5, w: 50, h: 90, sqm: 140 },
-                { label: "Lobby / Accueil", x: 5, y: 5, w: 32, h: 90, sqm: 80 },
+                { label: "Café / Coworking", x: 45, y: 5, w: 50, h: 90, sqm: 140 },
+                { label: "Lobby / Multi-usage", x: 5, y: 5, w: 32, h: 90, sqm: 80 },
             ],
             furniture: [
-                { type: "utensils-crossed", x: 60, y: 30 }, { type: "utensils-crossed", x: 80, y: 30 },
-                { type: "utensils-crossed", x: 60, y: 70 }, { type: "utensils-crossed", x: 80, y: 70 },
+                { type: "coffee", x: 60, y: 30 }, { type: "monitor", x: 80, y: 30 },
+                { type: "coffee", x: 60, y: 70 }, { type: "monitor", x: 80, y: 70 },
                 { type: "armchair", x: 15, y: 50 }
             ],
             doors: [

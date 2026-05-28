@@ -36,11 +36,6 @@
       "lifespan_years": 5
     },
     {
-      "name": "Équipement de cuisine commerciale",
-      "capital_value": 60000.00,
-      "lifespan_years": 10
-    },
-    {
       "name": "Électroménagers (Buanderie & Suites)",
       "capital_value": 40000.00,
       "lifespan_years": 8
