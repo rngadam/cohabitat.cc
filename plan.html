@@ -58,7 +58,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
-<section class="pt-16 pb-6 bg-gradient-to-br from-primary/5 to-accent/5">
+
+<!-- Sticky Tabs Navigation -->
+<nav class="sticky top-16 md:top-20 z-30 bg-white/90 backdrop-blur-md border-b border-stone-200 overflow-x-auto">
+    <div class="max-w-7xl mx-auto px-6 flex gap-6 min-w-max">
+        <a href="#allocations" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Allocations d'Espaces</a>
+        <a href="#construction" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Coûts de Construction</a>
+        <a href="#pre-dev" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Budget Pré-développement</a>
+        <a href="#opex" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Frais Fixes & Opérations</a>
+        <a href="#revenus" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Revenus Locatifs</a>
+        <a href="#sim-global" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Simulateur Global</a>
+        <a href="#sim-unitaire" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Simulateur Unitaire</a>
+        <a href="#parametres" class="py-4 text-sm font-semibold text-stone-600 hover:text-primary border-b-2 border-transparent hover:border-primary whitespace-nowrap">Paramètres</a>
+    </div>
+</nav>
+
+<section id="allocations" class="pt-16 pb-6 bg-gradient-to-br from-primary/5 to-accent/5">
     <div class="max-w-6xl mx-auto px-6 text-center">
         <div class="max-w-4xl mx-auto space-y-8  active">
             <div class="inline-flex items-center gap-3 text-accent mb-4">
@@ -106,7 +121,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Table will be populated by JavaScript -->
         </div>
 
-        <div id="construction-costs" class="mt-16">
+
+        <div id="pre-dev" class="mt-16 scroll-mt-32">
+            <div class="mb-8">
+                <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Budget Pré-développement</p>
+                <h2 class="font-serif text-4xl text-primary text-center">Dépenses Initiales</h2>
+            </div>
+            <div id="pre-dev-container" class="rounded-3xl border border-stone-200 bg-white shadow-sm p-6"></div>
+        </div>
+
+        <div id="opex" class="mt-16 scroll-mt-32">
+            <div class="mb-8">
+                <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Frais Fixes & Opérations</p>
+                <h2 class="font-serif text-4xl text-primary text-center">OPEX</h2>
+            </div>
+            <div id="opex-container" class="rounded-3xl border border-stone-200 bg-white shadow-sm p-6"></div>
+        </div>
+
+        <div id="revenus" class="mt-16 scroll-mt-32">
+            <div class="mb-8">
+                <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Revenus Locatifs</p>
+                <h2 class="font-serif text-4xl text-primary text-center">Entrées de fonds</h2>
+            </div>
+            <div id="revenus-container" class="rounded-3xl border border-stone-200 bg-white shadow-sm p-6"></div>
+        </div>
+
+        <div id="construction" class="mt-16 scroll-mt-32">
             <div class="mb-8">
                 <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Budget de Construction</p>
                 <h2 class="font-serif text-4xl text-primary text-center">Décomposition des Hard Costs</h2>
@@ -117,6 +157,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
 
+        <div id="sim-global" class="scroll-mt-32">
         <!-- Simulateur de Scénarios (Interactif) -->
         <div id="cost-reduction-strategies" class="mt-20">
             <div class="mb-12">
@@ -227,7 +268,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </section>
 
-<section class="pb-24 bg-white">
+<section id="sim-unitaire" class="pb-24 bg-white scroll-mt-32">
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-12 items-start">
             <div class="">
@@ -575,6 +616,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             renderDesignCards(allocations);
             renderTable();
             renderCostTable(allocations, params, activeOverrides);
+            renderExtraSections();
 
             // Update Floating Toolbar Result Peek
             const perSuite = costCalculator.calculatePerSuiteCosts();
@@ -678,6 +720,86 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function formatCurrency(amount) {
         return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD' }).format(amount);
+    }
+
+
+    function renderExtraSections() {
+        if (!paramsData || !opexData) return;
+
+        const calc = new CostCalculator(paramsData, allocationsData, opexData, activeOverrides);
+        const globalCosts = calc.calculateGlobalCosts();
+
+        // Render Pre-dev
+        const preDevContainer = document.getElementById('pre-dev-container');
+        if (preDevContainer) {
+            let preDevHtml = '<table class="min-w-full text-left text-sm"><thead class="border-b border-stone-200"><tr><th class="py-2 text-stone-500 font-normal">Rôle</th><th class="py-2 text-stone-500 font-normal text-right">Montant</th></tr></thead><tbody class="divide-y divide-stone-100">';
+            paramsData.pre_development_breakdown.intervenants.forEach(item => {
+                const cost = item.rate * item.hours;
+                preDevHtml += `<tr><td class="py-3 text-stone-600">${item.role}</td><td class="py-3 text-right font-bold">${formatCurrency(cost)}</td></tr>`;
+            });
+            preDevHtml += `<tr class="bg-stone-50"><td class="py-3 px-2 font-bold text-primary">Total Pré-développement</td><td class="py-3 px-2 text-right font-bold text-primary">${formatCurrency(calc.calculatePreDevTotal())}</td></tr>`;
+            preDevHtml += '</tbody></table>';
+            preDevContainer.innerHTML = preDevHtml;
+        }
+
+        // Render OPEX
+        const opexContainer = document.getElementById('opex-container');
+        if (opexContainer) {
+            let opexHtml = '<div class="grid md:grid-cols-2 gap-8"><div class="space-y-4"><h3 class="font-serif text-xl text-primary border-b border-stone-200 pb-2">Services Mensuels</h3><ul class="space-y-2 text-sm">';
+            for(const [k, v] of Object.entries(opexData.monthly_services)) {
+                opexHtml += `<li class="flex justify-between"><span class="text-stone-500 capitalize">${k.replace(/_/g, ' ')}</span><span class="font-bold">${formatCurrency(v)}</span></li>`;
+            }
+            opexHtml += `</ul><div class="pt-4 flex justify-between font-bold text-primary"><span>Total Services</span><span>${formatCurrency(globalCosts.recurring.monthlyServices)}</span></div></div>`;
+
+            opexHtml += '<div class="space-y-4"><h3 class="font-serif text-xl text-primary border-b border-stone-200 pb-2">Taxes & Frais Fixes (Mensuels)</h3><ul class="space-y-2 text-sm">';
+            opexHtml += `<li class="flex justify-between"><span class="text-stone-500">Taxes Municipales</span><span class="font-bold">${formatCurrency(globalCosts.recurring.municipalTax / 12)}</span></li>`;
+            opexHtml += `<li class="flex justify-between"><span class="text-stone-500">Taxes Scolaires</span><span class="font-bold">${formatCurrency(globalCosts.recurring.schoolTax / 12)}</span></li>`;
+            opexHtml += `<li class="flex justify-between"><span class="text-stone-500">Assurances</span><span class="font-bold">${formatCurrency(globalCosts.recurring.insurance / 12)}</span></li>`;
+            opexHtml += `<li class="flex justify-between"><span class="text-stone-500">Fonds de prévoyance</span><span class="font-bold">${formatCurrency(globalCosts.recurring.reserveFund / 12)}</span></li>`;
+            opexHtml += `</ul><div class="pt-4 flex justify-between font-bold text-primary"><span>Total Fixe (Taxes + Fonds)</span><span>${formatCurrency((globalCosts.recurring.municipalTax + globalCosts.recurring.schoolTax + globalCosts.recurring.insurance + globalCosts.recurring.reserveFund)/12)}</span></div></div></div>`;
+            opexContainer.innerHTML = opexHtml;
+        }
+
+        // Render Revenus
+        const revenusContainer = document.getElementById('revenus-container');
+        if (revenusContainer) {
+            let revenusHtml = '<div class="space-y-4"><ul class="space-y-2 text-sm">';
+            revenusHtml += `<li class="flex justify-between"><span class="text-stone-500">Espaces Commerciaux & Ateliers (${globalCosts.rental.totalRentalAreaM2.toFixed(1)} m²)</span><span class="font-bold">${formatCurrency(globalCosts.rental.monthlyIncome)} / mois</span></li>`;
+
+            const floatingConfig = paramsData.floating_rooms;
+            const perSuite = calc.calculatePerSuiteCosts();
+            const floatingRevenue = perSuite.floatingRoomRevenue * paramsData.population.total_suites;
+
+            revenusHtml += `<li class="flex justify-between"><span class="text-stone-500">Chambres Flottantes (${floatingConfig.count} unités @ ${floatingConfig.occupancy_rate_pct}% occ.)</span><span class="font-bold">${formatCurrency(floatingRevenue)} / mois</span></li>`;
+            revenusHtml += `</ul><div class="pt-4 border-t border-stone-200 flex justify-between font-bold text-emerald-600 text-lg"><span>Total Revenus Mensuels</span><span>${formatCurrency(globalCosts.rental.monthlyIncome + floatingRevenue)}</span></div></div>`;
+            revenusContainer.innerHTML = revenusHtml;
+        }
+
+        // Render Parametres
+        const paramsContainer = document.getElementById('parametres-container');
+        if (paramsContainer) {
+            const sections = [
+                { title: "Paramètres Globaux", data: paramsData.constants },
+                { title: "Hypothèques", data: paramsData.mortgage },
+                { title: "Taxes & Frais (%)", data: paramsData.taxes_and_fees },
+                { title: "Population", data: paramsData.population },
+                { title: "Chambres Flottantes", data: paramsData.floating_rooms }
+            ];
+
+            let paramsHtml = '<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">';
+            sections.forEach(sec => {
+                paramsHtml += '<div class="space-y-4">';
+                paramsHtml += `<h3 class="font-serif text-xl text-primary border-b border-stone-200 pb-2">${sec.title}</h3>`;
+                paramsHtml += '<ul class="space-y-2">';
+                for (const [key, value] of Object.entries(sec.data)) {
+                    if(typeof value === 'object') continue;
+                    paramsHtml += `<li class="flex justify-between items-center text-sm"><span class="text-stone-500 capitalize">${key.replace(/_/g, ' ')}</span><span class="font-bold text-stone-700">${value}</span></li>`;
+                }
+                paramsHtml += '</ul></div>';
+            });
+            paramsHtml += '</div>';
+            paramsContainer.innerHTML = paramsHtml;
+        }
     }
 
     function renderSummary() {
@@ -1311,6 +1433,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
 
+        </div>
+
         <!-- Paramètres Avancés -->
         <div class="space-y-8 pt-8 border-t border-stone-100">
             <!-- Founders -->
@@ -1360,6 +1484,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 </div>
+
+
+        <div id="parametres" class="mt-16 scroll-mt-32">
+            <div class="mb-8">
+                <p class="text-accent font-bold uppercase tracking-[0.35em] mb-3 text-center">Paramètres</p>
+                <h2 class="font-serif text-4xl text-primary text-center">Constantes de calcul</h2>
+            </div>
+            <div id="parametres-container" class="rounded-3xl border border-stone-200 bg-white shadow-sm p-6"></div>
+        </div>
 
 <!-- Simulateur Mobile (Barre de résumé en bas) -->
 <div id="mobile-simulator-bar"
