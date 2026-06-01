@@ -768,7 +768,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             const floatingConfig = paramsData.floating_rooms;
             const perSuite = calc.calculatePerSuiteCosts();
-            const floatingRevenue = perSuite.floatingRoomRevenue * paramsData.population.total_suites;
+            const floatingRevenue = paramsData.floating_rooms.count * (perSuite.totalMonthlyNet * (paramsData.floating_rooms.price_pct / 100)) * (paramsData.floating_rooms.occupancy_rate_pct / 100);
 
             revenusHtml += `<li class="flex justify-between"><span class="text-stone-500">Chambres Flottantes (${floatingConfig.count} unités @ ${floatingConfig.occupancy_rate_pct}% occ.)</span><span class="font-bold">${formatCurrency(floatingRevenue)} / mois</span></li>`;
             revenusHtml += `</ul><div class="pt-4 border-t border-stone-200 flex justify-between font-bold text-emerald-600 text-lg"><span>Total Revenus Mensuels</span><span>${formatCurrency(globalCosts.rental.monthlyIncome + floatingRevenue)}</span></div></div>`;
