@@ -112,7 +112,7 @@ test.describe('Footer Content', () => {
     await expect(ccLink).toBeVisible();
 
     // Check Coderbunker link
-    const coderbunkerLink = footer.locator('a[href*="coderbunker.ca"]');
+    const coderbunkerLink = footer.locator('a[href*="habile.ca"]');
     await expect(coderbunkerLink).toBeVisible();
   });
 
