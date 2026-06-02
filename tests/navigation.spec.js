@@ -112,8 +112,8 @@ test.describe('Footer Content', () => {
     await expect(ccLink).toBeVisible();
 
     // Check Coderbunker link
-    const coderbunkerLink = footer.locator('a[href*="habile.ca"]');
-    await expect(coderbunkerLink).toBeVisible();
+    const habileLink = footer.locator('a[href*="habile.ca"]');
+    await expect(habileLink).toBeVisible();
   });
 
   test('should have social media links', async ({ page }) => {

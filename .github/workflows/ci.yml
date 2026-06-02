@@ -27,6 +27,7 @@ jobs:
         timeout-minutes: 10
         env:
           DEBUG: pw:install
+          DEBIAN_FRONTEND: noninteractive
 
       - name: Run Linting
         run: npm run lint
