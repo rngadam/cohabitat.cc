@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main, master ]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   validate:
     name: Lint & Test
@@ -16,14 +19,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: 'npm'
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y unzip
 
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: |
+          npx playwright install-deps
+          npx playwright install
+        timeout-minutes: 10
+        env:
+          DEBUG: pw:install
+          DEBIAN_FRONTEND: noninteractive
 
       - name: Run Linting
         run: npm run lint
